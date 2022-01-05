@@ -3,26 +3,35 @@ const request = require('request');
 const ticket_data = require('./ticket_data');
 const axios = require('axios');
 
+
+
+const stock_prices = {
+    'OD-AKSJD': 0,
+    'OD-ODUSD': 0,
+    'Nordnet Indeksfond Global': 134.01,
+    'Nordnet Indeksfond Emerging Market': 109.19,
+    'Landkreditt Utbytte A': 280.69,
+}
+
+
 const get_stock_price_url = (ticket) => {
     const item = ticket_data[ticket];
     let value;
-    // request(item.url, (err, resp,html) => {
-    //     if(!err && resp.statusCode == 200){
-    //         const $ = cheerio.load(html);
-    //         value = eval(item.selector );
-    //         console.log(value.html());
-    //
-    //     }
-    // })
 
-    // item.url = 'https://motherfuckingwebsite.com/';
+    if(item){
+        return axios.get(item.url)
+        .then( (resp) => {
+            const $ = cheerio.load(resp.data);
+            if(typeof item.selector == 'string'){
+                return parseFloat(  eval(item.selector ).html().replace(',','.') ).toFixed(4);
+            }else{
+                return eval( item.selector($) );
+            }
+        });
+    }else{
+        return Promise.resolve(stock_prices[ticket]);
+    }
 
-    aaxios.get(item.url).then( (resp) => {
-        const $ = cheerio.load(resp.data);
-        value = eval(item.selector );
-        // value = $("[class*=StatsBox__StyledPriceText]").first();
-        console.log('more' ,value.html() );
-    });
 
     console.log('doe this run before??');
 

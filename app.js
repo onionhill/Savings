@@ -3,99 +3,64 @@ const holdings = require('./holdings');
 const get_stock_price_url = require('./scrapper');
 
 const request = require('request');
-
-const stock_prices = {
-    'EQNR': 235.50,
-    'TEL': 139.65,
-    'MING': 149,
-    'AKRBP': 281.2,
-    'MOWI': 210.7,
-    'YAR': 468,
-    'NONG': 111.4,
-    'MPCC': 25.95,
-    'KIT': 23.25,
-    'B3': 86.40,
-    'BELCO': 13.6,
-    'NEXT': 7.51,
-    'HMONY': 1.0062
-}
-
+var total_value = 0;
 
 function get_value_from_provider(provider){
-    let total_value = 0;
+    let promises = [];
     Object.keys(holdings).forEach(key => {
         total_value[key] = [];
         Object.keys(holdings[key]).forEach(item => {
             if(holdings[key][item].PROVIDER != provider){
-               return;
+                return;
             }
-            if(key === 'stocks'){
-                get_value_stock(item);
+            if(key === 'stocks' ){
+                 promises.push( get_stock_promise(item) );
             }else if(key === 'fonds'){
-                get_value_fond(item);
+                 promises.push( get_fond_promise(item) );
             }
 
-            console.log(`${item} has an value of ${holdings[key][item].current_value}`)
-            total_value += holdings[key][item].current_value;
+
         })
     });
-    console.log(`Value of ${provider} is ${total_value}`);
+    Promise.all(promises).then( () => {
+        console.log(`Value of ${provider} is ${total_value.toFixed(2)}`);
+    })
 }
 function get_value_crypto(){
     const cryptos = holdings['Crypto'];
 }
 
+function get_stock_promise(ticket){
+    return get_stock_price_url(ticket).then( (value) => {
+        const stock = get_stock(ticket);
+        stock.stock_price = value;
+        return ticket;
+    }).then( (ticket) => {
+        get_value_stock(ticket);
+        return ticket;
+    }).then( (ticket) => {
+        console.log(`${ticket} has an value of ${holdings['stocks'][ticket].current_value}`);
+        total_value+= parseFloat( holdings['stocks'][ticket].current_value );
+    });
 
+}
 
-function get_current_stock_price(ticket){
-
-
-    // if(ticket === 'MIsNG'){
-    //      var url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=SpareBank 1&apikey=SECRET';
-    //     //  var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPXXF&interval=120min&outputsize=10&apikey=SECRET';
-    //     request.get({
-    //         url: url,
-    //         json:true,
-    //         headers:{'User-Agent': 'request'}
-    //     }, (err, res, data) => {
-    //         if(err){
-    //             console.log('Error', err)
-    //         }else if (res.statusCode !== 200) {
-    //             console.log('Status:', res.statusCode);
-    //           } else {
-    //             // data is successfully parsed as a JSON object:
-    //             console.log('this is data', data);
-    //           }
-    //
-    //     });
-    //
-    // }
-
-    if(ticket === 'TEL'){
-        get_stock_price_url(ticket);
-
-    }
-
-
-    return stock_prices[ticket];
+function get_fond_promise(ticket){
+    return get_stock_price_url(ticket).then( (value) => {
+        const fond = get_fond(ticket);
+        fond.stock_price = value;
+        return ticket;
+    }).then( (ticket) => {
+        get_value_fond(ticket);
+        return ticket;
+    }).then( (ticket) => {
+        console.log(`${ticket} has an value of ${holdings['fonds'][ticket].current_value}`);
+        total_value+= parseFloat( holdings['fonds'][ticket].current_value );
+    });
 }
 
 
-function get_current_fond_price(ticket){
-    // Here we have to scrab from nornet to get the values...
 
-    const fond_price = {
-        'OD-AKSJD': 0,
-        'OD-ODUSD': 0,
-        'Nordnet Indeksfond Global': 134.01,
-        'Nordnet Indeksfond Emerging Market': 109.19,
-        'Landkreditt Utbytte A': 280.69,
-    };
-    if(fond_price[ticket]){
-        return fond_price[ticket];
-    }
-    return 0;
-}
 
 function get_crypto(coin){
     if(holdings.Crypto[coin]){
@@ -134,8 +99,6 @@ function get_value_fond(name){
     fond.quantity = get_quantity(fond.ORDERS);
     fond.avg_buy = get_avg_buy_value(fond.ORDERS);
 
-    fond.stock_price = get_current_fond_price(name);
-
     fond.total_dividends = get_dividends(fond.DIVIDENDS);
     fond.return = (fond.stock_price - fond.avg_buy) * fond.quantity;
     fond.total_return = calculate_profitt(fond);
@@ -144,7 +107,6 @@ function get_value_fond(name){
 // Dividends: ${fond.total_dividends}
 // Return: ${fond.return}
 // Profitt: ${fond.total_return}`);
-
 
 }
 
@@ -163,12 +125,14 @@ function get_value_stock(ticket){
 
     stock.quantity = get_quantity(stock.ORDERS);
     stock.avg_buy = get_avg_buy_value(stock.ORDERS);
-    stock.stock_price = get_current_stock_price(ticket);
+    //
+    // await get_stock_price_url(ticket).then( (value) => stock.stock_price = value);
+
     stock.total_dividends = get_dividends(stock.DIVIDENDS);
     stock.return = (stock.stock_price - stock.avg_buy) * stock.quantity;
     stock.total_return = calculate_profitt(stock);
 
-
+//
 //     console.log(`You own ${stock.quantity } stocks in ticket ${ticket} with avg price ${stock.avg_buy}.
 // The current stock price is ${stock.stock_price}
 // Dividends: ${stock.total_dividends}
@@ -188,7 +152,7 @@ function get_dividends(dividends){
 }
 
 function calculate_profitt(stock){
-    stock.current_value = stock.quantity * stock.stock_price;
+    stock.current_value = parseFloat( stock.quantity * stock.stock_price).toFixed(2);
     return stock.current_value + stock.total_dividends - (stock.quantity * stock.avg_buy);
 }
 
@@ -230,3 +194,35 @@ function convert_to_NOK(number){
 // get_value_stock('EQNR');
 
 get_value_from_provider('nordnet');
+
+function get_current_stock_price(ticket){
+
+
+    // if(ticket === 'MIsNG'){
+    //      var url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=SpareBank 1&apikey=SECRET';
+    //     //  var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPXXF&interval=120min&outputsize=10&apikey=SECRET';
+    //     request.get({
+    //         url: url,
+    //         json:true,
+    //         headers:{'User-Agent': 'request'}
+    //     }, (err, res, data) => {
+    //         if(err){
+    //             console.log('Error', err)
+    //         }else if (res.statusCode !== 200) {
+    //             console.log('Status:', res.statusCode);
+    //           } else {
+    //             // data is successfully parsed as a JSON object:
+    //             console.log('this is data', data);
+    //           }
+    //
+    //     });
+    //
+    // }
+
+    get_stock_price_url(ticket);
+
+    return value;
+
+
+
+}
