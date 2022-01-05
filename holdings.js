@@ -473,7 +473,7 @@ const holdings = {
         },
         'AXS':{
             'PROVIDER': 'Crypto.com',
-            'NAME': 'Dogelon Mars',
+            'NAME': 'Axie Infinity',
             'ORDERS':[
                 {
                     'PRICE': 94.95,

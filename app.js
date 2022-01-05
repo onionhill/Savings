@@ -195,6 +195,23 @@ function convert_to_NOK(number){
 
 get_value_from_provider('nordnet');
 
+var providers = [
+    'nordnet', ''
+]
+function get_portfolio_value(){
+    let providers = {
+        'nordnet': 0,
+        'etoro': 0,
+        'Binance': 0,
+        'Firi': 0,
+        'Coinbase': 0,
+        'SpareBank1': 0,
+        'Crypto.com': 0
+    }
+}
+
+
+
 function get_current_stock_price(ticket){
 
 
