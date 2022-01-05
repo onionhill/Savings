@@ -1,5 +1,6 @@
 const { readFileSync, writeFileSync } = require('fs');
 const holdings = require('./holdings');
+const get_stock_price_url = require('./scrapper');
 
 const request = require('request');
 
@@ -48,30 +49,33 @@ function get_value_crypto(){
 
 function get_current_stock_price(ticket){
 
-   
-    
-   
-    if(ticket === 'MING'){
-        // var url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=SpareBank 1&apikey=SECRET';
-        //  var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPXXF&interval=120min&outputsize=10&apikey=SECRET';
-        request.get({
-            url: url,
-            json:true,
-            headers:{'User-Agent': 'request'}
-        }, (err, res, data) => {
-            if(err){
-                console.log('Error', err)
-            }else if (res.statusCode !== 200) {
-                console.log('Status:', res.statusCode);
-              } else {
-                // data is successfully parsed as a JSON object:
-                console.log('this is data', data);
-              }
-    
-        });
+
+    // if(ticket === 'MIsNG'){
+    //      var url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=SpareBank 1&apikey=SECRET';
+    //     //  var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPXXF&interval=120min&outputsize=10&apikey=SECRET';
+    //     request.get({
+    //         url: url,
+    //         json:true,
+    //         headers:{'User-Agent': 'request'}
+    //     }, (err, res, data) => {
+    //         if(err){
+    //             console.log('Error', err)
+    //         }else if (res.statusCode !== 200) {
+    //             console.log('Status:', res.statusCode);
+    //           } else {
+    //             // data is successfully parsed as a JSON object:
+    //             console.log('this is data', data);
+    //           }
+    //
+    //     });
+    //
+    // }
+
+    if(ticket === 'TEL'){
+        get_stock_price_url(ticket);
 
     }
-   
+
 
     return stock_prices[ticket];
 }
@@ -122,7 +126,7 @@ function get_value_fond(name){
         return;
     }
 
-    
+
     if(fond.VALUE){
         return fond.VALUE;
     }
