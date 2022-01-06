@@ -353,7 +353,7 @@ const holdings = {
             'DIVIDENDS':[ ]
         }
     },
-    'Crypto':{
+    'crypto':{
         'ADA':{
             'PROVIDER': 'Firi',
             'NAME': 'Cardano',

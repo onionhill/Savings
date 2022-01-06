@@ -1,6 +1,7 @@
 const { readFileSync, writeFileSync } = require('fs');
 const holdings = require('./holdings');
 const get_stock_price_url = require('./scrapper');
+const get_crypto_coin_price = require('./crypto');
 
 const request = require('request');
 var total_value = 0;
@@ -9,14 +10,16 @@ function get_value_from_provider(provider){
     let promises = [];
     Object.keys(holdings).forEach(key => {
         total_value[key] = [];
-        Object.keys(holdings[key]).forEach(item => {
-            if(holdings[key][item].PROVIDER != provider){
+        Object.keys(holdings[key]).forEach(ticket => {
+            if(holdings[key][ticket].PROVIDER != provider){
                 return;
             }
             if(key === 'stocks' ){
-                 promises.push( get_stock_promise(item) );
+                 promises.push( get_stock_promise(ticket) );
             }else if(key === 'fonds'){
-                 promises.push( get_fond_promise(item) );
+                 promises.push( get_fond_promise(ticket) );
+            }else if(key === 'crypto' && ticket === 'BTC'){
+                 promises.push( get_crypto_promise(ticket) );
             }
 
 
@@ -27,7 +30,11 @@ function get_value_from_provider(provider){
     })
 }
 function get_value_crypto(){
-    const cryptos = holdings['Crypto'];
+    const cryptos = holdings['crypto'];
+}
+
+function get_crypto_promise(coin){
+    return get_crypto_coin_price(coin, 'NOK');
 }
 
 function get_stock_promise(ticket){
@@ -193,7 +200,7 @@ function convert_to_NOK(number){
 //
 // get_value_stock('EQNR');
 
-get_value_from_provider('nordnet');
+get_value_from_provider('Firi');
 
 var providers = [
     'nordnet', ''
