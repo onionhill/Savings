@@ -41,40 +41,30 @@ const ticket_data = {
     },
 
     'Nordnet Indeksfond Global':{
-        'url': 'https://www.nordnet.no/market/funds/17334521-nordnet-indeksfond-global',
-        'selector': function($){
-            let items = $("[class*=StatsBox__StyledPriceText]");
-            let price = 0;
-            items.each( (i,el) => {
-                if(i == 1) price = $(el).html()
-            })
-            return parseFloat( price.replace(',','.') ).toFixed(2);
-        }
+        'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F000015CV5',
+        'selector': '$(".line.text").first()',
+
 
     },
     'Nordnet Indeksfond Emerging Market':{
-        'url': 'https://www.nordnet.no/market/funds/17334523-nordnet-indeks-emerging?accid=3',
-        'selector': function($){
-            let items = $("[class*=StatsBox__StyledPriceText]");
-            let price = 0;
-            items.each( (i,el) => {
-                if(i == 1) price = $(el).html()
-            })
-            return parseFloat( price.replace(',','.') ).toFixed(2);
-        }
+        'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F000015CUX',
+        'selector': '$(".line.text").first()',
+
 
     },
     'Landkreditt Utbytte A':{
-        'url': 'https://www.nordnet.no/market/funds/16801444-landkreditt-utbytte-a?accid=3',
-        'selector': function($){
-            let items = $("[class*=StatsBox__StyledPriceText]");
-            let price = 0;
-            items.each( (i,el) => {
-                if(i == 1) price = $(el).html()
-            })
-            return parseFloat( price.replace(',','.') ).toFixed(2);
-        }
+        'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F00000PLTL',
+        'selector': '$(".line.text").first()',
 
+
+    },
+    'OD-ODUSD':{
+        'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F00000XXR8',
+        'selector': '$(".line.text").first()',
+    },
+    'OD-AKSJD':{
+        'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F0000170KP',
+        'selector': '$(".line.text").first()',
     }
 
 }

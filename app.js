@@ -34,21 +34,23 @@ function get_portfolio_value(){
     // const provider_promises = update_portfolio_value('etoro');
     Promise.allSettled(provider_promises).then( () => {
 
-        const etoro_value = get_value_from_provider('etoro');
+        const etoro_value = get_value_from_provider('etoro') * 8.90;
         const nordnet_value = get_value_from_provider('nordnet');
         const firi_value = get_value_from_provider('Firi');
         const binance_value = get_value_from_provider('Binance');
         const cdc_value = get_value_from_provider('Crypto.com');
         const coinbase_value = get_value_from_provider('Coinbase');
+        const sb1_value = get_value_from_provider('SpareBank1');
 
         const portfolio_value = {
-            'etoro': etoro_value,
-            'nordnet': nordnet_value,
-            'Firi': firi_value,
-            'Binance': binance_value,
-            'Crypto.com': cdc_value,
-            'Coinbase': coinbase_value,
-            'Total': (etoro_value+nordnet_value+firi_value+binance_value+cdc_value+coinbase_value)
+            'etoro': etoro_value.toFixed(2),
+            'nordnet': nordnet_value.toFixed(2),
+            'Firi': firi_value.toFixed(2),
+            'Binance': binance_value.toFixed(2),
+            'Crypto.com': cdc_value.toFixed(2),
+            'Coinbase': coinbase_value.toFixed(2),
+            'SpareBank1': sb1_value.toFixed(2),
+            'Total': (etoro_value+nordnet_value+firi_value+binance_value+cdc_value+coinbase_value+sb1_value).toFixed(2)
         };
 
         console.log(portfolio_value);
@@ -67,7 +69,6 @@ function get_portfolio_value(){
 function get_value_from_provider(provider){
     let provider_value = 0;
     Object.keys(holdings).forEach(key => {
-        total_value[key] = [];
         Object.keys(holdings[key]).forEach(ticket => {
             const asset = holdings[key][ticket];
 
@@ -89,14 +90,7 @@ function get_value_from_provider(provider){
 function update_portfolio_value(){
     let promises = [];
     Object.keys(holdings).forEach(key => {
-        total_value[key] = [];
         Object.keys(holdings[key]).forEach(ticket => {
-            if( holdings[key][ticket].PROVIDER == 'SpareBank1'
-            ){
-                return;
-            }
-
-
             if(key === 'stocks' ){
                  promises.push(
                      get_stock_promise(ticket).then( (ticket) => {
@@ -150,7 +144,6 @@ function get_etf_promise(ticket){
     if(etf.current_value){
         return Promise.resolve(ticket);
     }
-    console.log('ticket needs to be generated..' , ticket);
     return get_stock_price_api(ticket).then( (value) => {
         etf.stock_price = value;
         get_value_asset(etf);
@@ -165,7 +158,7 @@ function get_stock_promise(ticket){
 
     // We have checked the price today. Dont cant about updating multiple times a day
     // Api has a limit off 500 request a day and 5 in a minute so this hould help on performance
-    if(stock.current_value){
+    if(stock.current_value && stock.METHOD === 'API'){
         return Promise.resolve(ticket);
     }
 
@@ -188,7 +181,7 @@ function get_stock_promise(ticket){
 
 function get_fond_promise(ticket){
     const fond = get_fond(ticket);
-    if(fond.current_value){
+    if(fond.current_value ){
         return Promise.resolve(fond.current_value);
     }
 
@@ -201,7 +194,7 @@ function get_fond_promise(ticket){
         return ticket;
     }).then( (ticket) => {
         console.log(`${ticket} has an value of ${holdings['fonds'][ticket].current_value}`);
-        total_value+= parseFloat( holdings['fonds'][ticket].current_value );
+
     });
 }
 
@@ -236,7 +229,7 @@ function get_fond(name){
     return {};
 }
 
-
+// TODO: Handle currencys here?
 function get_value_asset(asset){
     if(!asset.ORDERS){
         return;
