@@ -17,7 +17,8 @@ const holdings = {
                 { 'DATE': '2021-05-27', 'VALUE': 9.9, 'CURRENCY': 'NOK' },
                 { 'DATE': '2021-08-27', 'VALUE': 26.61, 'CURRENCY': 'NOK' },
                 { 'DATE': '2021-11-29', 'VALUE': 449, 'CURRENCY': 'NOK' }
-            ]
+            ],
+            'METHOD': 'scrapper'
         },
         'TEL':{
             'PROVIDER':'nordnet',
@@ -41,7 +42,8 @@ const holdings = {
             'DIVIDENDS':[
                 { 'DATE': '2021-06-09', 'VALUE': 150, 'CURRENCY': 'NOK' },
                 { 'DATE': '2021-10-20', 'VALUE': 204, 'CURRENCY': 'NOK' },
-            ]
+            ],
+            'METHOD': 'scrapper'
 
         },
         'MING':{
@@ -59,7 +61,8 @@ const holdings = {
             'DIVIDENDS':[
                 { 'DATE': '2021-07-04', 'VALUE': 13, 'CURRENCY': 'NOK' },
                 { 'DATE': '2021-11-09', 'VALUE': 77.5, 'CURRENCY': 'NOK' },
-            ]
+            ],
+            'METHOD': 'scrapper'
 
         },
         'AKRBP':{
@@ -78,7 +81,8 @@ const holdings = {
                 { 'DATE': '2021-05-11', 'VALUE': 20.69, 'CURRENCY': 'NOK' },
                 { 'DATE': '2021-07-28', 'VALUE': 21.86, 'CURRENCY': 'NOK' },
                 { 'DATE': '2021-11-12', 'VALUE': 69.82, 'CURRENCY': 'NOK' },
-            ]
+            ],
+            'METHOD': 'scrapper'
 
         },
         'MOWI':{
@@ -98,7 +102,8 @@ const holdings = {
                 { 'DATE': '2021-06-07', 'VALUE': 8.47, 'CURRENCY': 'NOK' },
                 { 'DATE': '2021-09-13', 'VALUE': 41.16, 'CURRENCY': 'NOK' },
                 { 'DATE': '2021-11-29', 'VALUE': 29.4, 'CURRENCY': 'NOK' },
-            ]
+            ],
+            'METHOD': 'scrapper'
 
         },
         'YAR':{
@@ -116,7 +121,8 @@ const holdings = {
             'DIVIDENDS':[
                 { 'DATE': '2022-05-19', 'VALUE': 160, 'CURRENCY': 'NOK' },
                 { 'DATE': '2022-09-15', 'VALUE': 160, 'CURRENCY': 'NOK' },
-            ]
+            ],
+            'METHOD': 'scrapper'
 
         },
         'NONG':{
@@ -134,7 +140,8 @@ const holdings = {
             'DIVIDENDS':[
                 { 'DATE': '2021-04-14', 'VALUE': 12.7, 'CURRENCY': 'NOK' },
                 { 'DATE': '2021-11-11', 'VALUE': 81.53, 'CURRENCY': 'NOK' },
-            ]
+            ],
+            'METHOD': 'scrapper'
 
         },
         'KIT':{
@@ -148,7 +155,8 @@ const holdings = {
                     'DATE':'2022-01-01',
                     'BUY': true
                 }
-            ]
+            ],
+            'METHOD': 'scrapper'
 
         },
         'B3':{
@@ -162,7 +170,8 @@ const holdings = {
                     'DATE':'2022-01-01',
                     'BUY': true
                 }
-            ]
+            ],
+            'METHOD': 'scrapper'
 
         },
         'HMONY':{
@@ -176,7 +185,8 @@ const holdings = {
                     'DATE':'2022-01-01',
                     'BUY': true
                 }
-            ]
+            ],
+            'METHOD': 'scrapper'
 
         },
         'JPM':{
@@ -191,7 +201,8 @@ const holdings = {
                     'BUY': true
                 }
             ],
-            'DIVIDENDS':[ ]
+            'DIVIDENDS':[ ],
+            'METHOD': 'API'
         },
         'AGNC':{
             'PROVIDER':'etoro',
@@ -205,7 +216,8 @@ const holdings = {
                     'BUY': true
                 }
             ],
-            'DIVIDENDS':[ ]
+            'DIVIDENDS':[ ],
+            'METHOD': 'API'
         },
         'PSEC':{
             'PROVIDER':'etoro',
@@ -219,7 +231,8 @@ const holdings = {
                     'BUY': true
                 }
             ],
-            'DIVIDENDS':[ ]
+            'DIVIDENDS':[ ],
+            'METHOD': 'API'
         },
         'PYPL':{
             'PROVIDER':'etoro',
@@ -233,11 +246,12 @@ const holdings = {
                     'BUY': true
                 }
             ],
-            'DIVIDENDS':[ ]
+            'DIVIDENDS':[ ],
+            'METHOD': 'API'
         },
 
     },
-    'ETF':{
+    'etf':{
         'VOO':{
             'PROVIDER': 'etoro',
             'NAME': 'Vanguard S&P 500 ETF',
@@ -250,7 +264,8 @@ const holdings = {
                     'BUY': true
                 }
             ],
-            'DIVIDENDS':[ ]
+            'DIVIDENDS':[ ],
+            'METHOD': 'API'
         },
         'VTI':{
             'PROVIDER': 'etoro',
@@ -259,12 +274,13 @@ const holdings = {
                 {
                     'PRICE': 223.81,
                     'CURRENCY': 'USD',
-                    'UNITS': 0.52,
+                    'UNITS': 0.67,
                     'DATE':'2022-01-01',
                     'BUY': true
                 }
             ],
-            'DIVIDENDS':[ ]
+            'DIVIDENDS':[ ],
+            'METHOD': 'API'
         },
         'QYLD':{
             'PROVIDER': 'etoro',
@@ -278,7 +294,8 @@ const holdings = {
                     'BUY': true
                 }
             ],
-            'DIVIDENDS':[ ]
+            'DIVIDENDS':[ ],
+            'METHOD': 'API'
         },
     },
     'fonds':{
@@ -472,7 +489,7 @@ const holdings = {
             ]
         },
         'AXS':{
-            'PROVIDER': 'Crypto.com',
+            'PROVIDER': 'Binance',
             'NAME': 'Axie Infinity',
             'ORDERS':[
                 {
@@ -484,7 +501,7 @@ const holdings = {
                 }
             ]
         }
-    }
+    },
 }
 
 
