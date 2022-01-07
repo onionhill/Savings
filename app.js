@@ -1,5 +1,7 @@
 const fs = require('fs');
-let holdings = require('./holdings');
+let portfolio = require('./portfolio');
+let assets = portfolio.assets;
+
 const {get_stock_price_url, get_stock_price_api} = require('./stocks');
 const get_crypto_coin_price = require('./crypto');
 const write_to_cache = true;
@@ -15,83 +17,95 @@ get_portfolio_value();
 //     'nordnet', ''
 // ]
 function get_portfolio_value(){
-    let providers = holdings.providers;
     // Check if the cache exists
     const date = new Date();
     const cache_file =  `./historical_data/${get_todays_date()}.json`;
     try{
         if(fs.existsSync(cache_file)){
             const cache = fs.readFileSync(cache_file, 'utf8');
-            holdings = JSON.parse( cache );
-
+            portfolio = JSON.parse( cache );
+            assets = portfolio.assets;
         }
     }catch(err){
         console.log(err);
     }
     const provider_promises = update_portfolio_value();
 
-
     // const provider_promises = update_portfolio_value('etoro');
     Promise.allSettled(provider_promises).then( () => {
+        const etoro = get_value_from_provider('etoro');
+        const nordnet = get_value_from_provider('nordnet');
+        const firi = get_value_from_provider('Firi');
+        const binance = get_value_from_provider('Binance');
+        const cdc = get_value_from_provider('Crypto.com');
+        const coinbase = get_value_from_provider('Coinbase');
+        const sb1 = get_value_from_provider('SpareBank1');
 
-        const etoro_value = get_value_from_provider('etoro') * 8.90;
-        const nordnet_value = get_value_from_provider('nordnet');
-        const firi_value = get_value_from_provider('Firi');
-        const binance_value = get_value_from_provider('Binance');
-        const cdc_value = get_value_from_provider('Crypto.com');
-        const coinbase_value = get_value_from_provider('Coinbase');
-        const sb1_value = get_value_from_provider('SpareBank1');
 
         const portfolio_value = {
-            'etoro': etoro_value.toFixed(2),
-            'nordnet': nordnet_value.toFixed(2),
-            'Firi': firi_value.toFixed(2),
-            'Binance': binance_value.toFixed(2),
-            'Crypto.com': cdc_value.toFixed(2),
-            'Coinbase': coinbase_value.toFixed(2),
-            'SpareBank1': sb1_value.toFixed(2),
-            'Total': (etoro_value+nordnet_value+firi_value+binance_value+cdc_value+coinbase_value+sb1_value).toFixed(2)
+            'etoro': etoro,
+            'nordnet': nordnet,
+            'Firi': firi,
+            'Binance': binance,
+            'Crypto.com': cdc,
+            'Coinbase': coinbase,
+            'SpareBank1': sb1,
+            'Total': ( (etoro.value * 8.90) +nordnet.value+firi.value+binance.value+cdc.value+coinbase.value+sb1.value).toFixed(2)
         };
 
-        console.log(portfolio_value);
 
         if(write_to_cache){
-            fs.writeFileSync(cache_file, JSON.stringify(holdings) , {encodeing: 'utf8'});
+            portfolio.results = portfolio_value;
+
+            fs.writeFileSync(cache_file, JSON.stringify(portfolio) , {encodeing: 'utf8'});
 
         }
+
+        // console.log( portfolio.results );
     }).catch(error => {
         console.error(error.message)
     });
     //Check value of a provider
-    // Write the holdings to cache
 }
 
 function get_value_from_provider(provider){
     let provider_value = 0;
-    Object.keys(holdings).forEach(key => {
-        Object.keys(holdings[key]).forEach(ticket => {
-            const asset = holdings[key][ticket];
+    let provider_data = {
+        value:0,
+        assets:{}
+    }
 
+
+    Object.keys(assets).forEach(key => {
+        Object.keys(assets[key]).forEach(ticket => {
+            const asset = assets[key][ticket];
             if(asset.PROVIDER !== provider){
                 return;
             }
+
             if(!asset.current_value){
                 console.log('missing value for ticket',ticket);
                 return;
             }
             provider_value += parseFloat(asset.current_value);
+            if(!provider_data.assets[key]){
+                provider_data.assets[key] = {};
+            }
+            provider_data.assets[key][ticket] = parseFloat(asset.current_value);
         });
     });
+    provider_data.value = parseFloat(provider_value);
     // console.log(`Value off ${provider} is ${provider_value}`);
 
-    return parseFloat(provider_value);
+
+    return provider_data;
 }
 
 
 function update_portfolio_value(){
     let promises = [];
-    Object.keys(holdings).forEach(key => {
-        Object.keys(holdings[key]).forEach(ticket => {
+    Object.keys(assets).forEach(key => {
+        Object.keys(assets[key]).forEach(ticket => {
             if(key === 'stocks' ){
                  promises.push(
                      get_stock_promise(ticket).then( (ticket) => {
@@ -123,7 +137,7 @@ function update_portfolio_value(){
 
 }
 function get_value_crypto(){
-    const cryptos = holdings['crypto'];
+    const cryptos = assets['crypto'];
 }
 
 function get_crypto_promise(coin){
@@ -190,11 +204,11 @@ function get_fond_promise(ticket){
         fond.stock_price = value;
         return ticket;
     }).then( (ticket) => {
-        // get_value_fond(ticket);
-        get_value_asset(fond);
+         get_value_asset(fond);
         return ticket;
     }).then( (ticket) => {
-        console.log(`${ticket} has an value of ${holdings['fonds'][ticket].current_value}`);
+        // console.log(assets['fonds'] );
+        // console.log(`${ticket} has an value of ${assets['fonds'][ticket].current_value}`);
 
     });
 }
@@ -203,29 +217,29 @@ function get_fond_promise(ticket){
 
 
 function get_crypto(coin){
-    if(holdings.crypto[coin]){
-        return holdings.crypto[coin];
+    if(assets.crypto[coin]){
+        return assets.crypto[coin];
     }
     return {};
 }
 
 function get_stock(ticket){
-    if(holdings.stocks[ticket]){
-        return holdings.stocks[ticket];
+    if(assets.stocks[ticket]){
+        return assets.stocks[ticket];
     }
     return {};
 }
 
 function get_etf(ticket){
-    if(holdings.etf[ticket]){
-        return holdings.etf[ticket];
+    if(assets.etf[ticket]){
+        return assets.etf[ticket];
     }
     return {};
 }
 
 function get_fond(name){
-    if(holdings.fonds[name]){
-        return holdings.fonds[name];
+    if(assets.fonds[name]){
+        return assets.fonds[name];
     }
     return {};
 }
@@ -299,10 +313,6 @@ function get_avg_buy_value(orders){
 function convert_to_NOK(number){
     return number * 8.86;
 }
-
-//
-// get_value_stock('EQNR');
-
 
 function get_todays_date(){
     var d = new Date(),
