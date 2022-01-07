@@ -5,19 +5,18 @@ let assets = portfolio.assets;
 const {get_stock_price_url, get_stock_price_api} = require('./stocks');
 const get_crypto_coin_price = require('./crypto');
 const write_to_cache = true;
-
 const request = require('request');
-var total_value = 0;
+const axios = require('axios');
 
+let exchange_rates = {};
 
-
-get_portfolio_value();
 //
 // var providers = [
 //     'nordnet', ''
 // ]
-function get_portfolio_value(){
-    // Check if the cache exists
+init_portfolio();
+
+function init_portfolio(){
     const date = new Date();
     const cache_file =  `./historical_data/${get_todays_date()}.json`;
     try{
@@ -25,42 +24,42 @@ function get_portfolio_value(){
             const cache = fs.readFileSync(cache_file, 'utf8');
             portfolio = JSON.parse( cache );
             assets = portfolio.assets;
+            exchange_rates = portfolio.exchange_rates;
+            if(!exchange_rates){
+                exchange_rates = {};
+            }
         }
     }catch(err){
-        console.log(err);
+        console.log('error...',err);
     }
+
+    if( Object.keys(exchange_rates) == 0){
+        Promise.all( get_exchange_rates() ).then( () => {
+            console.log('done with exchange....');
+        } );
+    }
+
     const provider_promises = update_portfolio_value();
 
     // const provider_promises = update_portfolio_value('etoro');
     Promise.allSettled(provider_promises).then( () => {
-        const etoro = get_value_from_provider('etoro');
-        const nordnet = get_value_from_provider('nordnet');
-        const firi = get_value_from_provider('Firi');
-        const binance = get_value_from_provider('Binance');
-        const cdc = get_value_from_provider('Crypto.com');
-        const coinbase = get_value_from_provider('Coinbase');
-        const sb1 = get_value_from_provider('SpareBank1');
 
-        etoro.value  = etoro.value  * 8.90;
-        const portfolio_value = {
-            'etoro': etoro,
-            'nordnet': nordnet,
-            'Firi': firi,
-            'Binance': binance,
-            'Crypto.com': cdc,
-            'Coinbase': coinbase,
-            'SpareBank1': sb1,
-            'Total': ( (etoro.value ) +nordnet.value+firi.value+binance.value+cdc.value+coinbase.value+sb1.value).toFixed(2)
-        };
+        const all_providers = get_all_providers();
 
+        const portfolio_value = {};
+        let total_value = 0;
+        Object.keys(all_providers).forEach((provider) => {
+            portfolio_value[provider] = get_value_from_provider(provider);
+            total_value+= portfolio_value[provider].value;
+        });
+        portfolio_value.total = total_value;
 
         if(write_to_cache){
             portfolio.results = portfolio_value;
-
+            portfolio.exchange_rates = exchange_rates;
             fs.writeFileSync(cache_file, JSON.stringify(portfolio) , {encodeing: 'utf8'});
 
         }
-
 
         const today_total = portfolio_value.Total;
         //Get yesteday json
@@ -72,19 +71,20 @@ function get_portfolio_value(){
                 const yesterday_portfolio = JSON.parse( cache );
                 const yesterday_results = yesterday_portfolio.results;
 
+                let gains = {};
+                let total_gains = 0;
+                Object.keys(all_providers).forEach((provider) => {
+                    gains[provider] = calculate_provider_changes(
+                        portfolio_value[provider],
+                        yesterday_results[provider]
+                    )
+                    total_gains = total_gains + parseFloat( gains[provider].value );
+                });
 
-                const gains = {
-                    'etoro': parseFloat(etoro.value - yesterday_results.etoro.value).toFixed(2),
-                    'nordnet': parseFloat(nordnet.value - yesterday_results.nordnet.value).toFixed(2),
-                    'Firi': parseFloat(firi.value - yesterday_results.Firi.value).toFixed(2),
-                    'Binance': parseFloat(binance.value - yesterday_results.Binance.value).toFixed(2),
-                    'Crypto.com': parseFloat(cdc.value - yesterday_results['Crypto.com'].value).toFixed(2),
-                    'Coinbase': parseFloat(coinbase.value - yesterday_results.Coinbase.value).toFixed(2),
-                    'SpareBank1': parseFloat(sb1.value - yesterday_results.SpareBank1.value).toFixed(2),
-                    'total': parseFloat( portfolio_value.Total - yesterday_results.Total)
-                };
+                gains.total = total_gains;
+
                 console.log('HOLDINGS');
-                console.log(portfolio_value);
+                console.log(portfolio_value['Crypto.com']);
                 console.log('Todays changes...');
                 console.log(gains);
             }
@@ -96,6 +96,38 @@ function get_portfolio_value(){
         console.error(error.message)
     });
     //Check value of a provider
+}
+
+function calculate_provider_changes(today, yesterday){
+    let provider_gains = {
+        value: parseFloat( today.value - yesterday.value).toFixed(2)
+    };
+    // Only check today vs yesterday. Dont care if today is not found in yesterday
+    Object.keys(today.assets).forEach((type) => {
+        Object.keys(today.assets[type] ).forEach((ticket) => {
+            if(!yesterday.assets[type][ticket] ){
+                provider_gains[ticket] = 0;
+            }else{
+                provider_gains[ticket] = parseFloat(today.assets[type][ticket] - yesterday.assets[type][ticket] ).toFixed(2)
+            }
+        });
+
+    });
+
+    return provider_gains;
+}
+
+
+function get_all_providers(){
+    let providers = {};
+    Object.keys(assets).forEach(key => {
+        Object.keys(assets[key]).forEach(ticket => {
+            const asset = assets[key][ticket];
+            providers[asset.PROVIDER] = {}
+            // console.log('setting stuff here',asset);
+        });
+    });
+    return providers;
 }
 
 
@@ -112,18 +144,19 @@ function get_value_from_provider(provider){
     Object.keys(assets).forEach(key => {
         Object.keys(assets[key]).forEach(ticket => {
             const asset = assets[key][ticket];
-            if(asset.PROVIDER !== provider){
+            if(asset.PROVIDER.toLowerCase() !== provider.toLowerCase()){
                 return;
             }
-
             if(!asset.current_value){
-                console.log('missing value for ticket',ticket);
+                console.log('missing value for ', ticket);
                 return;
             }
             provider_value += parseFloat(asset.current_value);
             if(!provider_data.assets[key]){
                 provider_data.assets[key] = {};
             }
+
+
             provider_data.assets[key][ticket] = parseFloat(asset.current_value);
         });
     });
@@ -163,7 +196,6 @@ function update_portfolio_value(){
 
         })
     });
-
     return promises;
 
 
@@ -180,7 +212,8 @@ function get_crypto_promise(coin){
 
     }
 
-    return get_crypto_coin_price(coin, 'NOK').then( (value) => {
+
+    return get_crypto_coin_price(coin, crypto.ORDERS[0].CURRENCY).then( (value) => {
         crypto.stock_price = value;
         get_value_asset(crypto);
         return coin
@@ -206,7 +239,8 @@ function get_stock_promise(ticket){
 
     // We have checked the price today. Dont cant about updating multiple times a day
     // Api has a limit off 500 request a day and 5 in a minute so this hould help on performance
-    if(stock.current_value && stock.METHOD === 'API'){
+    // if(stock.current_value && stock.METHOD === 'API'){
+    if(stock.current_value ){
         return Promise.resolve(ticket);
     }
 
@@ -239,11 +273,7 @@ function get_fond_promise(ticket){
     }).then( (ticket) => {
          get_value_asset(fond);
         return ticket;
-    }).then( (ticket) => {
-        // console.log(assets['fonds'] );
-        // console.log(`${ticket} has an value of ${assets['fonds'][ticket].current_value}`);
-
-    });
+    })
 }
 
 
@@ -283,20 +313,17 @@ function get_value_asset(asset){
         return;
     }
 
-
     if(asset.VALUE){
         return asset.VALUE;
     }
-
+    asset.currency = asset.ORDERS[0].CURRENCY;
     asset.quantity = get_quantity(asset.ORDERS);
     asset.avg_buy = get_avg_buy_value(asset.ORDERS);
-
     asset.total_dividends = get_dividends(asset.DIVIDENDS);
     asset.return = (asset.stock_price - asset.avg_buy) * asset.quantity;
+
     asset.total_return = calculate_profitt(asset);
 }
-
-
 
 function get_dividends(dividends){
     if(!dividends){
@@ -310,6 +337,9 @@ function get_dividends(dividends){
 
 function calculate_profitt(stock){
     stock.current_value = parseFloat( stock.quantity * stock.stock_price).toFixed(2);
+    if(stock.currency != 'NOK'){
+        stock.current_value = stock.current_value * exchange_rates[`${stock.currency}_NOK`];
+    }
     return stock.current_value + stock.total_dividends - (stock.quantity * stock.avg_buy);
 }
 
@@ -330,7 +360,6 @@ function get_quantity(orders){
 function get_avg_buy_value(orders){
     let number_of_stocks = 0;
     let buy_value = 0;
-    let is_USD = false;
     orders.forEach(order => {
         if(order.BUY){
             number_of_stocks += order.UNITS;
@@ -340,6 +369,7 @@ function get_avg_buy_value(orders){
             buy_value = buy_value - (order.UNITS * order.PRICE);
         }
     });
+
     return buy_value/number_of_stocks;;
 }
 
@@ -380,62 +410,33 @@ function get_todays_date(){
     return [year, month, day].join('');
 }
 
+function get_exchange_rates(){
+    // Only need to get USD TO NOK and SEK TO NOK
+    var currencys_in_use = ['USD', 'SEK'];
+    var exchange_rate_promises = [];
+    currencys_in_use.forEach((from_currency) => {
 
+        const url = `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from_currency}&to_currency=NOK&apikey=I1G8TIKPFJ9UHGV0`;
 
-//
-// function get_value_fond(name){
-//     const fond = get_fond(name);
-//     if(!fond.ORDERS){
-//         return;
-//     }
-//
-//
-//     if(fond.VALUE){
-//         return fond.VALUE;
-//     }
-//
-//     fond.quantity = get_quantity(fond.ORDERS);
-//     fond.avg_buy = get_avg_buy_value(fond.ORDERS);
-//
-//     fond.total_dividends = get_dividends(fond.DIVIDENDS);
-//     fond.return = (fond.stock_price - fond.avg_buy) * fond.quantity;
-//     fond.total_return = calculate_profitt(fond);
-// //     console.log(`You own ${fond.quantity } shares in fond ${name} with avg price ${fond.avg_buy}.
-// // The current stock price is ${fond.stock_price}
-// // Dividends: ${fond.total_dividends}
-// // Return: ${fond.return}
-// // Profitt: ${fond.total_return}`);
-//
-// }
-//
-//
-// function get_value_stock(ticket){
-//
-//
-//     const stock = get_stock(ticket);
-//     if(!stock.ORDERS){
-//         return;
-//     }
-//
-//     if(stock.VALUE){
-//         return stock.VALUE;
-//     }
-//
-//     stock.quantity = get_quantity(stock.ORDERS);
-//     stock.avg_buy = get_avg_buy_value(stock.ORDERS);
-//     //
-//     // await get_stock_price_url(ticket).then( (value) => stock.stock_price = value);
-//
-//     stock.total_dividends = get_dividends(stock.DIVIDENDS);
-//     stock.return = (stock.stock_price - stock.avg_buy) * stock.quantity;
-//     stock.total_return = calculate_profitt(stock);
-//
-// //
-// //     console.log(`You own ${stock.quantity } stocks in ticket ${ticket} with avg price ${stock.avg_buy}.
-// // The current stock price is ${stock.stock_price}
-// // Dividends: ${stock.total_dividends}
-// // Return: ${stock.return}
-// // Profitt: ${stock.total_return}`);
-//
-//     return stock;
-// }
+        exchange_rate_promises.push(
+            axios.get(url,{
+                json:true,
+                headers: {'User-Agent': 'request'}
+            }).then( (response) => {
+                try{
+                    console.log(response.data);
+                    exchange_rates[`${from_currency}_NOK`] =
+                        response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']
+                }catch(err){
+                    console.log('error in gett exchange rate for ' + from_currency, err);
+                }
+                return 1;
+            }).catch((error) => {
+                console.log(error);
+              })
+        );
+
+    });
+
+    return exchange_rate_promises;
+}

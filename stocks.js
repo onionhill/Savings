@@ -4,16 +4,6 @@ const ticket_data = require('./ticket_data');
 const axios = require('axios');
 
 
-
-const stock_prices = {
-    'OD-AKSJD': 0,
-    'OD-ODUSD': 0,
-    'Nordnet Indeksfond Global': 134.01,
-    'Nordnet Indeksfond Emerging Market': 109.19,
-    'Landkreditt Utbytte A': 280.69,
-}
-
-
 const get_stock_price_url = (ticket) => {
     const item = ticket_data[ticket];
     let value;
@@ -31,7 +21,7 @@ const get_stock_price_url = (ticket) => {
         });
     }else{
         console.log('no info in tickets.');
-        return Promise.resolve(stock_prices[ticket]);
+        return 0;
     }
 
 }
@@ -40,16 +30,24 @@ const get_stock_price_api = (ticket) => {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticket}&apikey=I1G8TIKPFJ9UHGV0`;
 
         // console.log('checking ticket', ticket);
+
+    //This should only be in USD
     return axios.get(url,{
         json: true,
         headers: {'User-Agent': 'request'}
     }).then( (response) => {
-        const last_data_point_date = response.data['Meta Data']['3. Last Refreshed'];
+
+        var last_data_point_date = response.data['Meta Data']['3. Last Refreshed'];
+        if(last_data_point_date.length > 10){
+            last_data_point_date = last_data_point_date.substring(0,10);
+        }
         const last_data_point = response.data['Time Series (Daily)'][last_data_point_date];
         return last_data_point['4. close'];
 
     })
 }
+
+
 function getYesterdayDate() {
   let d =  new Date(new Date().getTime() - 24*60*60*1000);
       month = '' + (d.getMonth() + 1),
@@ -74,5 +72,5 @@ function getYesterdayDate() {
 
 module.exports = {
     get_stock_price_url: get_stock_price_url,
-    get_stock_price_api: get_stock_price_api
+    get_stock_price_api: get_stock_price_api,
 }

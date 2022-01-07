@@ -11,7 +11,7 @@ const portfolio = {
                         'UNITS': 45,
                         'DATE':'2022-01-01',
                         'BUY': true
-    
+
                     }
                 ],
                 'DIVIDENDS':[
@@ -45,7 +45,7 @@ const portfolio = {
                     { 'DATE': '2021-10-20', 'VALUE': 204, 'CURRENCY': 'NOK' },
                 ],
                 'METHOD': 'scrapper'
-    
+
             },
             'MING':{
                 'PROVIDER':'nordnet',
@@ -64,7 +64,7 @@ const portfolio = {
                     { 'DATE': '2021-11-09', 'VALUE': 77.5, 'CURRENCY': 'NOK' },
                 ],
                 'METHOD': 'scrapper'
-    
+
             },
             'AKRBP':{
                 'PROVIDER':'nordnet',
@@ -84,7 +84,7 @@ const portfolio = {
                     { 'DATE': '2021-11-12', 'VALUE': 69.82, 'CURRENCY': 'NOK' },
                 ],
                 'METHOD': 'scrapper'
-    
+
             },
             'MOWI':{
                 'PROVIDER':'nordnet',
@@ -105,7 +105,7 @@ const portfolio = {
                     { 'DATE': '2021-11-29', 'VALUE': 29.4, 'CURRENCY': 'NOK' },
                 ],
                 'METHOD': 'scrapper'
-    
+
             },
             'YAR':{
                 'PROVIDER':'nordnet',
@@ -124,7 +124,7 @@ const portfolio = {
                     { 'DATE': '2022-09-15', 'VALUE': 160, 'CURRENCY': 'NOK' },
                 ],
                 'METHOD': 'scrapper'
-    
+
             },
             'NONG':{
                 'PROVIDER':'nordnet',
@@ -143,7 +143,7 @@ const portfolio = {
                     { 'DATE': '2021-11-11', 'VALUE': 81.53, 'CURRENCY': 'NOK' },
                 ],
                 'METHOD': 'scrapper'
-    
+
             },
             'KIT':{
                 'PROVIDER':'nordnet',
@@ -158,7 +158,7 @@ const portfolio = {
                     }
                 ],
                 'METHOD': 'scrapper'
-    
+
             },
             'B3':{
                 'PROVIDER':'nordnet',
@@ -173,7 +173,7 @@ const portfolio = {
                     }
                 ],
                 'METHOD': 'scrapper'
-    
+
             },
             'HMONY':{
                 'PROVIDER':'nordnet',
@@ -188,7 +188,7 @@ const portfolio = {
                     }
                 ],
                 'METHOD': 'scrapper'
-    
+
             },
             'JPM':{
                 'PROVIDER':'etoro',
@@ -250,7 +250,7 @@ const portfolio = {
                 'DIVIDENDS':[ ],
                 'METHOD': 'API'
             },
-    
+
         },
         'etf':{
             'VOO':{
@@ -373,7 +373,7 @@ const portfolio = {
         },
         'crypto':{
             'ADA':{
-                'PROVIDER': 'Firi',
+                'PROVIDER': 'firi',
                 'NAME': 'Cardano',
                 'ORDERS':[
                     {
@@ -386,7 +386,7 @@ const portfolio = {
                 ]
             },
             'BTC':{
-                'PROVIDER': 'Firi',
+                'PROVIDER': 'firi',
                 'NAME': 'Bitcoin',
                 'ORDERS':[
                     {
@@ -399,7 +399,7 @@ const portfolio = {
                 ]
             },
             'ETH':{
-                'PROVIDER': 'Firi',
+                'PROVIDER': 'firi',
                 'NAME': 'Ethereum',
                 'ORDERS':[
                     {
@@ -412,7 +412,7 @@ const portfolio = {
                 ]
             },
             'LTC':{
-                'PROVIDER': 'Firi',
+                'PROVIDER': 'firi',
                 'NAME': 'Litecoin',
                 'ORDERS':[
                     {
@@ -425,7 +425,7 @@ const portfolio = {
                 ]
             },
             'XRP':{
-                'PROVIDER': 'Firi',
+                'PROVIDER': 'firi',
                 'NAME': 'XRP',
                 'ORDERS':[
                     {
@@ -490,7 +490,7 @@ const portfolio = {
                 ]
             },
             'AXS':{
-                'PROVIDER': 'Binance',
+                'PROVIDER': 'binance',
                 'NAME': 'Axie Infinity',
                 'ORDERS':[
                     {
@@ -505,8 +505,8 @@ const portfolio = {
         },
     },
     results:{},
-    
-    
+
+
 }
 
 
