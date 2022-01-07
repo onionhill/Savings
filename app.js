@@ -41,7 +41,7 @@ function get_portfolio_value(){
         const coinbase = get_value_from_provider('Coinbase');
         const sb1 = get_value_from_provider('SpareBank1');
 
-
+        etoro.value  = etoro.value  * 8.90;
         const portfolio_value = {
             'etoro': etoro,
             'nordnet': nordnet,
@@ -50,7 +50,7 @@ function get_portfolio_value(){
             'Crypto.com': cdc,
             'Coinbase': coinbase,
             'SpareBank1': sb1,
-            'Total': ( (etoro.value * 8.90) +nordnet.value+firi.value+binance.value+cdc.value+coinbase.value+sb1.value).toFixed(2)
+            'Total': ( (etoro.value ) +nordnet.value+firi.value+binance.value+cdc.value+coinbase.value+sb1.value).toFixed(2)
         };
 
 
