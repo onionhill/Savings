@@ -76,6 +76,7 @@ function get_value_from_provider(provider){
                 return;
             }
             if(!asset.current_value){
+                console.log('missing value for ticket',ticket);
                 return;
             }
             provider_value += parseFloat(asset.current_value);
