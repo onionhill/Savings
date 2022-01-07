@@ -61,12 +61,45 @@ function get_portfolio_value(){
 
         }
 
+
+        const today_total = portfolio_value.Total;
+        //Get yesteday json
+
+        try{
+            const yesterday_file =  `./historical_data/${getYesterdayDate()}.json`;
+            if(fs.existsSync(yesterday_file)){
+                const cache = fs.readFileSync(yesterday_file, 'utf8');
+                const yesterday_portfolio = JSON.parse( cache );
+                const yesterday_results = yesterday_portfolio.results;
+
+
+                const gains = {
+                    'etoro': parseFloat(etoro.value - yesterday_results.etoro.value).toFixed(2),
+                    'nordnet': parseFloat(nordnet.value - yesterday_results.nordnet.value).toFixed(2),
+                    'Firi': parseFloat(firi.value - yesterday_results.Firi.value).toFixed(2),
+                    'Binance': parseFloat(binance.value - yesterday_results.Binance.value).toFixed(2),
+                    'Crypto.com': parseFloat(cdc.value - yesterday_results['Crypto.com'].value).toFixed(2),
+                    'Coinbase': parseFloat(coinbase.value - yesterday_results.Coinbase.value).toFixed(2),
+                    'SpareBank1': parseFloat(sb1.value - yesterday_results.SpareBank1.value).toFixed(2),
+                    'total': parseFloat( portfolio_value.Total - yesterday_results.Total)
+                };
+                console.log('HOLDINGS');
+                console.log(portfolio_value);
+                console.log('Todays changes...');
+                console.log(gains);
+            }
+        }catch(err) {
+            console.log(err);
+        }
         // console.log( portfolio.results );
     }).catch(error => {
         console.error(error.message)
     });
     //Check value of a provider
 }
+
+
+
 
 function get_value_from_provider(provider){
     let provider_value = 0;
@@ -312,6 +345,23 @@ function get_avg_buy_value(orders){
 
 function convert_to_NOK(number){
     return number * 8.86;
+}
+
+function getYesterdayDate() {
+  let d =  new Date(new Date().getTime() - 24*60*60*1000);
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+    return [year, month, day].join('');
+
 }
 
 function get_todays_date(){
