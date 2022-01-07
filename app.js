@@ -82,9 +82,9 @@ function init_portfolio(){
                 });
 
                 gains.total = total_gains;
-
-                console.log('HOLDINGS');
-                console.log(portfolio_value['Crypto.com']);
+                // 
+                // console.log('HOLDINGS');
+                // console.log(portfolio_value['Crypto.com']);
                 console.log('Todays changes...');
                 console.log(gains);
             }

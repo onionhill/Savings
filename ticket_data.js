@@ -39,24 +39,17 @@ const ticket_data = {
         'url': 'https://www.nordnet.no/market/stocks/17436489-harmonychain',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
-
     'Nordnet Indeksfond Global':{
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F000015CV5',
         'selector': '$(".line.text").first()',
-
-
     },
     'Nordnet Indeksfond Emerging Market':{
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F000015CUX',
         'selector': '$(".line.text").first()',
-
-
     },
     'Landkreditt Utbytte A':{
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F00000PLTL',
         'selector': '$(".line.text").first()',
-
-
     },
     'OD-ODUSD':{
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F00000XXR8',
