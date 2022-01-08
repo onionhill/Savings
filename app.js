@@ -10,10 +10,6 @@ const axios = require('axios');
 
 let exchange_rates = {};
 
-//
-// var providers = [
-//     'nordnet', ''
-// ]
 init_portfolio();
 
 function init_portfolio(){
@@ -39,62 +35,75 @@ function init_portfolio(){
         } );
     }
 
-    const provider_promises = update_portfolio_value();
+    setTimeout(() => {
 
-    // const provider_promises = update_portfolio_value('etoro');
-    Promise.allSettled(provider_promises).then( () => {
+        const provider_promises = update_portfolio_value();
 
-        const all_providers = get_all_providers();
+        // const provider_promises = update_portfolio_value('etoro');
+        Promise.allSettled(provider_promises).then( () => {
 
-        const portfolio_value = {};
-        let total_value = 0;
-        Object.keys(all_providers).forEach((provider) => {
-            portfolio_value[provider] = get_value_from_provider(provider);
-            total_value+= portfolio_value[provider].value;
-        });
-        portfolio_value.total = total_value;
+            const all_providers = get_all_providers();
 
-        if(write_to_cache){
-            portfolio.results = portfolio_value;
-            portfolio.exchange_rates = exchange_rates;
-            fs.writeFileSync(cache_file, JSON.stringify(portfolio) , {encodeing: 'utf8'});
+            const portfolio_value = {};
+            let total_value = 0;
+            Object.keys(all_providers).forEach((provider) => {
+                portfolio_value[provider] = get_value_from_provider(provider);
+                total_value+= portfolio_value[provider].value;
+            });
+            portfolio_value.total = total_value;
 
-        }
+            if(write_to_cache){
+                portfolio.results = portfolio_value;
+                portfolio.exchange_rates = exchange_rates;
+                fs.writeFileSync(cache_file, JSON.stringify(portfolio) , {encodeing: 'utf8'});
 
-        const today_total = portfolio_value.Total;
-        //Get yesteday json
-
-        try{
-            const yesterday_file =  `./historical_data/${getYesterdayDate()}.json`;
-            if(fs.existsSync(yesterday_file)){
-                const cache = fs.readFileSync(yesterday_file, 'utf8');
-                const yesterday_portfolio = JSON.parse( cache );
-                const yesterday_results = yesterday_portfolio.results;
-
-                let gains = {};
-                let total_gains = 0;
-                Object.keys(all_providers).forEach((provider) => {
-                    gains[provider] = calculate_provider_changes(
-                        portfolio_value[provider],
-                        yesterday_results[provider]
-                    )
-                    total_gains = total_gains + parseFloat( gains[provider].value );
-                });
-
-                gains.total = total_gains;
-                // 
-                // console.log('HOLDINGS');
-                // console.log(portfolio_value['Crypto.com']);
-                console.log('Todays changes...');
-                console.log(gains);
             }
-        }catch(err) {
-            console.log(err);
-        }
-        // console.log( portfolio.results );
-    }).catch(error => {
-        console.error(error.message)
-    });
+
+            const today_total = portfolio_value.Total;
+            //Get yesteday json
+
+            try{
+                const yesterday_file =  `./historical_data/${getYesterdayDate()}.json`;
+                if(fs.existsSync(yesterday_file)){
+                    const cache = fs.readFileSync(yesterday_file, 'utf8');
+                    const yesterday_portfolio = JSON.parse( cache );
+                    const yesterday_results = yesterday_portfolio.results;
+
+                    let gains = {};
+                    let total_gains = 0;
+                    Object.keys(all_providers).forEach((provider) => {
+                        gains[provider] = calculate_provider_changes(
+                            portfolio_value[provider],
+                            yesterday_results[provider]
+                        )
+                        total_gains = total_gains + parseFloat( gains[provider].value );
+                    });
+
+                    gains.total = total_gains;
+                    //
+                    // console.log('HOLDINGS');
+                    // console.log(portfolio_value['Crypto.com']);
+                    console.log('Todays changes...');
+                    console.log(gains);
+                }
+            }catch(err) {
+                console.log(err);
+            }
+            // console.log( portfolio.results );
+        }).catch(error => {
+            console.error('error here',error.message)
+        });
+
+
+
+
+
+
+
+
+    }, 2000);
+
+
     //Check value of a provider
 }
 
@@ -217,6 +226,8 @@ function get_crypto_promise(coin){
         crypto.stock_price = value;
         get_value_asset(crypto);
         return coin
+    }).catch( (err) => {
+        console.log('error in get crypto promise', err);
     });
 }
 function get_etf_promise(ticket){
@@ -225,10 +236,13 @@ function get_etf_promise(ticket){
     if(etf.current_value){
         return Promise.resolve(ticket);
     }
+
     return get_stock_price_api(ticket).then( (value) => {
         etf.stock_price = value;
         get_value_asset(etf);
         return ticket
+    }).catch( (err) => {
+        console.log('error in get etf promise', err);
     });
 }
 
@@ -254,9 +268,10 @@ function get_stock_promise(ticket){
 
     return stock_promise.then( (value) => {
         stock.stock_price = value
-        // get_value_stock(ticket);
         get_value_asset(stock);
         return ticket;
+    }).catch( (err) => {
+        console.log('error in get stock promise', err);
     });
 
 }
@@ -269,11 +284,11 @@ function get_fond_promise(ticket){
 
     return get_stock_price_url(ticket).then( (value) => {
         fond.stock_price = value;
+        get_value_asset(fond);
         return ticket;
-    }).then( (ticket) => {
-         get_value_asset(fond);
-        return ticket;
-    })
+    }).catch( (err) => {
+        console.log('error in get fond promise', err);
+    });
 }
 
 
@@ -317,64 +332,31 @@ function get_value_asset(asset){
         return asset.VALUE;
     }
     asset.currency = asset.ORDERS[0].CURRENCY;
-    asset.quantity = get_quantity(asset.ORDERS);
-    asset.avg_buy = get_avg_buy_value(asset.ORDERS);
-    asset.total_dividends = get_dividends(asset.DIVIDENDS);
-    asset.return = (asset.stock_price - asset.avg_buy) * asset.quantity;
-
-    asset.total_return = calculate_profitt(asset);
-}
-
-function get_dividends(dividends){
-    if(!dividends){
-        return 0;
-    }
-    let total_dividends = 0;
-    dividends.forEach( dividend => total_dividends += dividend.VALUE );
-    return total_dividends;
-
-}
-
-function calculate_profitt(stock){
-    stock.current_value = parseFloat( stock.quantity * stock.stock_price).toFixed(2);
-    if(stock.currency != 'NOK'){
-        stock.current_value = stock.current_value * exchange_rates[`${stock.currency}_NOK`];
-    }
-    return stock.current_value + stock.total_dividends - (stock.quantity * stock.avg_buy);
-}
-
-
-function get_quantity(orders){
-    let quantity = 0;
-    orders.forEach(order => {
-        if(order.BUY){
-            quantity += order.UNITS;
-        }else{
-            quantity -= order.UNITS;
-        }
-    });
-
-    return quantity;
-}
-
-function get_avg_buy_value(orders){
-    let number_of_stocks = 0;
+    asset.quantity = 0; //
+    // asset.quantity = get_quantity(asset.ORDERS);
+     // asset.avg_buy = get_avg_buy_value(asset.ORDERS);
     let buy_value = 0;
-    orders.forEach(order => {
+    asset.ORDERS.forEach( (order) => {
         if(order.BUY){
-            number_of_stocks += order.UNITS;
+            asset.quantity += order.UNITS;
             buy_value = buy_value + (order.UNITS * order.PRICE);
         }else{
-            number_of_stocks -= order.UNITS;
+            asset.quantity -= order.UNITS;
             buy_value = buy_value - (order.UNITS * order.PRICE);
         }
     });
+    asset.avg_buy = buy_value / asset.quantity ;
+    asset.total_dividends = 0//get_dividends(asset.DIVIDENDS);;
+    if(asset.DIVIDENDS){
+        asset.DIVIDENDS.forEach( dividend => asset.total_dividends += dividend.VALUE );
+    }
+    asset.return = (asset.stock_price - asset.avg_buy) * asset.quantity;
+    asset.current_value = parseFloat( asset.quantity * asset.stock_price);
 
-    return buy_value/number_of_stocks;;
-}
-
-function convert_to_NOK(number){
-    return number * 8.86;
+    if(asset.currency != 'NOK'){
+        asset.current_value = asset.current_value * exchange_rates[`${asset.currency}_NOK`];
+    }
+    asset.total_return = asset.current_value + asset.total_dividends - (asset.quantity * asset.avg_buy);
 }
 
 function getYesterdayDate() {
@@ -391,8 +373,8 @@ function getYesterdayDate() {
       day = '0' + day;
     }
     return [year, month, day].join('');
-
 }
+
 
 function get_todays_date(){
     var d = new Date(),

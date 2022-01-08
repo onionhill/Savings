@@ -13,14 +13,14 @@ const get_stock_price_url = (ticket) => {
         .then( (resp) => {
             const $ = cheerio.load(resp.data);
             if(typeof item.selector == 'string'){
-
                 return parseFloat(  eval(item.selector ).html().replace('NOK&nbsp;','').replace(',','.') ).toFixed(4);
-            }else{
-                return eval( item.selector($) );
             }
+            else{
+                return eval( item.selector($) );
+             }
         });
     }else{
-        console.log('no info in tickets.');
+        console.log(`${ticket} has to be added to ticket_data.js...`);
         return 0;
     }
 
@@ -28,8 +28,6 @@ const get_stock_price_url = (ticket) => {
 
 const get_stock_price_api = (ticket) => {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticket}&apikey=I1G8TIKPFJ9UHGV0`;
-
-        // console.log('checking ticket', ticket);
 
     //This should only be in USD
     return axios.get(url,{
@@ -46,28 +44,6 @@ const get_stock_price_api = (ticket) => {
 
     })
 }
-
-
-function getYesterdayDate() {
-  let d =  new Date(new Date().getTime() - 24*60*60*1000);
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-    return [year, month, day].join('-');
-
-}
-
-
-
-
 
 
 module.exports = {
