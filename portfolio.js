@@ -395,6 +395,13 @@ const portfolio = {
                         'UNITS': 0.01397,
                         'DATE':'2022-01-01',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 379075,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.001319,
+                        'DATE':'2022-09-01',
+                        'BUY': true
                     }
                 ]
             },
@@ -407,6 +414,13 @@ const portfolio = {
                         'CURRENCY': 'NOK',
                         'UNITS': 0.7869,
                         'DATE':'2022-01-01',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 28636,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.01746,
+                        'DATE':'2022-01-09',
                         'BUY': true
                     }
                 ]
@@ -446,6 +460,13 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 118.47,
                         'DATE':'2022-01-01',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 1.70,
+                        'CURRENCY': 'USD',
+                        'UNITS': 54.64,
+                        'DATE':'2022-01-07',
                         'BUY': true
                     }
                 ]
