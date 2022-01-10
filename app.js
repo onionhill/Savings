@@ -28,12 +28,15 @@ function init_portfolio(){
     }catch(err){
         console.log('error...',err);
     }
-
+    // If we dont have exchange rates we delay the portfolio code to make sure the promises are done
+    var timeout_timer = 0;
     if( Object.keys(exchange_rates) == 0){
+        timeout_timer = 2000;
         Promise.all( get_exchange_rates() ).then( () => {
             console.log('done with exchange....');
         } );
     }
+
 
     setTimeout(() => {
 
@@ -80,9 +83,9 @@ function init_portfolio(){
                     });
 
                     gains.total = total_gains;
-                    //
-                    // console.log('HOLDINGS');
-                    // console.log(portfolio_value['Crypto.com']);
+
+                    console.log('HOLDINGS');
+                    console.log(portfolio_value);
                     console.log('Todays changes...');
                     console.log(gains);
                 }
@@ -94,14 +97,7 @@ function init_portfolio(){
             console.error('error here',error.message)
         });
 
-
-
-
-
-
-
-
-    }, 2000);
+    }, timeout_timer);
 
 
     //Check value of a provider

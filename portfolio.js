@@ -430,9 +430,9 @@ const portfolio = {
                 'NAME': 'Litecoin',
                 'ORDERS':[
                     {
-                        'PRICE': 1304.05,
+                        'PRICE': 1141,
                         'CURRENCY': 'NOK',
-                        'UNITS': 0.7869,
+                        'UNITS': 0.14,
                         'DATE':'2022-01-01',
                         'BUY': true
                     }
