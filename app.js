@@ -402,9 +402,8 @@ function get_exchange_rates(){
                 headers: {'User-Agent': 'request'}
             }).then( (response) => {
                 try{
-                    console.log(response.data);
                     exchange_rates[`${from_currency}_NOK`] =
-                        response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']
+                    response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']
                 }catch(err){
                     console.log('error in gett exchange rate for ' + from_currency, err);
                 }
