@@ -64,7 +64,8 @@ function init_portfolio(){
 
             const today_total = portfolio_value.Total;
             //Get yesteday json
-
+            console.log('HOLDINGS');
+            console.log(portfolio_value);
             try{
                 const yesterday_file =  `./historical_data/${getYesterdayDate()}.json`;
                 if(fs.existsSync(yesterday_file)){
@@ -84,8 +85,7 @@ function init_portfolio(){
 
                     gains.total = total_gains;
 
-                    console.log('HOLDINGS');
-                    console.log(portfolio_value);
+
                     console.log('Todays changes...');
                     console.log(gains);
                 }
