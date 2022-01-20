@@ -250,6 +250,21 @@ const portfolio = {
                 'DIVIDENDS':[ ],
                 'METHOD': 'API'
             },
+            'IEP':{
+                'PROVIDER':'etoro',
+                'NAME': 'Icahn Enterprises',
+                'ORDERS':[
+                    {
+                        'PRICE':54.42,
+                        'CURRENCY': 'USD',
+                        'UNITS': 2.48,
+                        'DATE':'2022-19-01',
+                        'BUY': true
+                    }
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'API'
+            }
 
         },
         'etf':{
