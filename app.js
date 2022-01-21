@@ -92,6 +92,9 @@ function init_portfolio(){
             }catch(err) {
                 console.log(err);
             }
+
+            //Calculate return values...
+            console.log(calculate_profit());
             // console.log( portfolio.results );
         }).catch(error => {
             console.error('error here',error.message)
@@ -122,6 +125,23 @@ function calculate_provider_changes(today, yesterday){
     return provider_gains;
 }
 
+function calculate_profit(){
+    let profit = [];
+    let total_profit = 0;
+    Object.keys(assets).forEach((type) => {
+        Object.keys(assets[type] ).forEach((ticket) => {
+            profit.push( [ticket, parseFloat( assets[type][ticket].return ).toFixed(2) ] );
+            total_profit+= assets[type][ticket].return;
+        });
+    });
+    profit.sort( (a,b) => {
+        return b[1] - a[1];
+    });
+
+    profit.push(['TOTAL', total_profit] );
+    return profit;
+}
+
 
 function get_all_providers(){
     let providers = {};
@@ -132,6 +152,7 @@ function get_all_providers(){
             // console.log('setting stuff here',asset);
         });
     });
+
     return providers;
 }
 

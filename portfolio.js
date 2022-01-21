@@ -264,6 +264,21 @@ const portfolio = {
                 ],
                 'DIVIDENDS':[ ],
                 'METHOD': 'API'
+            },
+            'VICI':{
+                'PROVIDER':'etoro',
+                'NAME': 'VICI Properties Inc',
+                'ORDERS':[
+                    {
+                        'PRICE':28.07,
+                        'CURRENCY': 'USD',
+                        'UNITS': 5.34,
+                        'DATE':'2022-20-01',
+                        'BUY': true
+                    }
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'API'
             }
 
         },
@@ -307,6 +322,28 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS':7.11,
                         'DATE':'2022-01-01',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 21.39,
+                        'CURRENCY': 'USD',
+                        'UNITS':4.45,
+                        'DATE':'2022-01-20',
+                        'BUY': true
+                    }
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'API'
+            },
+            'SCHD':{
+                'PROVIDER': 'etoro',
+                'NAME': 'Schwab US Dividend Equity ETF',
+                'ORDERS':[
+                    {
+                        'PRICE': 79.87,
+                        'CURRENCY': 'USD',
+                        'UNITS':1.25,
+                        'DATE':'2022-20-01',
                         'BUY': true
                     }
                 ],
