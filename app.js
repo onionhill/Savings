@@ -128,17 +128,19 @@ function calculate_provider_changes(today, yesterday){
 function calculate_profit(){
     let profit = [];
     let total_profit = 0;
+    let total_value = 0;
     Object.keys(assets).forEach((type) => {
         Object.keys(assets[type] ).forEach((ticket) => {
-            profit.push( [ticket, parseFloat( assets[type][ticket].return ).toFixed(2) ] );
+            profit.push( [ticket, parseFloat( assets[type][ticket].current_value ).toFixed(2), parseFloat( assets[type][ticket].return ).toFixed(2) ] );
             total_profit+= assets[type][ticket].return;
+            total_value+=assets[type][ticket].current_value;
         });
     });
     profit.sort( (a,b) => {
         return b[1] - a[1];
     });
 
-    profit.push(['TOTAL', total_profit] );
+    profit.push(['TOTAL', parseFloat(total_value).toFixed(2), parseFloat(total_profit).toFixed(2)] );
     return profit;
 }
 
