@@ -31,7 +31,7 @@ function init_portfolio(){
     // If we dont have exchange rates we delay the portfolio code to make sure the promises are done
     var timeout_timer = 0;
     if( Object.keys(exchange_rates) == 0){
-        timeout_timer = 2000;
+        timeout_timer = 1000;
         Promise.all( get_exchange_rates() ).then( () => {
             console.log('done with exchange....');
         } );
@@ -50,13 +50,15 @@ function init_portfolio(){
             const portfolio_value = {};
             let total_value = 0;
             Object.keys(all_providers).forEach((provider) => {
-                portfolio_value[provider] = get_value_from_provider(provider);
+               portfolio_value[provider] = get_value_from_provider(provider);
                 total_value+= portfolio_value[provider].value;
             });
+
+            
             portfolio_value.total = total_value;
 
             if(write_to_cache){
-                portfolio.results = portfolio_value;
+               portfolio.results = portfolio_value;
                 portfolio.exchange_rates = exchange_rates;
                 fs.writeFileSync(cache_file, JSON.stringify(portfolio) , {encodeing: 'utf8'});
 
@@ -64,8 +66,9 @@ function init_portfolio(){
 
             const today_total = portfolio_value.Total;
             //Get yesteday json
-            console.log('HOLDINGS');
-            console.log(portfolio_value);
+            //console.log('HOLDINGS');
+           // console.log(portfolio);
+           let gains = {};
             try{
                 const yesterday_file =  `./historical_data/${getYesterdayDate()}.json`;
                 if(fs.existsSync(yesterday_file)){
@@ -73,28 +76,39 @@ function init_portfolio(){
                     const yesterday_portfolio = JSON.parse( cache );
                     const yesterday_results = yesterday_portfolio.results;
 
-                    let gains = {};
+                   
                     let total_gains = 0;
-                    Object.keys(all_providers).forEach((provider) => {
-                        gains[provider] = calculate_provider_changes(
-                            portfolio_value[provider],
-                            yesterday_results[provider]
-                        )
-                        total_gains = total_gains + parseFloat( gains[provider].value );
+                    Object.keys(portfolio.assets).forEach((type) => {
+                        Object.keys(portfolio.assets[type] ).forEach((ticket) => {
+                            if(!yesterday_portfolio.assets[type][ticket] ){
+                                gains[ticket] = 0;
+                            }else{
+                                gains[ticket] = parseFloat(portfolio.assets[type][ticket].total_return - yesterday_portfolio.assets[type][ticket].total_return ).toFixed(2)
+                            }
+                            total_gains += parseFloat(gains[ticket] );
+                        });
                     });
+                   
+                    // Object.keys(all_providers).forEach((provider) => {
+                    //     gains[provider] = calculate_provider_changes(
+                    //         portfolio_value[provider],
+                    //         yesterday_results[provider]
+                    //     )
+                    //     total_gains = total_gains + parseFloat( gains[provider].value );
+                    // });
 
                     gains.total = total_gains;
-
-
-                    console.log('Todays changes...');
-                    console.log(gains);
+                    //Calculate return values...
+                
+                    // console.log('Todays changes...');
+                    // console.log(gains);
+                   
                 }
             }catch(err) {
                 console.log(err);
             }
-
-            //Calculate return values...
-            console.log(calculate_profit());
+            console.log(calculate_profit(gains));
+            
             // console.log( portfolio.results );
         }).catch(error => {
             console.error('error here',error.message)
@@ -125,13 +139,27 @@ function calculate_provider_changes(today, yesterday){
     return provider_gains;
 }
 
-function calculate_profit(){
+function find_ticket(ticket, data){
+
+}
+
+function calculate_profit(gains){
     let profit = [];
     let total_profit = 0;
     let total_value = 0;
+   
+
     Object.keys(assets).forEach((type) => {
         Object.keys(assets[type] ).forEach((ticket) => {
-            profit.push( [ticket, parseFloat( assets[type][ticket].current_value ).toFixed(2), parseFloat( assets[type][ticket].return ).toFixed(2) ] );
+            let push_val =  [ticket, parseFloat( assets[type][ticket].current_value ).toFixed(2), parseFloat( assets[type][ticket].return ).toFixed(2) ];
+            // if(yesterday[type][ticket] ){
+            //     y = yesterday[assets][type][ticket];
+
+            // }
+            if(gains[ticket] ){
+                push_val.push(gains[ticket] );
+            }
+            profit.push( push_val);
             total_profit+= assets[type][ticket].return;
             total_value+=assets[type][ticket].current_value;
         });
@@ -140,7 +168,7 @@ function calculate_profit(){
         return b[1] - a[1];
     });
 
-    profit.push(['TOTAL', parseFloat(total_value).toFixed(2), parseFloat(total_profit).toFixed(2)] );
+    profit.push(['TOTAL', parseFloat(total_value).toFixed(2), parseFloat(total_profit).toFixed(2), gains.total] );
     return profit;
 }
 

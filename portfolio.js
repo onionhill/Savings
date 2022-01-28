@@ -260,6 +260,13 @@ const portfolio = {
                         'UNITS': 2.48,
                         'DATE':'2022-19-01',
                         'BUY': true
+                    },
+                    {
+                        'PRICE':52.64,
+                        'CURRENCY': 'USD',
+                        'UNITS': 1.89,
+                        'DATE':'2022-28-01',
+                        'BUY': true
                     }
                 ],
                 'DIVIDENDS':[ ],
@@ -330,6 +337,13 @@ const portfolio = {
                         'UNITS':4.45,
                         'DATE':'2022-01-20',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 20.02,
+                        'CURRENCY': 'USD',
+                        'UNITS':4.99,
+                        'DATE':'2022-01-28',
+                        'BUY': true
                     }
                 ],
                 'DIVIDENDS':[ ],
@@ -344,6 +358,13 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS':1.25,
                         'DATE':'2022-20-01',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 78.47,
+                        'CURRENCY': 'USD',
+                        'UNITS':1.52,
+                        'DATE':'2022-27-01',
                         'BUY': true
                     }
                 ],
