@@ -555,6 +555,20 @@ const portfolio = {
                         'UNITS': 109.53,
                         'DATE':'2022-01-22',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 0.88,
+                        'CURRENCY': 'USD',
+                        'UNITS': 98.51,
+                        'DATE':'2022-02-03',
+                        'BUY': true
+                    }, 
+                    {
+                        'PRICE': 0.01,
+                        'CURRENCY': 'USD',
+                        'UNITS': 5.51,
+                        'DATE':'2022-02-03',
+                        'BUY': true
                     }
                 ]
             },

@@ -30,7 +30,7 @@ function init_portfolio(){
     }
     // If we dont have exchange rates we delay the portfolio code to make sure the promises are done
     var timeout_timer = 0;
-    if( Object.keys(exchange_rates) == 0){
+    if( Object.keys(exchange_rates) != 2){
         timeout_timer = 1000;
         Promise.all( get_exchange_rates() ).then( () => {
             console.log('done with exchange....');
@@ -83,7 +83,7 @@ function init_portfolio(){
                             if(!yesterday_portfolio.assets[type][ticket] ){
                                 gains[ticket] = 0;
                             }else{
-                                gains[ticket] = parseFloat(portfolio.assets[type][ticket].total_return - yesterday_portfolio.assets[type][ticket].total_return ).toFixed(2)
+                                gains[ticket] = format_number(portfolio.assets[type][ticket].total_return - yesterday_portfolio.assets[type][ticket].total_return )
                             }
                             total_gains += parseFloat(gains[ticket] );
                         });
@@ -122,7 +122,7 @@ function init_portfolio(){
 
 function calculate_provider_changes(today, yesterday){
     let provider_gains = {
-        value: parseFloat( today.value - yesterday.value).toFixed(2)
+        value: format_number( today.value - yesterday.value)
     };
     // Only check today vs yesterday. Dont care if today is not found in yesterday
     Object.keys(today.assets).forEach((type) => {
@@ -130,7 +130,7 @@ function calculate_provider_changes(today, yesterday){
             if(!yesterday.assets[type][ticket] ){
                 provider_gains[ticket] = 0;
             }else{
-                provider_gains[ticket] = parseFloat(today.assets[type][ticket] - yesterday.assets[type][ticket] ).toFixed(2)
+                provider_gains[ticket] = format_number(today.assets[type][ticket] - yesterday.assets[type][ticket] )
             }
         });
 
@@ -151,11 +151,7 @@ function calculate_profit(gains){
 
     Object.keys(assets).forEach((type) => {
         Object.keys(assets[type] ).forEach((ticket) => {
-            let push_val =  [ticket, parseFloat( assets[type][ticket].current_value ).toFixed(2), parseFloat( assets[type][ticket].return ).toFixed(2) ];
-            // if(yesterday[type][ticket] ){
-            //     y = yesterday[assets][type][ticket];
-
-            // }
+            let push_val =  [ticket, format_number( assets[type][ticket].current_value ), format_number( assets[type][ticket].return ) ];
             if(gains[ticket] ){
                 push_val.push(gains[ticket] );
             }
@@ -168,10 +164,13 @@ function calculate_profit(gains){
         return b[1] - a[1];
     });
 
-    profit.push(['TOTAL', parseFloat(total_value).toFixed(2), parseFloat(total_profit).toFixed(2), gains.total] );
+    profit.push(['TOTAL', format_number(total_value), format_number(total_profit), format_number(gains.total)] );
     return profit;
 }
 
+function format_number(number){
+    return parseFloat(number).toFixed(2);
+}
 
 function get_all_providers(){
     let providers = {};
@@ -314,7 +313,7 @@ function get_stock_promise(ticket){
 
 
     return stock_promise.then( (value) => {
-        stock.stock_price = value
+        stock.stock_price = value;
         get_value_asset(stock);
         return ticket;
     }).catch( (err) => {
