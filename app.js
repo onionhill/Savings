@@ -30,10 +30,10 @@ function init_portfolio(){
     }
     // If we dont have exchange rates we delay the portfolio code to make sure the promises are done
     var timeout_timer = 0;
-    if( Object.keys(exchange_rates) != 2){
+    if( Object.keys(exchange_rates).length != 2){
         timeout_timer = 1000;
         Promise.all( get_exchange_rates() ).then( () => {
-            console.log('done with exchange....');
+            console.log('done with exchange....', exchange_rates);
         } );
     }
 
@@ -163,7 +163,7 @@ function calculate_profit(gains){
     profit.sort( (a,b) => {
         return b[1] - a[1];
     });
-
+    
     profit.push(['TOTAL', format_number(total_value), format_number(total_profit), format_number(gains.total)] );
     return profit;
 }

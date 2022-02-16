@@ -1,0 +1,202 @@
+<html>
+    <head>
+        <script src="/public/js/jquery-3.6.0.min.js"></script>
+        <!-- Load d3.js and c3.js -->
+        <link href="/public/css/c3.min.css" rel="stylesheet">
+
+<script src="/public/js/d3.v5.min.js" charset="utf-8"></script>
+<script src="/public/js/c3.min.js"></script>
+    </head>
+    <body>
+        <main>
+            <h1>Portfolio page</h1>    
+            <div class="valuesOverview">
+                <div class="valueDiv">Verdi: <span id="current_value"></span> </div>
+                <div class="startDiv">Starting value 01.01.2022: <span id="start_value"></span></div>
+                <div class="depositDiv">Innskudd: <span id="deposit_value"></span></div>
+                <div class="resultDiv">Result: <span id="result_value"></span></div>
+            </div>
+            <br>
+            <div class="grafOverView">
+                Oversikt over utvikling av portefølje
+                <div id="chart"></div>
+            </div>
+
+        </main>
+      
+
+    </body>
+<script>
+
+
+let portfolioData = {};
+let assets = {};
+let history = {};
+function initPortFolio(){
+    $.get('/portfolioData').then( (res) => {
+        portfolioData = res;
+        assets = portfolioData.portfolio.assets;
+        history = portfolioData.history;
+        initValues();
+        drawCurrentValue();
+        console.log(portfolioData);
+    });
+}
+
+function getDateElement(datestring){
+    // Find the first history item after given date
+    let dates = Object.keys( portfolioData.history).sort();
+
+    return dates[ dates.findIndex(n => n >= datestring) ];
+
+}
+
+function initValues(){
+    let todays_item = history[get_todays_date()];
+    let total_value = 0;
+    if(todays_item ){
+        total_value = todays_item.results.total;
+        $('#current_value').html(total_value.toLocaleString('no-NO'));
+    }else{
+        $('#current_value').html('----');
+    }
+
+    let firstItem = getDateElement('20220101');
+    let start_value = 0;
+    if(history?.[firstItem] ){
+        start_value = portfolioData.history[firstItem].results.total;
+        $('#start_value').html(start_value.toLocaleString('no-NO'));
+    }else{
+        $('#start_value').html('----');
+    }
+
+    let total_buy = calculate_total_buy('20220102')
+    if(total_buy){
+        $('#deposit_value').html(total_buy.toLocaleString('no-NO') );
+    }else{
+        $('#deposit_value').html('----');
+    }
+
+    let result = total_value - total_buy - start_value;
+    $('#result_value').html(result.toLocaleString('no-NO') );
+}
+
+function calculate_total_buy(startDate = '20000101', endDate = '20990101'){
+    let total_buy = 0;
+    let todays_item = history[get_todays_date()];
+
+
+    Object.keys(assets).forEach((type) => {
+        Object.keys(assets[type] ).forEach((ticket) => {
+            const asset = assets[type][ticket];
+            let ticket_buy = 0;
+            asset.ORDERS.forEach( (order) => {
+                let orderDate = order.DATE.replace(/-/g,'');
+                if(orderDate >= startDate && orderDate <= endDate){
+                    let order_buy = 0;
+                    
+                    if(order.BUY){
+                        asset.quantity += order.UNITS;
+                        order_buy = (order.UNITS * order.PRICE);
+                    }else{
+                        asset.quantity -= order.UNITS;
+                        order_buy=  (order.UNITS * order.PRICE);
+                    }
+
+                    if(order.CURRENCY != 'NOK'){
+                        order_buy *= todays_item.exchange_rates[`${order.CURRENCY}_NOK`];
+                    }
+                    console.log('ticket', ticket, order.UNITS, order.PRICE , order_buy );
+                    ticket_buy+= order_buy;
+                }
+
+
+              
+            });
+            
+            total_buy += ticket_buy;
+        });
+       
+    });
+    return total_buy;
+
+}
+
+
+function drawCurrentValue(){
+    // Get all total values in a array
+    let data = {};
+    let dates = Object.keys( portfolioData.history).sort();
+    let values = ['value'];
+    console.log(dates);
+    dates.forEach( (date) => {
+        values.push(portfolioData.history[date].results.total )
+        
+    });
+
+    let dateformat = Object.keys( portfolioData.history).map( (x) => {
+       return [x.slice(0,4), '-', x.slice(4,6) , '-', x.slice(6,8) ].join('');
+    }).sort();
+
+    dateformat.unshift('x');
+
+    var chart = c3.generate({
+        data: {
+            x: 'x',
+            columns: [
+                dateformat,
+                values
+            ]
+        },
+        axis: {
+            x: {
+                type: 'timeseries',
+                tick: {
+                    format: '%Y-%m-%d'
+                }
+            }
+        }
+    });
+}
+
+
+function format_number(number){
+    return parseFloat(number).toFixed(2);
+}
+
+function get_todays_date(){
+    var d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) {
+        month = '0' + month;
+    }
+
+    if (day.length < 2) {
+        day = '0' + day;
+    }
+    return [year, month, day].join('');
+}
+
+$(function(){
+initPortFolio();
+});
+
+</script>
+
+    <style>
+        .valuesOverview{
+            border: solid 1px;
+        }
+        .valueDiv{
+            font-size: 2em;;
+        }
+        .grafOverView{
+            min-height: 400px;
+            border: solid 1px;
+        }
+
+    </style>
+</html>
