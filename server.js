@@ -10,7 +10,6 @@ app.get('/', function(request, response){
 });
 
 app.get('/PortfolioData', function(request, response){
-    console.log( typeof getHistoryData);
     response.send({
         portfolio: portfolio,
         history: getHistoryData()

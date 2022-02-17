@@ -7,10 +7,8 @@ const directoryPath = path.join(__dirname, 'historical_data');
 const getHistoryData = () => {
     let historical_data = {};
 
-    console.log('start unc tion', directoryPath);
     const files = fs.readdirSync(directoryPath);
     files.forEach( (filename) => {
-        console.log('loop file', filename);
         const name = path.parse(filename).name;
         try{
             const cache = fs.readFileSync(directoryPath + '/' + filename, 'utf8');

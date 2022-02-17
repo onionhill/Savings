@@ -153,7 +153,7 @@ function calculate_profit(gains){
         Object.keys(assets[type] ).forEach((ticket) => {
             let push_val =  [ticket, format_number( assets[type][ticket].current_value ), format_number( assets[type][ticket].return ) ];
             if(gains[ticket] ){
-                push_val.push(gains[ticket] );
+               // push_val.push(gains[ticket] );
             }
             profit.push( push_val);
             total_profit+= assets[type][ticket].return;
@@ -164,7 +164,7 @@ function calculate_profit(gains){
         return b[1] - a[1];
     });
     
-    profit.push(['TOTAL', format_number(total_value), format_number(total_profit), format_number(gains.total)] );
+    profit.push(['TOTAL', format_number(total_value), format_number(total_profit)] );
     return profit;
 }
 
@@ -262,7 +262,7 @@ function get_value_crypto(){
 
 function get_crypto_promise(coin){
     const crypto = get_crypto(coin);
-    if(crypto.current_value){
+    if(crypto.current_value ){
         return Promise.resolve(coin);
 
     }
@@ -270,7 +270,7 @@ function get_crypto_promise(coin){
 
     return get_crypto_coin_price(coin, crypto.ORDERS[0].CURRENCY).then( (value) => {
         crypto.stock_price = value;
-        get_value_asset(crypto);
+        get_value_asset(crypto, coin);
         return coin
     }).catch( (err) => {
         console.log('error in get crypto promise', err);
@@ -279,13 +279,13 @@ function get_crypto_promise(coin){
 function get_etf_promise(ticket){
     // This should be the same as stocks....
     const etf = get_etf(ticket);
-    if(etf.current_value){
+    if(etf.current_value  ){
         return Promise.resolve(ticket);
     }
 
     return get_stock_price_api(ticket).then( (value) => {
         etf.stock_price = value;
-        get_value_asset(etf);
+        get_value_asset(etf, ticket);
         return ticket
     }).catch( (err) => {
         console.log('error in get etf promise', err);
@@ -300,7 +300,7 @@ function get_stock_promise(ticket){
     // We have checked the price today. Dont cant about updating multiple times a day
     // Api has a limit off 500 request a day and 5 in a minute so this hould help on performance
     // if(stock.current_value && stock.METHOD === 'API'){
-    if(stock.current_value ){
+    if(stock.current_value){
         return Promise.resolve(ticket);
     }
 
@@ -314,7 +314,7 @@ function get_stock_promise(ticket){
 
     return stock_promise.then( (value) => {
         stock.stock_price = value;
-        get_value_asset(stock);
+        get_value_asset(stock, ticket);
         return ticket;
     }).catch( (err) => {
         console.log('error in get stock promise', err);
@@ -330,7 +330,7 @@ function get_fond_promise(ticket){
 
     return get_stock_price_url(ticket).then( (value) => {
         fond.stock_price = value;
-        get_value_asset(fond);
+        get_value_asset(fond,ticket);
         return ticket;
     }).catch( (err) => {
         console.log('error in get fond promise', err);
@@ -369,11 +369,10 @@ function get_fond(name){
 }
 
 // TODO: Handle currencys here?
-function get_value_asset(asset){
+function get_value_asset(asset, ticket){
     if(!asset.ORDERS){
         return;
     }
-
     if(asset.VALUE){
         return asset.VALUE;
     }
@@ -398,11 +397,13 @@ function get_value_asset(asset){
     }
     asset.return = (asset.stock_price - asset.avg_buy) * asset.quantity;
     asset.current_value = parseFloat( asset.quantity * asset.stock_price);
-
+    let exchange_rate = 1;
     if(asset.currency != 'NOK'){
-        asset.current_value = asset.current_value * exchange_rates[`${asset.currency}_NOK`];
+        exchange_rate =  exchange_rates[`${asset.currency}_NOK`];
+        asset.return = asset.return * exchange_rate;
+        asset.current_value = asset.current_value * exchange_rate;
     }
-    asset.total_return = asset.current_value + asset.total_dividends - (asset.quantity * asset.avg_buy);
+       asset.total_return = asset.current_value + asset.total_dividends - (asset.quantity * asset.avg_buy * exchange_rate);
 }
 
 function getYesterdayDate() {
