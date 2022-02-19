@@ -29,7 +29,7 @@ function init_portfolio(){
         console.log('error...',err);
     }
     // If we dont have exchange rates we delay the portfolio code to make sure the promises are done
-    var timeout_timer = 0;
+    var timeout_timer = 2000;
     if( Object.keys(exchange_rates).length != 2){
         timeout_timer = 1000;
         Promise.all( get_exchange_rates() ).then( () => {
@@ -266,8 +266,6 @@ function get_crypto_promise(coin){
         return Promise.resolve(coin);
 
     }
-
-
     return get_crypto_coin_price(coin, crypto.ORDERS[0].CURRENCY).then( (value) => {
         crypto.stock_price = value;
         get_value_asset(crypto, coin);

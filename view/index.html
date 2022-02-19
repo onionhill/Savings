@@ -54,11 +54,63 @@
                 </div>
     
                 <div class="asset_overview">
-                    <div class="assets_div row">
-                   
+                    <!-- STOCKS -->
+                    <div class="row">
+                        <div class="col-6">
+                            <h1>Aksjer:</h1>
+                        </div>
+                        <div class="col-6">
+                            <div class="asset_numbers">
+                                <div id="stocks_value"></div>
+                                <div id="stocks_result"></div>
+                            </div>
+                        </div>
+                        <div id="stocks_overivew" class="col-12"></div>
                     </div>
-                </div>
 
+                    <!-- CRYPTO-->
+                    <div class="row">
+                        <div class="col-6">
+                            <h1>Crypto:</h1>
+                        </div>
+                        <div class="col-6">
+                            <div class="asset_numbers">
+                                <div id="crypto_value"></div>
+                                <div id="crypto_result"></div>
+                            </div>
+                        </div>
+                        <div id="crypto_overivew" class="col-12"></div>
+                    </div>
+
+                    <!-- FONDS-->
+                    <div class="row">
+                        <div class="col-6">
+                            <h1>Fond:</h1>
+                        </div>
+                        <div class="col-6">
+                            <div class="asset_numbers">
+                                <div id="fonds_value"></div>
+                                <div id="fonds_result"></div>
+                            </div>
+                        </div>
+                        <div id="fond_overivew" class="col-12"></div>
+                    </div>
+
+                    <!-- ETF-->
+                    <div class="row">
+                        <div class="col-6">
+                            <h1>ETF:</h1>
+                        </div>
+                        <div class="col-6">
+                            <div class="asset_numbers">
+                                <div id="etf_value"></div>
+                                <div id="etf_result"></div>
+                            </div>
+                        </div>
+                        <div id="etf_overivew" class="col-12"></div>
+                    </div>
+            
+                </div>
             </div>
            
 <br>       
@@ -184,10 +236,13 @@ function show_all_positions(){
         }) 
     });
 
-    const stocks = $('<div>',{id: 'stocks_overivew', class:'col-12'} ).append('<h1>Aksjer</h1>');
-    const etf = $('<div>',{id: 'etf_overivew', class:'col-12'} ).append('<h1>ETF</h1>');
-    const crypto = $('<div>',{id: 'crypto_overivew', class:'col-12'} ).append('<h1>Crypto</h1>');
-    const fond = $('<div>',{id: 'fond_overivew', class:'col-12'} ).append('<h1>Fond</h1>');
+    console.log(assets.stocks);
+    calculate_type_values(assets_clean);
+   
+    const stocks = $('#stocks_overivew');
+    const etf = $('#etf_overivew');
+    const crypto =$('#crypto_overivew'); 
+    const fond = $('#fond_overivew'); 
 
     Object.keys(assets).forEach((type) => {
         const sorted_elements = assets_clean[type].sort((a,b) => b[2] - a[2] );
@@ -228,9 +283,9 @@ function show_all_positions(){
         
     });
 
-    $('.assets_div').append(stocks, crypto, etf, fond);
+  
 
-    $(".tablesorter").tablesorter({ sortList: [[0,0], [1,0]] });
+    // $(".tablesorter").tablesorter({ sortList: [[0,0], [1,0]] });
 }
 
 function calculate_total_buy(startDate = '20000101', endDate = '20990101'){
@@ -336,6 +391,33 @@ function get_todays_date(){
     return [year, month, day].join('');
 }
 
+function calculate_type_values(assets_clean){
+    
+    console.log(assets_clean);
+    Object.keys(assets_clean).forEach( (type) => {
+        console.log('type', type);
+        $(`#${type}_value`).html( 
+            format_number(
+                assets_clean[type].reduce( 
+                    (partial, a) => partial + a[2], 0
+                ), false
+            ) 
+        );
+
+        $(`#${type}_result`).html( 
+            format_number(
+                assets_clean[type].reduce( 
+                    (partial, a) => partial + a[5], 0
+                )
+            ) 
+        );
+    });
+  
+
+
+    
+}
+
 $(function(){
 initPortFolio();
 });
@@ -363,5 +445,14 @@ initPortFolio();
         .container{
             background-color: white;
         }
+
+        .asset_numbers{
+            float: right;
+            font-size: 20px;
+        }
+        /* #stock_result, #crypto_result, #fond_result, #etf_result{
+            float:right;
+            font-size: 20px;
+        } */
     </style>
 </html>

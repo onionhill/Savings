@@ -3,8 +3,8 @@
 var axios = require('axios');
 
 const backup_crypto_price = {
-    'CRO': 0.4409,
-    'ELON': 0.0000009037
+    'CRO': 0.4388,
+    'ELON': 0.0000008364
 }
 
 const get_crypto_coin_price = (coin, currency) => {
