@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "axios": "^0.24.0",
+    "bootstrap-icons": "^1.8.1",
     "cheerio": "^1.0.0-rc.10",
     "express": "^4.17.2",
     "nodemon": "^2.0.15",

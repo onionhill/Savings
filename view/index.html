@@ -6,7 +6,7 @@
 
 <script src="/public/js/d3.v5.min.js" charset="utf-8"></script>
 <script src="/public/js/c3.min.js"></script>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="/public/js/jquery.tablesorter.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -47,17 +47,23 @@
                 <br>
                 
                 <div class="grafOverView row">
-                    <div class="col-12">
-                        <div id="chart"></div>
+                    <div class="col-6">
+                        <button id="back_button" style="display: none;" onclick="generate_donut_chart()" type="button" class="btn btn-primary">Reset</button>
+                        <div id="donut_chart">
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="current_value_chart"></div>
                     </div>
                     
                 </div>
     
-                <div class="asset_overview">
+                <div class="asset_overview" id="show_by_type">
                     <!-- STOCKS -->
                     <div class="row">
                         <div class="col-6">
-                            <h1>Aksjer:</h1>
+                            <h1><i data-type="stocks" class="toggle_icon bi bi-caret-right"></i>Aksjer</h1>
                         </div>
                         <div class="col-6">
                             <div class="asset_numbers">
@@ -65,13 +71,13 @@
                                 <div id="stocks_result"></div>
                             </div>
                         </div>
-                        <div id="stocks_overivew" class="col-12"></div>
+                        <div id="stocks_overview" class="col-12"></div>
                     </div>
 
                     <!-- CRYPTO-->
                     <div class="row">
                         <div class="col-6">
-                            <h1>Crypto:</h1>
+                            <h1><i data-type="crypto" class="toggle_icon bi bi-caret-right"></i>Crypto</h1>
                         </div>
                         <div class="col-6">
                             <div class="asset_numbers">
@@ -79,13 +85,13 @@
                                 <div id="crypto_result"></div>
                             </div>
                         </div>
-                        <div id="crypto_overivew" class="col-12"></div>
+                        <div id="crypto_overview" class="col-12"></div>
                     </div>
 
                     <!-- FONDS-->
                     <div class="row">
                         <div class="col-6">
-                            <h1>Fond:</h1>
+                            <h1><i data-type="fond" class="toggle_icon bi bi-caret-right"></i>Fond</h1>
                         </div>
                         <div class="col-6">
                             <div class="asset_numbers">
@@ -93,13 +99,13 @@
                                 <div id="fonds_result"></div>
                             </div>
                         </div>
-                        <div id="fond_overivew" class="col-12"></div>
+                        <div id="fond_overview" class="col-12"></div>
                     </div>
 
                     <!-- ETF-->
                     <div class="row">
                         <div class="col-6">
-                            <h1>ETF:</h1>
+                            <h1><i data-type="etf" class="toggle_icon bi bi-caret-right"></i>ETF</h1>
                         </div>
                         <div class="col-6">
                             <div class="asset_numbers">
@@ -107,7 +113,7 @@
                                 <div id="etf_result"></div>
                             </div>
                         </div>
-                        <div id="etf_overivew" class="col-12"></div>
+                        <div id="etf_overview" class="col-12"></div>
                     </div>
             
                 </div>
@@ -129,13 +135,16 @@ let assets = {};
 let history = {};
 let todays_item = {};
 let yesterdays_item;
+let type_values = {};
+let assets_clean = {};
+
 function initPortFolio(){
     $.get('/portfolioData').then( (res) => {
         portfolioData = res;
         assets = portfolioData.portfolio.assets;
         history = portfolioData.history;
         initValues();
-        drawCurrentValue();
+       
     });
 }
 
@@ -211,7 +220,7 @@ function initValues(){
 }
 
 function show_all_positions(){
-    let assets_clean = {};
+    assets_clean = {};
     Object.keys(assets).forEach((type) => {
         Object.keys(assets[type] ).forEach((ticket) => {
             const asset = todays_item.assets[type][ticket];
@@ -236,13 +245,11 @@ function show_all_positions(){
         }) 
     });
 
-    console.log(assets.stocks);
-    calculate_type_values(assets_clean);
-   
-    const stocks = $('#stocks_overivew');
-    const etf = $('#etf_overivew');
-    const crypto =$('#crypto_overivew'); 
-    const fond = $('#fond_overivew'); 
+  
+    const stocks = $('#stocks_overview');
+    const etf = $('#etf_overview');
+    const crypto =$('#crypto_overview'); 
+    const fond = $('#fond_overview'); 
 
     Object.keys(assets).forEach((type) => {
         const sorted_elements = assets_clean[type].sort((a,b) => b[2] - a[2] );
@@ -282,10 +289,58 @@ function show_all_positions(){
         if(type === 'fonds') fond.append(asset_table);
         
     });
+    type_values = calculate_type_values(assets_clean);
 
-  
+    generate_donut_chart();
+
+     drawCurrentValue();
 
     // $(".tablesorter").tablesorter({ sortList: [[0,0], [1,0]] });
+}
+
+function generate_donut_chart(data){
+    let default_value;
+    if(!data){
+        data = type_values;
+        default_value = $('#current_value').text();
+        $('#back_button').hide();
+    }else{
+        //Convert ['BTC', 1000] to {BTC: 1000}
+        let object_data = {};
+        let sum =0; 
+        data.forEach( (item) => { sum+= item[2]; object_data[item[0] ] = item[2]  } );
+        data = object_data;
+        default_value = parseFloat( parseFloat(sum).toFixed(0) ).toLocaleString('no-NO');
+        $('#back_button').show();
+
+    }
+
+    var chart = c3.generate({
+        bindto: '#donut_chart',
+        data: {
+            json: data,
+            type : 'donut',
+            onmouseover: function (d, i) {  
+                let pre_fix = '';
+                if(!assets_clean[d.id] ){
+                    pre_fix = d.id + ': ';
+                    console.log(d);
+                }
+                let formated_value = parseFloat( parseFloat(d.value).toFixed(0) ).toLocaleString('no-NO');
+                $('.c3-chart-arcs-title').html(pre_fix + formated_value); 
+            },
+            onmouseout: function (d, i) { $('.c3-chart-arcs-title').html(default_value) },
+            onclick: function(d,i){
+                if(assets_clean[d.id] ){
+                    toggle_overviews(d.id, true);
+                    generate_donut_chart(assets_clean[d.id] );
+                }
+            },
+        },
+        donut: {
+            title: default_value
+        }
+    });
 }
 
 function calculate_total_buy(startDate = '20000101', endDate = '20990101'){
@@ -339,6 +394,7 @@ function drawCurrentValue(){
     dateformat.unshift('x');
 
     var chart = c3.generate({
+        bindto: '#current_value_chart',
         data: {
             x: 'x',
             columns: [
@@ -350,13 +406,36 @@ function drawCurrentValue(){
             x: {
                 type: 'timeseries',
                 tick: {
-                    format: '%Y-%m-%d'
+                    format: '%Y-%m-%d',
+                    culling: {
+                        max: 20
+                    }, rotate: 90
                 }
             }
         }
     });
 }
+function toggle_overviews(type, force_show = false){
+    let overview = $(`#${type}_overview`);
+    let icon = overview.closest('.row').find('h1 > i');
 
+    if(force_show){
+        overview.show();
+        icon.removeClass('bi-caret-right');
+        icon.addClass('bi-caret-down');
+    }else{
+        if(icon.hasClass('bi-caret-right') ){
+            icon.removeClass('bi-caret-right');
+            icon.addClass('bi-caret-down');
+        }else{
+            icon.removeClass('bi-caret-down');
+            icon.addClass('bi-caret-right');
+        }
+        overview.toggle();
+    }
+
+  
+}
 
 function format_number(number, addColor = true, extra = ''){
     let formated_value = parseFloat( parseFloat(number).toFixed(2) ).toLocaleString('no-NO');
@@ -392,50 +471,36 @@ function get_todays_date(){
 }
 
 function calculate_type_values(assets_clean){
-    
-    console.log(assets_clean);
+    const type_values = {};
     Object.keys(assets_clean).forEach( (type) => {
-        console.log('type', type);
-        $(`#${type}_value`).html( 
-            format_number(
-                assets_clean[type].reduce( 
-                    (partial, a) => partial + a[2], 0
-                ), false
-            ) 
-        );
+        const typevalue = assets_clean[type].reduce( (partial, a) => partial + a[2], 0 );
+        const typechanges = assets_clean[type].reduce( (partial, a) => partial + a[5], 0 );
 
-        $(`#${type}_result`).html( 
-            format_number(
-                assets_clean[type].reduce( 
-                    (partial, a) => partial + a[5], 0
-                )
-            ) 
-        );
+        type_values[type] = typevalue;
+        $(`#${type}_value`).html(  format_number(typevalue, false) );
+
+        $(`#${type}_result`).html( format_number(typechanges) );
     });
   
 
-
+    return type_values;
     
 }
 
 $(function(){
-initPortFolio();
+    initPortFolio();
+    $('.toggle_icon').on('click', function(){
+        toggle_overviews($(this).data('type')) 
+    });
 });
 
 </script>
 
     <style>
-        .valuesOverview{
-            border-bottom: solid 1px;
-        }
         .valueDiv{
             font-size: 2em;;
         }
-        .grafOverView{
-            min-height: 400px;
-            border-bottom: solid 1px;
-        }
-        .asset_overview{
+        .grafOverView, .asset_overview, .valuesOverview{
             border-bottom: solid 1px;
         }
     
@@ -449,6 +514,9 @@ initPortFolio();
         .asset_numbers{
             float: right;
             font-size: 20px;
+        }
+        #etf_overview, #stocks_overview, #fond_overview, #crypto_overview{
+            display: none;
         }
         /* #stock_result, #crypto_result, #fond_result, #etf_result{
             float:right;
