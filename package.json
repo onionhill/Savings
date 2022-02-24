@@ -12,6 +12,7 @@
     "request": "^2.88.2"
   },
   "scripts": {
+    "server": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
