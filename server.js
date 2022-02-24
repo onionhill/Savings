@@ -17,7 +17,7 @@ app.get('/PortfolioData', function(request, response){
 });
 
 app.listen(5300, () => {
-    console.log('express is running on port 5000');
+    console.log('express is running on port 5300');
 });
 
 app.use('/public', express.static('public'))

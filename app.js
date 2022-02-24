@@ -31,7 +31,6 @@ function init_portfolio(){
     // If we dont have exchange rates we delay the portfolio code to make sure the promises are done
     var timeout_timer = 2000;
     if( Object.keys(exchange_rates).length != 2){
-        timeout_timer = 1000;
         Promise.all( get_exchange_rates() ).then( () => {
             console.log('done with exchange....', exchange_rates);
         } );
