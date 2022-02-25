@@ -61,56 +61,56 @@
     
                 <div class="asset_overview" id="show_by_type">
                     <!-- STOCKS -->
-                    <div class="row">
+                    <div class="row asset_row">
                         <div class="col-6">
                             <h1><i data-type="stocks" class="toggle_icon bi bi-caret-right"></i>Aksjer</h1>
                         </div>
                         <div class="col-6">
                             <div class="asset_numbers">
-                                <div id="stocks_value"></div>
-                                <div id="stocks_result"></div>
+                                <span id="stocks_value"></span><br>
+                                <span id="stocks_result"></span>
                             </div>
                         </div>
                         <div id="stocks_overview" class="col-12"></div>
                     </div>
 
                     <!-- CRYPTO-->
-                    <div class="row">
+                    <div class="row asset_row">
                         <div class="col-6">
                             <h1><i data-type="crypto" class="toggle_icon bi bi-caret-right"></i>Crypto</h1>
                         </div>
                         <div class="col-6">
                             <div class="asset_numbers">
-                                <div id="crypto_value"></div>
-                                <div id="crypto_result"></div>
+                                <span id="crypto_value"></span><br>
+                                <span id="crypto_result"></span>
                             </div>
                         </div>
                         <div id="crypto_overview" class="col-12"></div>
                     </div>
 
                     <!-- FONDS-->
-                    <div class="row">
+                    <div class="row asset_row">
                         <div class="col-6">
-                            <h1><i data-type="fond" class="toggle_icon bi bi-caret-right"></i>Fond</h1>
+                            <h1><i data-type="fonds" class="toggle_icon bi bi-caret-right"></i>Fond</h1>
                         </div>
                         <div class="col-6">
                             <div class="asset_numbers">
-                                <div id="fonds_value"></div>
-                                <div id="fonds_result"></div>
+                                <span id="fonds_value"></span><br>
+                                <span id="fonds_result"></span>
                             </div>
                         </div>
-                        <div id="fond_overview" class="col-12"></div>
+                        <div id="fonds_overview" class="col-12"></div>
                     </div>
 
                     <!-- ETF-->
-                    <div class="row">
+                    <div class="row asset_row">
                         <div class="col-6">
                             <h1><i data-type="etf" class="toggle_icon bi bi-caret-right"></i>ETF</h1>
                         </div>
                         <div class="col-6">
                             <div class="asset_numbers">
-                                <div id="etf_value"></div>
-                                <div id="etf_result"></div>
+                                <span id="etf_value"></span><br>
+                                <span id="etf_result"></span>
                             </div>
                         </div>
                         <div id="etf_overview" class="col-12"></div>
@@ -249,7 +249,7 @@ function show_all_positions(){
     const stocks = $('#stocks_overview');
     const etf = $('#etf_overview');
     const crypto =$('#crypto_overview'); 
-    const fond = $('#fond_overview'); 
+    const fond = $('#fonds_overview'); 
 
     Object.keys(assets).forEach((type) => {
         const sorted_elements = assets_clean[type].sort((a,b) => b[2] - a[2] );
@@ -324,7 +324,6 @@ function generate_donut_chart(data){
                 let pre_fix = '';
                 if(!assets_clean[d.id] ){
                     pre_fix = d.id + ': ';
-                    console.log(d);
                 }
                 let formated_value = parseFloat( parseFloat(d.value).toFixed(0) ).toLocaleString('no-NO');
                 $('.c3-chart-arcs-title').html(pre_fix + formated_value); 
@@ -415,7 +414,9 @@ function drawCurrentValue(){
         }
     });
 }
+
 function toggle_overviews(type, force_show = false){
+    console.log('show type', type);
     let overview = $(`#${type}_overview`);
     let icon = overview.closest('.row').find('h1 > i');
 
@@ -503,6 +504,10 @@ $(function(){
         .grafOverView, .asset_overview, .valuesOverview{
             border-bottom: solid 1px;
         }
+
+        .asset_overview > .asset_row:not(:last-child){
+            border-bottom: solid 1px;
+        }
     
         body{
             background-image: url('/public/background.jpg');
@@ -515,7 +520,11 @@ $(function(){
             float: right;
             font-size: 20px;
         }
-        #etf_overview, #stocks_overview, #fond_overview, #crypto_overview{
+        
+        .asset_numbers > span{
+            float: right;
+        }
+        #etf_overview, #stocks_overview, #fonds_overview, #crypto_overview{
             display: none;
         }
         /* #stock_result, #crypto_result, #fond_result, #etf_result{
