@@ -54,10 +54,11 @@ function init_portfolio(){
             });
 
             
+            
             portfolio_value.total = total_value;
 
             if(write_to_cache){
-               portfolio.results = portfolio_value;
+                portfolio.results = portfolio_value;
                 portfolio.exchange_rates = exchange_rates;
                 fs.writeFileSync(cache_file, JSON.stringify(portfolio) , {encodeing: 'utf8'});
 
@@ -107,7 +108,6 @@ function init_portfolio(){
                 console.log(err);
             }
             console.log(calculate_profit(gains));
-            
             // console.log( portfolio.results );
         }).catch(error => {
             console.error('error here',error.message)
@@ -246,6 +246,10 @@ function update_portfolio_value(){
                         // console.log(`${ticket} has an value of ${holdings[key][ticket].current_value}`);
                     })
                 );
+            }
+            else if(key === 'cash'){
+                promises.push();
+                console.log(assets[key], ticket);
             }
 
         })

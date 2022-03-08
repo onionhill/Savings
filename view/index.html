@@ -228,6 +228,11 @@ function show_all_positions(){
             if(!assets_clean[type] ){
                 assets_clean[type] = [];
             }
+
+            if(asset.quantity == 0){
+                return;
+            }
+
             assets_clean[type].push(
                [ 
                    ticket,
@@ -359,14 +364,15 @@ function calculate_total_buy(startDate = '20000101', endDate = '20990101'){
                         order_buy = (order.UNITS * order.PRICE);
                     }else{
                         asset.quantity -= order.UNITS;
-                        order_buy=  (order.UNITS * order.PRICE);
+                        order_buy =  -(order.UNITS * order.PRICE);
                     }
 
                     if(order.CURRENCY != 'NOK'){
                         order_buy *= todays_item.exchange_rates[`${order.CURRENCY}_NOK`];
                     }
+  
                     ticket_buy+= order_buy;
-                }              
+                }           
             });
             total_buy += ticket_buy;
         });

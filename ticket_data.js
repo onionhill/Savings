@@ -3,6 +3,10 @@ const ticket_data = {
         'url': 'https://www.nordnet.no/market/stocks/16105595-telenor',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
+    'DNB': {
+        'url': 'https://www.nordnet.no/market/stocks/17534483-dnb-bank-asa',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
     'EQNR': {
         'url': 'https://www.nordnet.no/market/stocks/16105420-equinor',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'

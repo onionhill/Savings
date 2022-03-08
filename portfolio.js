@@ -12,12 +12,38 @@ const portfolio = {
                         'DATE':'2022-01-01',
                         'BUY': true
 
+                    },
+                    {
+                        'PRICE': 310,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 45,
+                        'DATE':'2022-03-03',
+                        'BUY': false
+
                     }
                 ],
                 'DIVIDENDS':[
                     { 'DATE': '2021-05-27', 'VALUE': 9.9, 'CURRENCY': 'NOK' },
                     { 'DATE': '2021-08-27', 'VALUE': 26.61, 'CURRENCY': 'NOK' },
                     { 'DATE': '2021-11-29', 'VALUE': 449, 'CURRENCY': 'NOK' }
+                ],
+                'METHOD': 'scrapper'
+            },
+            'DNB':{
+                'PROVIDER':'nordnet',
+                'NAME': 'DNB',
+                'ORDERS':[
+                    {
+                        'PRICE': 193.90,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 69,
+                        'DATE':'2022-03-03',
+                        'BUY': true
+
+                    }
+                ],
+                'DIVIDENDS':[
+
                 ],
                 'METHOD': 'scrapper'
             },
@@ -350,6 +376,13 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS':4.99,
                         'DATE':'2022-01-28',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 20.20,
+                        'CURRENCY': 'USD',
+                        'UNITS':4.55,
+                        'DATE':'2022-03-03',
                         'BUY': true
                     }
                 ],
@@ -708,11 +741,9 @@ const portfolio = {
                     }
                 ]
             }
-        },
+        }
     },
     results:{},
-
-
 }
 
 
