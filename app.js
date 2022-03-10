@@ -138,9 +138,6 @@ function calculate_provider_changes(today, yesterday){
     return provider_gains;
 }
 
-function find_ticket(ticket, data){
-
-}
 
 function calculate_profit(gains){
     let profit = [];
@@ -151,9 +148,7 @@ function calculate_profit(gains){
     Object.keys(assets).forEach((type) => {
         Object.keys(assets[type] ).forEach((ticket) => {
             let push_val =  [ticket, format_number( assets[type][ticket].current_value ), format_number( assets[type][ticket].return ) ];
-            if(gains[ticket] ){
-               // push_val.push(gains[ticket] );
-            }
+            
             profit.push( push_val);
             total_profit+= assets[type][ticket].return;
             total_value+=assets[type][ticket].current_value;
@@ -396,7 +391,11 @@ function get_value_asset(asset, ticket){
     if(asset.DIVIDENDS){
         asset.DIVIDENDS.forEach( dividend => asset.total_dividends += dividend.VALUE );
     }
-    asset.return = (asset.stock_price - asset.avg_buy) * asset.quantity;
+    if(asset.quantity > 0 ){
+        asset.return = (asset.stock_price - asset.avg_buy) * asset.quantity;
+    }else{
+        asset.return = 0;
+    }
     asset.current_value = parseFloat( asset.quantity * asset.stock_price);
     let exchange_rate = 1;
     if(asset.currency != 'NOK'){
