@@ -43,6 +43,14 @@ const ticket_data = {
         'url': 'https://www.nordnet.no/market/stocks/17436489-harmonychain',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
+    'POL': {
+        'url': 'https://www.nordnet.no/market/stocks/16105742-polaris-media',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
+    'SCHB': {
+        'url': 'https://www.nordnet.no/market/stocks/16408915-schibsted-b',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
     'Nordnet Indeksfond Global':{
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F000015CV5',
         'selector': '$(".line.text").first()',

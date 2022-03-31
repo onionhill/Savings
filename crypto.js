@@ -3,8 +3,9 @@
 var axios = require('axios');
 
 const backup_crypto_price = {
-    'CRO': 0.4413,
-    'ELON': 0.0000008528
+    'CRO': 0.4835,
+    'ELON': 0.000001080,
+    'CRPT': 0.61
 }
 
 const get_crypto_coin_price = (coin, currency) => {
@@ -15,6 +16,7 @@ const get_crypto_coin_price = (coin, currency) => {
         headers: {'User-Agent': 'request'}
     }).then( (response) => {
         if(response.data['Error Message'] ){
+            console.log('error?', coin);
             return backup_crypto_price[coin];
         }else{
             return response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];

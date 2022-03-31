@@ -177,6 +177,9 @@ function initValues(){
     }
     
     let total_value = 0;
+
+    console.log(todays_item);
+
     if(todays_item ){
         total_value = todays_item.results.total;
         $('#current_value').html( format_number(total_value, false ) );
@@ -224,7 +227,7 @@ function show_all_positions(){
     Object.keys(assets).forEach((type) => {
         Object.keys(assets[type] ).forEach((ticket) => {
             const asset = todays_item.assets[type][ticket];
-            const y_asset = yesterdays_item.assets[type][ticket];
+            let y_asset = yesterdays_item.assets[type][ticket];
             if(!assets_clean[type] ){
                 assets_clean[type] = [];
             }
@@ -232,6 +235,13 @@ function show_all_positions(){
             if(asset.quantity == 0){
                 return;
             }
+
+            if(!y_asset){
+                y_asset = {
+                    current_value: asset.current_value,
+                };
+            }
+
 
             assets_clean[type].push(
                [ 

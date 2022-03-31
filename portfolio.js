@@ -71,6 +71,13 @@ const portfolio = {
                         'UNITS': 29,
                         'DATE': '2022-02-18',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 129,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 33,
+                        'DATE': '2022-03-28',
+                        'BUY': true
                     }
                 ],
                 'DIVIDENDS':[
@@ -109,6 +116,13 @@ const portfolio = {
                         'UNITS': 20,
                         'DATE':'2022-01-01',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 322.40,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 4,
+                        'DATE':'2022-03-30',
+                        'BUY': true
                     }
                 ],
                 'DIVIDENDS':[
@@ -128,6 +142,13 @@ const portfolio = {
                         'CURRENCY': 'NOK',
                         'UNITS': 21,
                         'DATE':'2022-01-01',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 240.60,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 10,
+                        'DATE':'2022-03-25',
                         'BUY': true
                     }
                 ],
@@ -169,6 +190,13 @@ const portfolio = {
                         'UNITS': 31,
                         'DATE':'2022-01-01',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 107,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 29,
+                        'DATE':'2022-03-25',
+                        'BUY': true
                     }
                 ],
                 'DIVIDENDS':[
@@ -188,6 +216,13 @@ const portfolio = {
                         'UNITS': 150,
                         'DATE':'2022-01-01',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 20.06,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 150,
+                        'DATE':'2022-03-25',
+                        'BUY': true
                     }
                 ],
                 'METHOD': 'scrapper'
@@ -203,6 +238,13 @@ const portfolio = {
                         'UNITS': 15,
                         'DATE':'2022-01-01',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 116,
+                        'CURRENCY': 'SEK',
+                        'UNITS': 15,
+                        'DATE':'2022-03-30',
+                        'BUY': false
                     }
                 ],
                 'METHOD': 'scrapper'
@@ -291,14 +333,14 @@ const portfolio = {
                         'PRICE':54.42,
                         'CURRENCY': 'USD',
                         'UNITS': 2.48,
-                        'DATE':'2022-19-01',
+                        'DATE':'2022-01-19',
                         'BUY': true
                     },
                     {
                         'PRICE':52.64,
                         'CURRENCY': 'USD',
                         'UNITS': 1.89,
-                        'DATE':'2022-28-01',
+                        'DATE':'2022-01-28',
                         'BUY': true
                     }
                 ],
@@ -313,12 +355,80 @@ const portfolio = {
                         'PRICE':28.07,
                         'CURRENCY': 'USD',
                         'UNITS': 5.34,
-                        'DATE':'2022-20-01',
+                        'DATE':'2022-01-20',
                         'BUY': true
                     }
                 ],
                 'DIVIDENDS':[ ],
                 'METHOD': 'API'
+            },
+            'T':{
+                'PROVIDER':'etoro',
+                'NAME': 'AT&T',
+                'ORDERS':[
+                    {
+                        'PRICE':23.21,
+                        'CURRENCY': 'USD',
+                        'UNITS': 4.30,
+                        'DATE':'2022-03-21',
+                        'BUY': true
+                    }
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'API'
+            },
+            'NIO':{
+                'PROVIDER':'etoro',
+                'NAME': 'Nio',
+                'ORDERS':[
+                    {
+                        'PRICE':18.80,
+                        'CURRENCY': 'USD',
+                        'UNITS': 5.31,
+                        'DATE':'2022-03-21',
+                        'BUY': true
+                    }
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'API'
+            },
+            'POL': {
+                'PROVIDER':'nordnet',
+                'NAME': 'PolarisMedia',
+                'ORDERS':[
+                    {
+                        'PRICE':72.05,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 208,
+                        'DATE':'2022-03-23',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE':89.80,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 208,
+                        'DATE':'2022-03-24',
+                        'BUY': false
+                    }
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'scrapper'
+
+            },
+            'SCHB': {
+                'PROVIDER':'nordnet',
+                'NAME': 'Schibsted',
+                'ORDERS':[
+                    {
+                        'PRICE':191.80,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 30,
+                        'DATE':'2022-03-28',
+                        'BUY': true
+                    },
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'scrapper'
             }
 
         },
@@ -384,6 +494,13 @@ const portfolio = {
                         'UNITS':4.55,
                         'DATE':'2022-03-03',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 20.51,
+                        'CURRENCY': 'USD',
+                        'UNITS':4.87,
+                        'DATE':'2022-03-21',
+                        'BUY': true
                     }
                 ],
                 'DIVIDENDS':[ ],
@@ -397,20 +514,50 @@ const portfolio = {
                         'PRICE': 79.87,
                         'CURRENCY': 'USD',
                         'UNITS':1.25,
-                        'DATE':'2022-20-01',
+                        'DATE':'2022-01-20',
                         'BUY': true
                     },
                     {
                         'PRICE': 78.47,
                         'CURRENCY': 'USD',
                         'UNITS':1.52,
-                        'DATE':'2022-27-01',
+                        'DATE':'2022-01-27',
                         'BUY': true
                     }
                 ],
                 'DIVIDENDS':[ ],
                 'METHOD': 'API'
             },
+            'SDIV':{
+                'PROVIDER': 'etoro',
+                'NAME': 'Global X SuperDividend ETF',
+                'ORDERS':[
+                    {
+                        'PRICE': 11.30,
+                        'CURRENCY': 'USD',
+                        'UNITS': 4.42,
+                        'DATE':'2022-03-29',
+                        'BUY': true
+                    }
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'API'
+            },
+            'SPHD':{
+                'PROVIDER': 'etoro',
+                'NAME': 'Invesco S&P 500 High dividend Low Volatility ETF',
+                'ORDERS':[
+                    {
+                        'PRICE': 47.41,
+                        'CURRENCY': 'USD',
+                        'UNITS': 1.05,
+                        'DATE':'2022-03-29',
+                        'BUY': true
+                    }
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'API'
+            }
         },
         'fonds':{
             'OD-AKSJD':{
@@ -537,6 +684,13 @@ const portfolio = {
                         'UNITS': 5.44,
                         'DATE':'2022-02-19',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 7.61,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 6.54,
+                        'DATE':'2022-03-21',
+                        'BUY': true
                     }
                 ]
             },
@@ -555,7 +709,7 @@ const portfolio = {
                         'PRICE': 379075,
                         'CURRENCY': 'NOK',
                         'UNITS': 0.001319,
-                        'DATE':'2022-09-01',
+                        'DATE':'2022-01-09',
                         'BUY': true
                     },
                     {
@@ -563,6 +717,13 @@ const portfolio = {
                         'CURRENCY': 'NOK',
                         'UNITS': 0.001235,
                         'DATE':'2022-02-19',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 367408,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.001219,
+                        'DATE':'2022-03-21',
                         'BUY': true
                     }
                 ]
@@ -598,6 +759,13 @@ const portfolio = {
                         'UNITS': 0.01570,
                         'DATE':'2022-02-19',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 25986,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.01533,
+                        'DATE':'2022-03-21',
+                        'BUY': true
                     }
                 ]
             },
@@ -618,6 +786,13 @@ const portfolio = {
                         'UNITS': 0.046,
                         'DATE':'2022-02-19',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 991,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.050,
+                        'DATE':'2022-03-21',
+                        'BUY': true
                     }
                 ]
             },
@@ -637,6 +812,13 @@ const portfolio = {
                         'CURRENCY': 'NOK',
                         'UNITS': 6.916,
                         'DATE':'2022-02-19',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 7.16,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 6.955,
+                        'DATE':'2022-03-21',
                         'BUY': true
                     }
                 ]
@@ -737,6 +919,32 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 0.3096,
                         'DATE':'2022-02-19',
+                        'BUY': true
+                    }
+                ]
+            },
+            'QSP':{
+                'PROVIDER': 'Coinbase',
+                'NAME': 'Quantstamp',
+                'ORDERS':[
+                    {
+                        'PRICE': 0.0834,
+                        'CURRENCY': 'USD',
+                        'UNITS': 310.14,
+                        'DATE':'2022-03-24',
+                        'BUY': true
+                    }
+                ]
+            },
+            'CRPT':{
+                'PROVIDER': 'Coinbase',
+                'NAME': 'Crypterium',
+                'ORDERS':[
+                    {
+                        'PRICE': 0.81,
+                        'CURRENCY': 'USD',
+                        'UNITS': 31.74,
+                        'DATE':'2022-03-24',
                         'BUY': true
                     }
                 ]
