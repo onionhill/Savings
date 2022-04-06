@@ -37,7 +37,13 @@
                             Starting value 01.01.2022: <span id="start_value"></span>
                         </div>
                         <div>
-                            Innskudd: <span id="deposit_value"></span>
+                            Kjøp: <span id="deposit_value"></span>
+                        </div>
+                        <div>
+                            Utbytte: <span id="dividend_value"></span> 
+                        </div>
+                        <div>
+                            Salg: <span id="sales_value"></span> 
                         </div>
                         <div>
                             Result: <span id="result_value"></span> / <span id="result_value_p"></span>
@@ -178,8 +184,6 @@ function initValues(){
     
     let total_value = 0;
 
-    console.log(todays_item);
-
     if(todays_item ){
         total_value = todays_item.results.total;
         $('#current_value').html( format_number(total_value, false ) );
@@ -203,13 +207,22 @@ function initValues(){
     }else{
         $('#start_value').html('----');
     }
+    let total_dividens = calculate_total_divididens_payed();
+    if(total_dividens){
+        $('#dividend_value').html( format_number(total_dividens, false) );
+    }else{
+        total_dividens = 0;
+        $('#dividend_value').html('----');
+    }
 
-    let total_buy = calculate_total_buy('20220106')
+    let total_buy = calculate_total_buy('20220106') - total_dividens;
     if(total_buy){
         $('#deposit_value').html( format_number(total_buy, false) );
     }else{
         $('#deposit_value').html('----');
     }
+
+   
 
     let result = total_value - total_buy - start_value;
     let result_p = result / (start_value + total_buy) * 100;
@@ -364,24 +377,31 @@ function calculate_total_buy(startDate = '20000101', endDate = '20990101'){
         Object.keys(assets[type] ).forEach((ticket) => {
             const asset = assets[type][ticket];
             let ticket_buy = 0;
+           
             asset.ORDERS.forEach( (order) => {
+                if(ticket === 'KIT'){
+                        console.log('ql', order.DATE);
+                    }
                 let orderDate = order.DATE.replace(/-/g,'');
                 if(orderDate >= startDate && orderDate <= endDate){
                     let order_buy = 0;
                     
+                  
+
                     if(order.BUY){
-                        asset.quantity += order.UNITS;
                         order_buy = (order.UNITS * order.PRICE);
                     }else{
-                        asset.quantity -= order.UNITS;
                         order_buy =  -(order.UNITS * order.PRICE);
                     }
 
+                    
                     if(order.CURRENCY != 'NOK'){
                         order_buy *= todays_item.exchange_rates[`${order.CURRENCY}_NOK`];
                     }
   
                     ticket_buy+= order_buy;
+                }else{
+
                 }           
             });
             total_buy += ticket_buy;
@@ -432,7 +452,6 @@ function drawCurrentValue(){
 }
 
 function toggle_overviews(type, force_show = false){
-    console.log('show type', type);
     let overview = $(`#${type}_overview`);
     let icon = overview.closest('.row').find('h1 > i');
 
@@ -504,6 +523,32 @@ function calculate_type_values(assets_clean){
     
 }
 
+function calculate_total_divididens_payed(){
+    
+    let total_dividens = 0;
+
+    Object.keys(assets).forEach( (type) => {
+        Object.keys(assets[type]).forEach( (ticket) => {
+            const asset = assets[type][ticket];
+
+            if(asset?.DIVIDENDS && asset.DIVIDENDS.length > 0){
+                let item_dividens = 0;
+                asset.DIVIDENDS.forEach( (dividend) => {
+                    if(dividend.CURRENCY === 'NOK'){
+                        item_dividens += dividend.VALUE;
+                    }else{
+                        item_dividens += (dividend.VALUE * todays_item.exchange_rates[`${dividend.CURRENCY}_NOK`]);
+                    }
+                });
+
+                total_dividens += item_dividens;
+
+            }
+        });
+    });
+    return total_dividens;
+}
+
 $(function(){
     initPortFolio();
     $('.toggle_icon').on('click', function(){
@@ -547,5 +592,9 @@ $(function(){
             float:right;
             font-size: 20px;
         } */
+
+        .c3-axis-x .tick {
+   display: none;
+}
     </style>
 </html>
