@@ -153,6 +153,13 @@ const portfolio = {
                         'UNITS': 10,
                         'DATE':'2022-03-25',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 250,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 2,
+                        'DATE':'2022-04-13',
+                        'BUY': true
                     }
                 ],
                 'DIVIDENDS':[
@@ -206,6 +213,7 @@ const portfolio = {
                 'DIVIDENDS':[
                     { 'DATE': '2021-04-14', 'VALUE': 12.7, 'CURRENCY': 'NOK' },
                     { 'DATE': '2021-11-11', 'VALUE': 81.53, 'CURRENCY': 'NOK' },
+                    { 'DATE': '2021-04-13', 'VALUE': 217, 'CURRENCY': 'NOK' },
                 ],
                 'METHOD': 'scrapper'
 
@@ -264,6 +272,13 @@ const portfolio = {
                         'UNITS': 4978,
                         'DATE':'2022-01-01',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 0.88,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 4978,
+                        'DATE':'2022-04-13',
+                        'BUY': false
                     }
                 ],
                 'METHOD': 'scrapper'
@@ -374,7 +389,9 @@ const portfolio = {
                         'BUY': true
                     }
                 ],
-                'DIVIDENDS':[ ],
+                'DIVIDENDS':[ 
+                    { 'DATE': '2021-04-07', 'VALUE': 1.35, 'CURRENCY': 'USD' }
+                ],
                 'METHOD': 'API'
             },
             'T':{
@@ -386,6 +403,21 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 4.30,
                         'DATE':'2022-03-21',
+                        'BUY': true
+                    }
+                ],
+                'DIVIDENDS':[ ],
+                'METHOD': 'API'
+            },
+            'WBD':{
+                'PROVIDER':'etoro',
+                'NAME': 'Warner Bros Discovery INC',
+                'ORDERS':[
+                    {
+                        'PRICE': 24.47,
+                        'CURRENCY': 'USD',
+                        'UNITS': 1.03,
+                        'DATE':'2022-04-13',
                         'BUY': true
                     }
                 ],
@@ -521,6 +553,13 @@ const portfolio = {
                         'UNITS':4.87,
                         'DATE':'2022-03-21',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 21.00,
+                        'CURRENCY': 'USD',
+                        'UNITS': 0.47,
+                        'DATE':'2022-04-13',
+                        'BUY': true
                     }
                 ],
                 'DIVIDENDS':[
@@ -530,6 +569,21 @@ const portfolio = {
                     { 'DATE': '2021-03-22', 'VALUE': 1.39, 'CURRENCY': 'USD' },
                     { 'DATE': '2021-03-29', 'VALUE': 2.46, 'CURRENCY': 'USD' }
                  ],
+                'METHOD': 'API'
+            },
+            'RYLD':{
+                'PROVIDER': 'nordnet',
+                'NAME': 'Global X Russell 2000 Covered Call ETF',
+                'ORDERS':[
+                    {
+                        'PRICE': 23.43,
+                        'CURRENCY': 'USD',
+                        'UNITS': 21,
+                        'DATE':'2022-04-13',
+                        'BUY': true
+                    }
+                ],
+                'DIVIDENDS':[ ],
                 'METHOD': 'API'
             },
             'SCHD':{
@@ -568,7 +622,9 @@ const portfolio = {
                         'BUY': true
                     }
                 ],
-                'DIVIDENDS':[ ],
+                'DIVIDENDS':[ 
+                    { 'DATE': '2021-04-06', 'VALUE': 0.31, 'CURRENCY': 'USD' }
+                ],
                 'METHOD': 'API'
             },
             'SPHD':{

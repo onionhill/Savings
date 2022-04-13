@@ -16,7 +16,6 @@ const get_crypto_coin_price = (coin, currency) => {
         headers: {'User-Agent': 'request'}
     }).then( (response) => {
         if(response.data['Error Message'] ){
-            console.log('error?', coin);
             return backup_crypto_price[coin];
         }else{
             return response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
