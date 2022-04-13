@@ -5,8 +5,12 @@ const getHistoryData = require('./historydata');
 
 
 app.get('/', function(request, response){
-
     response.sendFile('/view/index.html',{root: __dirname});
+});
+
+
+app.get('/dividends', function(request, response){
+    response.sendFile('/view/dividends.html',{root: __dirname});
 });
 
 app.get('/PortfolioData', function(request, response){
