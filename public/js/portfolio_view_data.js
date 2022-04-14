@@ -6,6 +6,7 @@ let todays_item = {};
 let yesterdays_item;
 let type_values = {};
 let assets_clean = {};
+let dividends = {};
 
 
 let flatten_assets = [];
@@ -16,6 +17,7 @@ function initPortFolio(){
         portfolioData = res;
         assets = portfolioData.portfolio.assets;
         history = portfolioData.history;
+        dividends = portfolioData.dividends;
         initValues();
        
     });
@@ -393,11 +395,11 @@ function calculate_type_values(assets_clean){
 function calculate_total_divididens_payed(){
     
     let total_dividens = 0;
-    flatten_assets.forEach( (asset) => {
+    Object.keys(dividends).forEach( (ticket) => {
+            const ticket_dividend = dividends[ticket];
 
-        if(asset?.DIVIDENDS && asset.DIVIDENDS.length > 0){
             let item_dividens = 0;
-            asset.DIVIDENDS.forEach( (dividend) => {
+            ticket_dividend.forEach( (dividend) => {
                 if(dividend.CURRENCY === 'NOK'){
                     item_dividens += dividend.VALUE;
                 }else{
@@ -405,7 +407,7 @@ function calculate_total_divididens_payed(){
                 }
             });
             total_dividens += item_dividens;
-        }
+        
     });
     return total_dividens;
 }
