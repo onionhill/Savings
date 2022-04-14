@@ -28,13 +28,13 @@ const dividens = {
         { 'DATE': '2022-03-07', 'VALUE': 29.4, 'CURRENCY': 'NOK' },
     ],
     'YAR':[
-        { 'DATE': '2022-05-19', 'VALUE': 160, 'CURRENCY': 'NOK' },
-        { 'DATE': '2022-09-15', 'VALUE': 160, 'CURRENCY': 'NOK' },
+        { 'DATE': '2021-05-19', 'VALUE': 160, 'CURRENCY': 'NOK' },
+        { 'DATE': '2021-09-15', 'VALUE': 160, 'CURRENCY': 'NOK' },
     ],
     'NONG': [
         { 'DATE': '2021-04-14', 'VALUE': 12.7, 'CURRENCY': 'NOK' },
         { 'DATE': '2021-11-11', 'VALUE': 81.53, 'CURRENCY': 'NOK' },
-        { 'DATE': '2021-04-13', 'VALUE': 217, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-04-13', 'VALUE': 217, 'CURRENCY': 'NOK' },
     ],
     'JPM': [ 
         { 'DATE': '2022-01-31', 'VALUE': 0.7, 'CURRENCY': 'USD' },
@@ -50,26 +50,26 @@ const dividens = {
         { 'DATE': '2022-03-22', 'VALUE': 1.18, 'CURRENCY': 'USD' },
     ],
     'VICI': [ 
-        { 'DATE': '2021-04-07', 'VALUE': 1.35, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-04-07', 'VALUE': 1.35, 'CURRENCY': 'USD' }
     ],
     'VOO': [
-        { 'DATE': '2021-03-28', 'VALUE': 0.50, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-03-28', 'VALUE': 0.50, 'CURRENCY': 'USD' }
     ],
     'VTI': [
-        { 'DATE': '2021-03-28', 'VALUE': 0.33, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-03-28', 'VALUE': 0.33, 'CURRENCY': 'USD' }
     ],
     'QYLD': [
         { 'DATE': '2022-01-07', 'VALUE': 3.55, 'CURRENCY': 'USD' },
-        { 'DATE': '2021-02-01', 'VALUE': 1.67, 'CURRENCY': 'USD' },
-        { 'DATE': '2021-03-02', 'VALUE': 2.38, 'CURRENCY': 'USD' },
-        { 'DATE': '2021-03-22', 'VALUE': 1.39, 'CURRENCY': 'USD' },
-        { 'DATE': '2021-03-29', 'VALUE': 2.46, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-02-01', 'VALUE': 1.67, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-03-02', 'VALUE': 2.38, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-03-22', 'VALUE': 1.39, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-03-29', 'VALUE': 2.46, 'CURRENCY': 'USD' }
     ],
     'SCHD': [ 
-        { 'DATE': '2021-03-28', 'VALUE': 1, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-03-28', 'VALUE': 1, 'CURRENCY': 'USD' }
     ],
     'SDIV': [ 
-        { 'DATE': '2021-04-06', 'VALUE': 0.31, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-04-06', 'VALUE': 0.31, 'CURRENCY': 'USD' }
     ]
 }
 

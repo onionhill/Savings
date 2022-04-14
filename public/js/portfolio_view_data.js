@@ -13,14 +13,27 @@ let flatten_assets = [];
 
 
 function initPortFolio(){
-    $.get('/portfolioData').then( (res) => {
-        portfolioData = res;
+
+    if(window.localStorage.getItem('portfolioData') !== null ){
+        portfolioData = JSON.parse(window.localStorage.getItem('portfolioData'));
         assets = portfolioData.portfolio.assets;
-        history = portfolioData.history;
         dividends = portfolioData.dividends;
+        history = portfolioData.history;
         initValues();
-       
-    });
+
+    }else{
+        $.get('/portfolioData').then( (res) => {
+            window.localStorage.setItem('portfolioData', JSON.stringify(res));
+    
+            portfolioData = res;
+            assets = portfolioData.portfolio.assets;
+            history = portfolioData.history;
+            dividends = portfolioData.dividends;
+            initValues();
+           
+        });
+    }
+   
 }
 
 function getDateElement(datestring){
@@ -266,7 +279,7 @@ function calculate_total_buy(startDate = '20000101', endDate = '20990101'){
 
                 
                 if(order.CURRENCY != 'NOK'){
-                    order_buy *= todays_item.exchange_rates[`${order.CURRENCY}_NOK`];
+                    order_buy = convert_currency( order.CURRENCY, order_buy );
                 }
 
                 ticket_buy+= order_buy;
@@ -278,6 +291,16 @@ function calculate_total_buy(startDate = '20000101', endDate = '20990101'){
     });
     return total_buy;
 
+}
+function convert_date(date){
+    let date_array = date.split('-');
+    return date_array[2] + '.' + date_array[1] + '.' + date_array[0];
+}
+
+
+function convert_currency(curreny, amount){
+    if(curreny === 'NOK') return amount;
+    return amount * todays_item.exchange_rates[`${curreny}_NOK`];
 }
 
 
@@ -403,7 +426,7 @@ function calculate_total_divididens_payed(){
                 if(dividend.CURRENCY === 'NOK'){
                     item_dividens += dividend.VALUE;
                 }else{
-                    item_dividens += (dividend.VALUE * todays_item.exchange_rates[`${dividend.CURRENCY}_NOK`]);
+                    item_dividens += ( convert_currency(dividend.CURRENCY, dividend.VALUE ) );
                 }
             });
             total_dividens += item_dividens;
