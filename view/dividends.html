@@ -26,7 +26,14 @@
             </div>
           </nav>
         <main>
-            <div id="dividends_overview"></div>
+            <div class="container">
+                <h1 style="text-align:center">Utbytte oversikt</h1>  
+                <br><br>
+                    <div id="div_chart"></div>
+
+                <br><br>
+                <div id="dividends_overview"></div>
+            </div>
         </main>
     </body>
 
@@ -35,17 +42,13 @@
 <script>
     $(async function(){
         initPortFolio();
-       
-        create_dividends_overview();
-           
+   
         // Videre planer for denne siden:
         /*
             1. Tabellen skal blir flere nivåer. Med år og måned som nivå
             2. Det skal vises en oversikt over alle utbytter per måned i året. Hvert år skal ha ulik farge
 
         */
-        
-        
 
     });
     function create_dividends_overview(){
@@ -66,15 +69,17 @@
             });
             dividend_array.push(...dividend);
         });
+
         const sorted_elements = dividend_array.sort((a,b) => {
             return new Date(b.DATE) - new Date(a.DATE)
         });
+
         const dividends_table_body = $('<tbody>');
         let total_dividend = 0;
         sorted_elements.forEach( (item) => {
             total_dividend += convert_currency(item.CURRENCY, item.VALUE);
             const tr = $('<tr>').append(
-                `<td>${convert_date(item.DATE)}</td>`,                             //Dato
+                `<td>${convert_date(item.DATE)}</td>`,  //Dato
                 $('<td>').append(item.ticket ), //Ticket
                 $('<td>').append(format_number( convert_currency(item.CURRENCY, item.VALUE), false ) ), //Verdi
             );
@@ -82,10 +87,47 @@
             dividends_table_body.append(tr);
         });
         dividends_table_body.prepend(`<tr><td>TOTALT</td><td>&nbsp</td><td>${total_dividend}</td></tr>`);
-
         dividend_table.append(dividends_table_body);
 
         $('#dividends_overview').append(dividend_table);
+
+        create_dividends_chart(sorted_elements);
+    }
+
+    function create_dividends_chart(elements){
+        // Year -> [0
+        let month_data = {
+            2021: [ ...Array(12).keys() ].map(() => 0),
+            2022: [ ...Array(12).keys() ].map(() => 0),
+        }
+
+        elements.forEach( (item) => {
+            const date = new Date(item.DATE);
+            month_data[date.getFullYear()][date.getMonth()] += convert_currency(item.CURRENCY, item.VALUE);
+            month_data[date.getFullYear()][date.getMonth()] = Math.round(month_data[date.getFullYear()][date.getMonth()] * 100) / 100;
+        });
+
+
+        var chart = c3.generate({
+            bindto: '#div_chart',
+            data: {
+                json: month_data,
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.5 // this makes bar width 50% of length between ticks
+                }
+                // or
+                //width: 100 // this makes bar width 100px
+            },axis: {
+                x: {
+                    type: 'category',
+                    categories: ['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Desember']
+                }
+            }
+        });
+        console.log(month_data);
     }
     </script>
 </html>

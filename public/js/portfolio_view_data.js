@@ -13,24 +13,35 @@ let flatten_assets = [];
 
 
 function initPortFolio(){
-
     if(window.localStorage.getItem('portfolioData') !== null ){
         portfolioData = JSON.parse(window.localStorage.getItem('portfolioData'));
         assets = portfolioData.portfolio.assets;
         dividends = portfolioData.dividends;
         history = portfolioData.history;
-        initValues();
+        todays_item = history[get_todays_date()];
+
+
+        if(typeof create_dividends_overview === 'function'){
+            create_dividends_overview();
+        }else{
+            initValues();
+
+        }
 
     }else{
         $.get('/portfolioData').then( (res) => {
-            window.localStorage.setItem('portfolioData', JSON.stringify(res));
-    
             portfolioData = res;
             assets = portfolioData.portfolio.assets;
             history = portfolioData.history;
             dividends = portfolioData.dividends;
-            initValues();
-           
+            todays_item = history[get_todays_date()];
+
+            if(typeof create_dividends_overview === 'function'){
+                create_dividends_overview();
+            }else{
+                initValues();
+
+            }
         });
     }
    
@@ -45,8 +56,7 @@ function getDateElement(datestring){
 }
 
 function initValues(){
-    todays_item = history[get_todays_date()];
-    counter = 1;
+    let counter = 1;
 
     while(!yesterdays_item && counter < 14 ){
         let date = new Date();
@@ -72,7 +82,14 @@ function initValues(){
     let total_value = 0;
 
     if(todays_item ){
-        total_value = todays_item.results.total;
+        Object.keys(assets).forEach((type) => {
+            Object.keys(assets[type] ).forEach((ticket) => {
+                const asset = todays_item.assets[type][ticket];
+                total_value+= asset.current_value;
+            });
+        });
+
+
         $('#current_value').html( format_number(total_value, false ) );
         let changes = total_value - yesterdays_item.results.total;
 
@@ -319,7 +336,7 @@ function drawCurrentValue(){
     }).sort();
 
     dateformat.unshift('x');
-
+    console.log('stuff here?', values, dateformat);
     var chart = c3.generate({
         bindto: '#current_value_chart',
         data: {

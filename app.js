@@ -45,10 +45,7 @@ function init_portfolio(){
         // const provider_promises = update_portfolio_value('etoro');
         Promise.allSettled(provider_promises).then( () => {
            
-            if(write_to_cache){
-                portfolio.exchange_rates = exchange_rates;
-                fs.writeFileSync(cache_file, JSON.stringify(portfolio) , {encodeing: 'utf8'});
-            }
+           
 
             let gains = {};
             try{
@@ -77,6 +74,12 @@ function init_portfolio(){
                 console.log(err);
             }
             console.log(calculate_profit(gains));
+
+            if(write_to_cache){
+                console.log('setting data?', portfolio.results.total);
+                portfolio.exchange_rates = exchange_rates;
+                fs.writeFileSync(cache_file, JSON.stringify(portfolio) , {encodeing: 'utf8'});
+            }
             // console.log( portfolio.results );
         }).catch(error => {
             console.error('error here',error.message)
@@ -106,7 +109,7 @@ function calculate_profit(gains){
     profit.sort( (a,b) => {
         return b[1] - a[1];
     });
-    
+    portfolio.results.total = total_value;
     profit.push(['TOTAL', format_number(total_value), format_number(total_profit)] );
     return profit;
 }
