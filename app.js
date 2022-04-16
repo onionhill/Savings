@@ -76,7 +76,6 @@ function init_portfolio(){
             console.log(calculate_profit(gains));
 
             if(write_to_cache){
-                console.log('setting data?', portfolio.results.total);
                 portfolio.exchange_rates = exchange_rates;
                 fs.writeFileSync(cache_file, JSON.stringify(portfolio) , {encodeing: 'utf8'});
             }
