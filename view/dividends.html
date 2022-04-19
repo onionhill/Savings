@@ -32,6 +32,35 @@
                     <div id="div_chart"></div>
 
                 <br><br>
+                <div id="dividends_calender_div">
+                    <div id="year_selector">
+                        <-   2022 ->
+                    </div>
+                    <table class="table " id="dividends_calender">
+                        <thead>
+                            <tr>
+                                <th>Ticket</th>
+                                <th>Jan</th>
+                                <th>Feb</th>  
+                                <th>Mars</th>  
+                                <th>Apr</th>    
+                                <th>Mai</th>    
+                                <th>Juni</th>    
+                                <th>Juli</th>    
+                                <th>Aug</th>    
+                                <th>Sept</th>    
+                                <th>Okt</th>   
+                                <th>Nov</th>   
+                                <th>Des</th>  
+                                <th>Sum</th>       
+                            </tr>
+                        </thead>
+                        <tbody id="dividend_body">
+
+                        </tbody>
+                    </table>
+
+                </div>
                 <div id="dividends_overview"></div>
             </div>
         </main>
@@ -40,6 +69,7 @@
     <script src="/public/js/portfolio_view_data.js"></script>    
 
 <script>
+    const months =  ['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Desember'];
     $(async function(){
         initPortFolio();
    
@@ -69,34 +99,119 @@
         let dividend_array = [];
         Object.keys(dividends).forEach((ticket) => {
             let dividend = dividends[ticket].map(object => {
-                return {...object, ticket: ticket};
+                return {...object, ticket: ticket, name: get_name(ticket)};
             });
             dividend_array.push(...dividend);
         });
 
+     
+
+        const sorted_elements_by_name = dividend_array.sort((a,b) => {            if(a.name < b.name) { return -1; }
+            if(a.name > b.name) { return 1; }
+            return 0;
+        });
+
+        const filter_divideds = sorted_elements_by_name.filter( (dividend) => {
+            let date = new Date(dividend.DATE);
+            return date.getFullYear() === 2022;
+        });
+
+
+        filter_divideds.forEach( (dividend) => {
+            if(!$(`#divided_${dividend.ticket}`).length ){
+                $('#dividend_body').append(create_new_row(dividend) );
+            }
+            const tr = $(`#divided_${dividend.ticket}`);
+           
+            //Find the correct cell and add the divided to it
+            const date = new Date(dividend.DATE);
+            const td = $(`#${dividend.ticket}_month_${date.getMonth()}`);
+
+            let sum = parseFloat(td.html() ) || 0;
+            sum = sum + convert_currency(dividend.CURRENCY, dividend.VALUE);
+
+            td.html(format_number(sum, false));
+        });
+
+        // Add the sum column
+        $('#dividend_body > tr').each( (i, row) => {
+            let row_sum = 0;
+            $(row).find('td').not(':first').not(':last').each( (j, cell) => {
+                let sum = $(cell).text() || 0;
+                row_sum += (parseFloat($(cell).text().replace(/,/, '.') ) || 0 );
+            });
+            $(row).find('.row_sum').html(format_number(row_sum, false));
+
+        });
+
+
+
+        // Add the sum row and start adding everything up
+        const sum_row = $('<tr id="sum_row"></tr>');
+        $('#dividend_body').append(sum_row);
+        sum_row.append('<td>&nbsp;</td>');
+
+
+
+        let total_sum = 0;
+        for(let i = 0; i < 12; i++){
+            let month_sum = 0;
+            $.each( $(`[id$="month_${i}"]`), (j,item) => {
+                month_sum += (parseFloat($(item).text() ) || 0 );
+            });
+            total_sum += month_sum;
+            console.log(month_sum);
+            sum_row.append(`<td>${month_sum}</td>`);
+        }
+        sum_row.append(`<td>${total_sum}</td>`);
+
+        console.log(filter_divideds);
+
+
         const sorted_elements = dividend_array.sort((a,b) => {
             return new Date(b.DATE) - new Date(a.DATE)
         });
-
-        const dividends_table_body = $('<tbody>');
-        let total_dividend = 0;
-        sorted_elements.forEach( (item) => {
-            total_dividend += convert_currency(item.CURRENCY, item.VALUE);
-            const tr = $('<tr>').append(
-                `<td>${convert_date(item.DATE)}</td>`,  //Dato
-                $('<td>').append(item.ticket ), //Ticket
-                $('<td>').append(format_number( convert_currency(item.CURRENCY, item.VALUE), false ) ), //Verdi
-            );
+        // const dividends_table_body = $('<tbody>');
+        // let total_dividend = 0;
+        // sorted_elements.forEach( (item) => {
+        //     total_dividend += convert_currency(item.CURRENCY, item.VALUE);
+        //     const tr = $('<tr>').append(
+        //         `<td>${convert_date(item.DATE)}</td>`,  //Dato
+        //         $('<td>').append(item.ticket ), //Ticket
+        //         $('<td>').append(format_number( convert_currency(item.CURRENCY, item.VALUE), false ) ), //Verdi
+        //     );
         
-            dividends_table_body.append(tr);
-        });
-        dividends_table_body.prepend(`<tr><td>TOTALT</td><td>&nbsp</td><td>${total_dividend}</td></tr>`);
-        dividend_table.append(dividends_table_body);
+        //     dividends_table_body.append(tr);
+        // });
+        // dividends_table_body.prepend(`<tr><td>TOTALT</td><td>&nbsp</td><td>${total_dividend}</td></tr>`);
+        // dividend_table.append(dividends_table_body);
 
-        $('#dividends_overview').append(dividend_table);
+        // $('#dividends_overview').append(dividend_table);
 
         create_dividends_chart(sorted_elements);
     }
+
+
+    function create_new_row(divided){
+        let tr = $(`<tr id="divided_${divided.ticket}"></tr>`);
+
+        tr.append(`<td>${divided.ticket}</td>`);
+
+
+
+        let counter = 0;
+        months.forEach( (month) => {
+            tr.append($(`<td id="${divided.ticket}_month_${counter}"></td>`));
+            counter++;
+        });
+
+        tr.append(`<td class="row_sum" id="divided_${divided.ticket}_sum">0</td>`);
+
+        return tr;
+
+
+    }
+   
 
     function create_dividends_chart(elements){
         // Year -> [0
@@ -131,7 +246,6 @@
                 }
             }
         });
-        console.log(month_data);
     }
     </script>
 </html>

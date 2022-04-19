@@ -12,6 +12,7 @@ let dividends = {};
 let flatten_assets = [];
 
 
+
 function initPortFolio(){
     if(window.localStorage.getItem('portfolioData') !== null ){
         portfolioData = JSON.parse(window.localStorage.getItem('portfolioData'));
@@ -450,4 +451,16 @@ function calculate_total_divididens_payed(){
         
     });
     return total_dividens;
+}
+
+function get_name(input){
+    let name = input;
+    Object.keys(assets).forEach((type) => {
+        Object.keys(assets[type] ).forEach((ticket) => {
+            if(input === ticket){
+                name = assets[type][ticket].NAME;
+            }
+        });
+    });
+    return name;
 }
