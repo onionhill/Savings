@@ -1,29 +1,6 @@
 const portfolio = {
     assets:{
         'stocks':{
-            'EQNR':{
-                'PROVIDER':'nordnet',
-                'NAME': 'Equinor',
-                'ORDERS':[
-                    {
-                        'PRICE': 176.84,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 45,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-
-                    },
-                    {
-                        'PRICE': 310,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 45,
-                        'DATE':'2022-03-03',
-                        'BUY': false
-
-                    }
-                ],
-                'METHOD': 'scrapper'
-            },
             'DNB':{
                 'PROVIDER':'nordnet',
                 'NAME': 'DNB',
@@ -200,106 +177,6 @@ const portfolio = {
                 'METHOD': 'scrapper'
 
             },
-            'B3':{
-                'PROVIDER':'nordnet',
-                'NAME': 'B3 Consulting Group AB',
-                'ORDERS':[
-                    {
-                        'PRICE': 68.93,
-                        'CURRENCY': 'SEK',
-                        'UNITS': 15,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 116,
-                        'CURRENCY': 'SEK',
-                        'UNITS': 15,
-                        'DATE':'2022-03-30',
-                        'BUY': false
-                    }
-                ],
-                'METHOD': 'scrapper'
-
-            },
-            'HMONY':{
-                'PROVIDER':'nordnet',
-                'NAME': 'HarmonyChain AS',
-                'ORDERS':[
-                    {
-                        'PRICE': 1.36,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 4978,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 0.88,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 4978,
-                        'DATE':'2022-04-13',
-                        'BUY': false
-                    }
-                ],
-                'METHOD': 'scrapper'
-
-            },
-            'JPM':{
-                'PROVIDER':'etoro',
-                'NAME': 'JP Morgan',
-                'ORDERS':[
-                    {
-                        'PRICE': 156.23,
-                        'CURRENCY': 'USD',
-                        'UNITS': 1,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'AGNC':{
-                'PROVIDER':'etoro',
-                'NAME': 'AGNC Investment Corp',
-                'ORDERS':[
-                    {
-                        'PRICE': 12.08,
-                        'CURRENCY': 'USD',
-                        'UNITS': 12.08,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'PSEC':{
-                'PROVIDER':'etoro',
-                'NAME': 'Prospect Capital Corp',
-                'ORDERS':[
-                    {
-                        'PRICE': 8.92,
-                        'CURRENCY': 'USD',
-                        'UNITS': 28.13,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'PYPL':{
-                'PROVIDER':'etoro',
-                'NAME': 'PayPal',
-                'ORDERS':[
-                    {
-                        'PRICE':191.63,
-                        'CURRENCY': 'USD',
-                        'UNITS': 0.52,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
             'IEP':{
                 'PROVIDER':'etoro',
                 'NAME': 'Icahn Enterprises',
@@ -321,84 +198,6 @@ const portfolio = {
                 ],
                 'METHOD': 'API'
             },
-            'VICI':{
-                'PROVIDER':'etoro',
-                'NAME': 'VICI Properties Inc',
-                'ORDERS':[
-                    {
-                        'PRICE':28.07,
-                        'CURRENCY': 'USD',
-                        'UNITS': 5.34,
-                        'DATE':'2022-01-20',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'T':{
-                'PROVIDER':'etoro',
-                'NAME': 'AT&T',
-                'ORDERS':[
-                    {
-                        'PRICE':23.21,
-                        'CURRENCY': 'USD',
-                        'UNITS': 4.30,
-                        'DATE':'2022-03-21',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'WBD':{
-                'PROVIDER':'etoro',
-                'NAME': 'Warner Bros Discovery INC',
-                'ORDERS':[
-                    {
-                        'PRICE': 24.47,
-                        'CURRENCY': 'USD',
-                        'UNITS': 1.03,
-                        'DATE':'2022-04-13',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'NIO':{
-                'PROVIDER':'etoro',
-                'NAME': 'Nio',
-                'ORDERS':[
-                    {
-                        'PRICE':18.80,
-                        'CURRENCY': 'USD',
-                        'UNITS': 5.31,
-                        'DATE':'2022-03-21',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'POL': {
-                'PROVIDER':'nordnet',
-                'NAME': 'PolarisMedia',
-                'ORDERS':[
-                    {
-                        'PRICE':72.05,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 208,
-                        'DATE':'2022-03-23',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE':89.80,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 208,
-                        'DATE':'2022-03-24',
-                        'BUY': false
-                    }
-                ],
-                'METHOD': 'scrapper'
-
-            },
             'SCHB': {
                 'PROVIDER':'nordnet',
                 'NAME': 'Schibsted',
@@ -416,34 +215,6 @@ const portfolio = {
 
         },
         'etf':{
-            'VOO':{
-                'PROVIDER': 'etoro',
-                'NAME': 'Vanguard S&P 500 ETF',
-                'ORDERS':[
-                    {
-                        'PRICE': 401.41,
-                        'CURRENCY': 'USD',
-                        'UNITS': 0.52,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'VTI':{
-                'PROVIDER': 'etoro',
-                'NAME': 'Vanguard S&P 500 ETF',
-                'ORDERS':[
-                    {
-                        'PRICE': 223.81,
-                        'CURRENCY': 'USD',
-                        'UNITS': 0.67,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
             'QYLD':{
                 'PROVIDER': 'etoro',
                 'NAME': 'Global X Nasdaq 100 Covered Call ETF',
@@ -502,55 +273,6 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 21,
                         'DATE':'2022-04-13',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'SCHD':{
-                'PROVIDER': 'etoro',
-                'NAME': 'Schwab US Dividend Equity ETF',
-                'ORDERS':[
-                    {
-                        'PRICE': 79.87,
-                        'CURRENCY': 'USD',
-                        'UNITS':1.25,
-                        'DATE':'2022-01-20',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 78.47,
-                        'CURRENCY': 'USD',
-                        'UNITS':1.52,
-                        'DATE':'2022-01-27',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'SDIV':{
-                'PROVIDER': 'etoro',
-                'NAME': 'Global X SuperDividend ETF',
-                'ORDERS':[
-                    {
-                        'PRICE': 11.30,
-                        'CURRENCY': 'USD',
-                        'UNITS': 4.42,
-                        'DATE':'2022-03-29',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
-            'SPHD':{
-                'PROVIDER': 'etoro',
-                'NAME': 'Invesco S&P 500 High dividend Low Volatility ETF',
-                'ORDERS':[
-                    {
-                        'PRICE': 47.41,
-                        'CURRENCY': 'USD',
-                        'UNITS': 1.05,
-                        'DATE':'2022-03-29',
                         'BUY': true
                     }
                 ],

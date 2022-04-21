@@ -41,7 +41,6 @@ const get_stock_price_api = (ticket) => {
         if(response.data['Error Message'] ){
             return backup_stock_price[ticket];
         }else{
-
             var last_data_point_date = response.data['Meta Data']['3. Last Refreshed'];
             if(last_data_point_date.length > 10){
                 last_data_point_date = last_data_point_date.substring(0,10);

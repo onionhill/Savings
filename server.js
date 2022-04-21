@@ -1,8 +1,8 @@
 const express = require('express');
 const app = new express();
-const portfolio = require('./src/portfolio');
+const portfolio = require('./src/data/portfolio');
 const getHistoryData = require('./src/historydata');
-const dividends = require('./src/dividends');
+const dividends = require('./src/data/dividends');
 
 
 app.get('/', function(request, response){

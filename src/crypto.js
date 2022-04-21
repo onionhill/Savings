@@ -15,11 +15,6 @@ const get_crypto_coin_price = (coin, currency) => {
         json: true,
         headers: {'User-Agent': 'request'}
     }).then( (response) => {
-
-        if(coin === 'DOT'){
-            console.log(response);
-        }
-
         if(response.data['Error Message'] ){
             return backup_crypto_price[coin];
         }else{
