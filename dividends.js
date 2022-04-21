@@ -63,13 +63,20 @@ const dividens = {
         { 'DATE': '2022-02-01', 'VALUE': 1.67, 'CURRENCY': 'USD' },
         { 'DATE': '2022-03-02', 'VALUE': 2.38, 'CURRENCY': 'USD' },
         { 'DATE': '2022-03-22', 'VALUE': 1.39, 'CURRENCY': 'USD' },
-        { 'DATE': '2022-03-29', 'VALUE': 2.46, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-03-29', 'VALUE': 2.46, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-04-19', 'VALUE': 1.42, 'CURRENCY': 'USD' }
     ],
     'SCHD': [ 
         { 'DATE': '2022-03-28', 'VALUE': 1, 'CURRENCY': 'USD' }
     ],
     'SDIV': [ 
         { 'DATE': '2022-04-06', 'VALUE': 0.31, 'CURRENCY': 'USD' }
+    ],
+    'SPHD': [ 
+        { 'DATE': '2022-04-19', 'VALUE': 0.11, 'CURRENCY': 'USD' }
+    ],
+    'T': [ 
+        { 'DATE': '2022-04-14', 'VALUE': 0.20, 'CURRENCY': 'USD' }
     ]
 }
 

@@ -786,6 +786,13 @@ const portfolio = {
                         'UNITS': 0.050,
                         'DATE':'2022-03-21',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 1,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.023,
+                        'DATE':'2022-03-21',
+                        'BUY': true
                     }
                 ]
             },
@@ -854,6 +861,27 @@ const portfolio = {
                         'UNITS': 5.51,
                         'DATE':'2022-02-03',
                         'BUY': true
+                    }, 
+                    {
+                        'PRICE': 0.98,
+                        'CURRENCY': 'USD',
+                        'UNITS': 22.03,
+                        'DATE':'2022-04-20',
+                        'BUY': true
+                    }, 
+                    {
+                        'PRICE': 0.98,
+                        'CURRENCY': 'USD',
+                        'UNITS': 14.10,
+                        'DATE':'2022-04-20',
+                        'BUY': true
+                    }, 
+                    {
+                        'PRICE': 0.01,
+                        'CURRENCY': 'USD',
+                        'UNITS': 1.01,
+                        'DATE':'2022-04-20',
+                        'BUY': true
                     }
                 ]
             },
@@ -912,32 +940,6 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 0.3096,
                         'DATE':'2022-02-19',
-                        'BUY': true
-                    }
-                ]
-            },
-            'QSP':{
-                'PROVIDER': 'Coinbase',
-                'NAME': 'Quantstamp',
-                'ORDERS':[
-                    {
-                        'PRICE': 0.0834,
-                        'CURRENCY': 'USD',
-                        'UNITS': 310.14,
-                        'DATE':'2022-03-24',
-                        'BUY': true
-                    }
-                ]
-            },
-            'CRPT':{
-                'PROVIDER': 'Coinbase',
-                'NAME': 'Crypterium',
-                'ORDERS':[
-                    {
-                        'PRICE': 0.81,
-                        'CURRENCY': 'USD',
-                        'UNITS': 31.74,
-                        'DATE':'2022-03-24',
                         'BUY': true
                     }
                 ]
