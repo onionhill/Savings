@@ -684,6 +684,13 @@ const portfolio = {
                         'UNITS': 6.54,
                         'DATE':'2022-03-21',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 8.41,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 5.92,
+                        'DATE':'2022-04-21',
+                        'BUY': true
                     }
                 ]
             },
@@ -717,6 +724,13 @@ const portfolio = {
                         'CURRENCY': 'NOK',
                         'UNITS': 0.001219,
                         'DATE':'2022-03-21',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 369000,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.001079,
+                        'DATE':'2022-04-21',
                         'BUY': true
                     }
                 ]
@@ -759,6 +773,13 @@ const portfolio = {
                         'UNITS': 0.01533,
                         'DATE':'2022-03-21',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 27415,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.0145,
+                        'DATE':'2022-04-21',
+                        'BUY': true
                     }
                 ]
             },
@@ -793,6 +814,13 @@ const portfolio = {
                         'UNITS': 0.023,
                         'DATE':'2022-03-21',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 982,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.506,
+                        'DATE':'2022-04-21',
+                        'BUY': true
                     }
                 ]
             },
@@ -819,6 +847,13 @@ const portfolio = {
                         'CURRENCY': 'NOK',
                         'UNITS': 6.955,
                         'DATE':'2022-03-21',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 6.59,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 7.55,
+                        'DATE':'2022-04-21',
                         'BUY': true
                     }
                 ]
@@ -943,7 +978,20 @@ const portfolio = {
                         'BUY': true
                     }
                 ]
-            }
+            },
+            'DOT':{
+                'PROVIDER': 'Firi',
+                'NAME': 'Polkadot',
+                'ORDERS':[
+                    {
+                        'PRICE': 169,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 0.292,
+                        'DATE':'2022-04-21',
+                        'BUY': true
+                    }
+                ]
+            },
         }
     },
     results:{},
