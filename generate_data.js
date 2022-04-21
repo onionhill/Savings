@@ -1,13 +1,13 @@
 const fs = require('fs');
-let portfolio = require('./portfolio');
+let portfolio = require('./src/portfolio');
 
 let assets = portfolio.assets;
 
-const {get_stock_price_url, get_stock_price_api} = require('./stocks');
-const get_crypto_coin_price = require('./crypto');
+const {get_stock_price_url, get_stock_price_api} = require('./src/stocks');
+const get_crypto_coin_price = require('./src/crypto');
 const write_to_cache = true;
 const axios = require('axios');
-const dividends = require('./dividends');
+const dividends = require('./src/dividends');
 
 let exchange_rates = {};
 
@@ -151,7 +151,7 @@ function update_portfolio_value(){
 
 function get_crypto_promise(coin){
     const crypto = get_crypto(coin);
-    if(crypto.current_value ){
+    if(crypto.current_value && coin !== 'DOT'){
         return Promise.resolve(coin);
 
     }

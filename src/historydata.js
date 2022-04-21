@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const directoryPath = path.join(__dirname, 'historical_data');
+const directoryPath = path.join(__dirname, '../historical_data');
 
 
 const getHistoryData = () => {
