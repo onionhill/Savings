@@ -13,6 +13,7 @@
   },
   "scripts": {
     "server": "nodemon server.js",
+    "generate": "node generate_data.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
