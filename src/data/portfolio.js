@@ -377,6 +377,13 @@ const portfolio = {
                         'UNITS': 1.234,
                         'DATE':'2022-02-22',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 277.84,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 1.22,
+                        'DATE':'2022-04-22',
+                        'BUY': true
                     }
                 ],
             }
