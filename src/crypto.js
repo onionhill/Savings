@@ -22,6 +22,7 @@ const get_crypto_coin_price = (coin, currency) => {
 
         }
     });
+    
 
 }
 
