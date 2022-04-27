@@ -117,6 +117,20 @@ const closed_posisions = {
         'RESULT': 2.21,
         'CURRENCY': 'USD',
         'DATE': '2022-04-21'
+    },
+    'QYLD':{
+        'TYPE':'etf',
+        'NAME': 'Global X Nasdaq 100 Covered Call ETF',
+        'RESULT': -28.67,
+        'CURRENCY': 'USD',
+        'DATE': '2022-04-26'
+    },
+    'Landkreditt Utbytte A':{
+        'PROVIDER': 'fond',
+        'TYPE': 'Landkreditt Utbytte A',
+        'RESULT': -24,
+        'CURRENCY': 'NOK',
+        'DATE': '2022-04-26'
     }
 }
 

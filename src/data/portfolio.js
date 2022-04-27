@@ -215,55 +215,6 @@ const portfolio = {
 
         },
         'etf':{
-            'QYLD':{
-                'PROVIDER': 'etoro',
-                'NAME': 'Global X Nasdaq 100 Covered Call ETF',
-                'ORDERS':[
-                    {
-                        'PRICE': 22.48,
-                        'CURRENCY': 'USD',
-                        'UNITS':7.11,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 21.39,
-                        'CURRENCY': 'USD',
-                        'UNITS':4.45,
-                        'DATE':'2022-01-20',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 20.02,
-                        'CURRENCY': 'USD',
-                        'UNITS':4.99,
-                        'DATE':'2022-01-28',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 20.20,
-                        'CURRENCY': 'USD',
-                        'UNITS':4.55,
-                        'DATE':'2022-03-03',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 20.51,
-                        'CURRENCY': 'USD',
-                        'UNITS':4.87,
-                        'DATE':'2022-03-21',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 21.00,
-                        'CURRENCY': 'USD',
-                        'UNITS': 0.47,
-                        'DATE':'2022-04-13',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
             'RYLD':{
                 'PROVIDER': 'nordnet',
                 'NAME': 'Global X Russell 2000 Covered Call ETF',
@@ -295,7 +246,14 @@ const portfolio = {
                         'PRICE': 103.05,
                         'CURRENCY': 'NOK',
                         'UNITS': 4.85,
-                        'DATE':'2022-01-01',
+                        'DATE':'2022-02-23',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 103.64,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 4.82,
+                        'DATE':'2022-04-25',
                         'BUY': true
                     }
                 ],
@@ -316,6 +274,13 @@ const portfolio = {
                         'CURRENCY': 'NOK',
                         'UNITS': 2.10,
                         'DATE':'2022-02-23',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 237.89,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 2.10,
+                        'DATE':'2022-04-25',
                         'BUY': true
                     }
                 ],
@@ -370,33 +335,6 @@ const portfolio = {
                         'CURRENCY': 'NOK',
                         'UNITS': 3.41,
                         'DATE':'2022-04-25',
-                        'BUY': true
-                    }
-                ],
-            },
-            'Landkreditt Utbytte A':{
-                'PROVIDER': 'nordnet',
-                'NAME': 'Landkreditt Utbytte A',
-                'ORDERS':[
-                    {
-                        'PRICE': 269.73,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 5.0421,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 275.53,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 1.234,
-                        'DATE':'2022-02-22',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 277.84,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 1.22,
-                        'DATE':'2022-04-22',
                         'BUY': true
                     }
                 ],

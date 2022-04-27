@@ -64,7 +64,8 @@ const dividens = {
         { 'DATE': '2022-03-02', 'VALUE': 2.38, 'CURRENCY': 'USD' },
         { 'DATE': '2022-03-22', 'VALUE': 1.39, 'CURRENCY': 'USD' },
         { 'DATE': '2022-03-29', 'VALUE': 2.46, 'CURRENCY': 'USD' },
-        { 'DATE': '2022-04-19', 'VALUE': 1.42, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-04-19', 'VALUE': 1.42, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-04-27', 'VALUE': 2.41, 'CURRENCY': 'USD' }
     ],
     'SCHD': [ 
         { 'DATE': '2022-03-28', 'VALUE': 1, 'CURRENCY': 'USD' }
@@ -77,6 +78,9 @@ const dividens = {
     ],
     'T': [ 
         { 'DATE': '2022-04-14', 'VALUE': 0.20, 'CURRENCY': 'USD' }
+    ],
+    'IEP': [    
+        { 'DATE': '2022-04-27', 'VALUE': 5.52, 'CURRENCY': 'USD' }
     ]
 }
 
