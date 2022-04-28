@@ -81,6 +81,9 @@ const dividens = {
     ],
     'IEP': [    
         { 'DATE': '2022-04-27', 'VALUE': 5.52, 'CURRENCY': 'USD' }
+    ],
+    'RYLD': [    
+        { 'DATE': '2022-04-27', 'VALUE': 38.77, 'CURRENCY': 'NOK' }
     ]
 }
 

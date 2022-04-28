@@ -118,6 +118,13 @@ const closed_posisions = {
         'CURRENCY': 'USD',
         'DATE': '2022-04-21'
     },
+    'IEP':{
+        'TYPE':'Stock',
+        'NAME': 'Icahn Enterprises LP Common Stock NASDAQ: IEP',
+        'RESULT': -4.25,
+        'CURRENCY': 'USD',
+        'DATE': '2022-04-28'
+    },
     'QYLD':{
         'TYPE':'etf',
         'NAME': 'Global X Nasdaq 100 Covered Call ETF',

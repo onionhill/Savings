@@ -177,27 +177,6 @@ const portfolio = {
                 'METHOD': 'scrapper'
 
             },
-            'IEP':{
-                'PROVIDER':'etoro',
-                'NAME': 'Icahn Enterprises',
-                'ORDERS':[
-                    {
-                        'PRICE':54.42,
-                        'CURRENCY': 'USD',
-                        'UNITS': 2.48,
-                        'DATE':'2022-01-19',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE':52.64,
-                        'CURRENCY': 'USD',
-                        'UNITS': 1.89,
-                        'DATE':'2022-01-28',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'API'
-            },
             'SCHB': {
                 'PROVIDER':'nordnet',
                 'NAME': 'Schibsted',
@@ -207,6 +186,20 @@ const portfolio = {
                         'CURRENCY': 'NOK',
                         'UNITS': 30,
                         'DATE':'2022-03-28',
+                        'BUY': true
+                    },
+                ],
+                'METHOD': 'scrapper'
+            },
+            'IVR': {
+                'PROVIDER':'nordnet',
+                'NAME': 'Schibsted',
+                'ORDERS':[
+                    {
+                        'PRICE':1.76,
+                        'CURRENCY': 'USD',
+                        'UNITS': 300,
+                        'DATE':'2022-04-28',
                         'BUY': true
                     },
                 ],
@@ -611,6 +604,12 @@ const portfolio = {
                         'UNITS': 156,
                         'DATE':'2022-01-01',
                         'BUY': true
+                    },{
+                        'PRICE': 0.001,
+                        'CURRENCY': 'USD',
+                        'UNITS': 5.69,
+                        'DATE':'2022-04-28',
+                        'BUY': true
                     }
                 ]
             },
@@ -623,6 +622,13 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 10064182,
                         'DATE':'2022-01-01',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 0.00000001,
+                        'CURRENCY': 'USD',
+                        'UNITS': 49631,
+                        'DATE':'2022-04-28',
                         'BUY': true
                     }
                 ]
@@ -656,6 +662,13 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 0.3096,
                         'DATE':'2022-02-19',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 0.1,
+                        'CURRENCY': 'USD',
+                        'UNITS': 0.630,
+                        'DATE':'2022-04-28',
                         'BUY': true
                     }
                 ]

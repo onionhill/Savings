@@ -51,6 +51,10 @@ const ticket_data = {
         'url': 'https://www.nordnet.no/market/stocks/16408915-schibsted-b',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
+    'IVR':{
+        'url': 'https://www.nordnet.no/market/stocks/16121755-invesco-mortgage-capital',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
     'Nordnet Indeksfond Global':{
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F000015CV5',
         'selector': '$(".line.text").first()',
@@ -70,7 +74,8 @@ const ticket_data = {
     'OD-AKSJD':{
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F0000170KP',
         'selector': '$(".line.text").first()',
-    }
+    },
+    
 
 }
 
