@@ -44,16 +44,16 @@
                         <div>
                             Starting value 01.01.2022: <span id="start_value"></span>
                         </div>
-                        <div>
+                        <div class="temp_hide">
                             Kjøp: <span id="deposit_value"></span>
                         </div>
-                        <div>
+                        <div class="temp_hide">
                             Utbytte: <span id="dividend_value"></span> 
                         </div>
-                        <div>
+                        <div class="temp_hide">
                             Salg: <span id="sales_value"></span> 
                         </div>
-                        <div>
+                        <div class="temp_hide">
                             Result: <span id="result_value"></span> / <span id="result_value_p"></span>
                         </div>
                     </div>
@@ -185,6 +185,10 @@ $(function(){
             float:right;
             font-size: 20px;
         } */
+
+        .temp_hide{
+            display: none;
+        }
 
         .c3-axis-x .tick {
    display: none;

@@ -3,6 +3,7 @@ const app = new express();
 const portfolio = require('./src/data/portfolio');
 const getHistoryData = require('./src/historydata');
 const dividends = require('./src/data/dividends');
+const closed = require('./src/data/closed');
 
 
 app.get('/', function(request, response){
@@ -18,7 +19,8 @@ app.get('/PortfolioData', function(request, response){
     response.send({
         portfolio: portfolio,
         dividends: dividends,
-        history: getHistoryData()
+        history: getHistoryData(),
+        closed: closed
     } );
 });
 

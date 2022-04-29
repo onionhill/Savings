@@ -7,7 +7,7 @@ let yesterdays_item;
 let type_values = {};
 let assets_clean = {};
 let dividends = {};
-
+let closed_posisions = {};
 
 let flatten_assets = [];
 
@@ -19,6 +19,7 @@ function initPortFolio(){
         assets = portfolioData.portfolio.assets;
         dividends = portfolioData.dividends;
         history = portfolioData.history;
+        closed_posisions = portfolioData.closed;
         todays_item = history[get_todays_date()];
 
 
@@ -36,6 +37,14 @@ function initPortFolio(){
             history = portfolioData.history;
             dividends = portfolioData.dividends;
             todays_item = history[get_todays_date()];
+            closed_posisions = portfolioData.closed;
+
+            let sum_sold = 0;
+            Object.keys(closed_posisions).forEach((ticket) => {
+                sum_sold += convert_currency( closed_posisions[ticket].CURRENCY, closed_posisions[ticket].SELL );
+            });
+
+            console.log('test2', sum_sold);
 
             if(typeof create_dividends_overview === 'function'){
                 create_dividends_overview();
@@ -45,7 +54,6 @@ function initPortFolio(){
             }
         });
     }
-   
 }
 
 function getDateElement(datestring){
@@ -86,7 +94,6 @@ function initValues(){
         Object.keys(assets).forEach((type) => {
             Object.keys(assets[type] ).forEach((ticket) => {
                 const asset = todays_item.assets[type][ticket];
-                console.log('ticket',ticket);
                 total_value+= asset.current_value;
             });
         });
@@ -338,7 +345,6 @@ function drawCurrentValue(){
     }).sort();
 
     dateformat.unshift('x');
-    console.log('stuff here?', values, dateformat);
     var chart = c3.generate({
         bindto: '#current_value_chart',
         data: {

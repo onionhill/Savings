@@ -193,12 +193,40 @@ const portfolio = {
             },
             'IVR': {
                 'PROVIDER':'nordnet',
-                'NAME': 'Schibsted',
+                'NAME': 'INVESCO MORTGAGE CAPITAL',
                 'ORDERS':[
                     {
                         'PRICE':1.76,
                         'CURRENCY': 'USD',
                         'UNITS': 300,
+                        'DATE':'2022-04-28',
+                        'BUY': true
+                    },
+                ],
+                'METHOD': 'scrapper'
+            },
+            'PSEC': {
+                'PROVIDER':'nordnet',
+                'NAME': 'Prospect Capital Corporation',
+                'ORDERS':[
+                    {
+                        'PRICE':7.90,
+                        'CURRENCY': 'USD',
+                        'UNITS': 40,
+                        'DATE':'2022-04-28',
+                        'BUY': true
+                    },
+                ],
+                'METHOD': 'scrapper'
+            },
+            'AGNC': {
+                'PROVIDER':'nordnet',
+                'NAME': 'AGNC Investment Corp',
+                'ORDERS':[
+                    {
+                        'PRICE':11.56,
+                        'CURRENCY': 'USD',
+                        'UNITS': 24,
                         'DATE':'2022-04-28',
                         'BUY': true
                     },
@@ -220,7 +248,21 @@ const portfolio = {
                         'BUY': true
                     }
                 ],
-                'METHOD': 'API'
+                'METHOD': 'scrapper'
+            },
+            'JEPI':{
+                'PROVIDER': 'nordnet',
+                'NAME': 'JPMorgan Equity Premium Income ETF',
+                'ORDERS':[
+                    {
+                        'PRICE':  60.08,
+                        'CURRENCY': 'USD',
+                        'UNITS': 16,
+                        'DATE':'2022-04-28',
+                        'BUY': true
+                    }
+                ],
+                'METHOD': 'scrapper'
             }
         },
         'fonds':{
@@ -273,60 +315,6 @@ const portfolio = {
                         'PRICE': 237.89,
                         'CURRENCY': 'NOK',
                         'UNITS': 2.10,
-                        'DATE':'2022-04-25',
-                        'BUY': true
-                    }
-                ],
-            },
-            'Nordnet Indeksfond Global':{
-                'PROVIDER': 'nordnet',
-                'NAME': 'Nordnet Indeksfond Global',
-                'ORDERS':[
-                    {
-                        'PRICE': 129.08,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 12.87,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 120.08,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 2.75,
-                        'DATE':'2022-02-23',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 120.37,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 2.74,
-                        'DATE':'2022-04-25',
-                        'BUY': true
-                    }
-                ],
-            },
-            'Nordnet Indeksfond Emerging Market':{
-                'PROVIDER': 'nordnet',
-                'NAME': 'Nordnet Indeksfond Emerging Market',
-                'ORDERS':[
-                    {
-                        'PRICE': 111.72,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 14.089,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 108.72,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 3.04,
-                        'DATE':'2022-02-23',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 96.597,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 3.41,
                         'DATE':'2022-04-25',
                         'BUY': true
                     }

@@ -55,17 +55,21 @@ const ticket_data = {
         'url': 'https://www.nordnet.no/market/stocks/16121755-invesco-mortgage-capital',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
-    'Nordnet Indeksfond Global':{
-        'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F000015CV5',
-        'selector': '$(".line.text").first()',
+    'PSEC':{
+        'url': 'https://www.nordnet.no/market/stocks/16119240-prospect-capital-corporation',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
-    'Nordnet Indeksfond Emerging Market':{
-        'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F000015CUX',
-        'selector': '$(".line.text").first()',
+    'AGNC':{
+        'url': 'https://www.nordnet.no/market/stocks/16118176-agnc-investment',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
-    'Landkreditt Utbytte A':{
-        'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F00000PLTL',
-        'selector': '$(".line.text").first()',
+    'RYLD':{
+        'url': 'https://www.nordnet.no/market/etfs/17037643-global-x-russell',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
+    'JEPI':{
+        'url': 'https://www.nordnet.no/market/etfs/17277718-jp-morgan-equity-premium',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
     'OD-ODUSD':{
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F00000XXR8',
@@ -75,8 +79,6 @@ const ticket_data = {
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F0000170KP',
         'selector': '$(".line.text").first()',
     },
-    
-
 }
 
 module.exports = ticket_data;
