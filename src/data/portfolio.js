@@ -263,6 +263,20 @@ const portfolio = {
                     }
                 ],
                 'METHOD': 'scrapper'
+            },
+            'SDIV':{
+                'PROVIDER': 'nordnet',
+                'NAME': 'Global X SuperDividend ETF',
+                'ORDERS':[
+                    {
+                        'PRICE': 10.78,
+                        'CURRENCY': 'USD',
+                        'UNITS': 20,
+                        'DATE':'2022-04-28',
+                        'BUY': true
+                    }
+                ],
+                'METHOD': 'scrapper'
             }
         },
         'fonds':{

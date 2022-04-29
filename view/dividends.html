@@ -127,7 +127,11 @@
             const date = new Date(dividend.DATE);
             const td = $(`#${dividend.ticket}_month_${date.getMonth()}`);
 
-            let sum = parseFloat(td.html() ) || 0;
+            let sum = parseFloat(td.text() ) || 0;
+
+            if(dividend.ticket === 'QYLD'){
+                console.log('check sum is', sum, td.text() );
+            }
             sum = sum + convert_currency(dividend.CURRENCY, dividend.VALUE);
 
             td.html(format_number(sum, false));
@@ -160,12 +164,9 @@
                 month_sum += (parseFloat($(item).text() ) || 0 );
             });
             total_sum += month_sum;
-            console.log(month_sum);
             sum_row.append(`<td>${month_sum}</td>`);
         }
         sum_row.append(`<td>${total_sum}</td>`);
-
-        console.log(filter_divideds);
 
 
         const sorted_elements = dividend_array.sort((a,b) => {
@@ -222,6 +223,9 @@
 
         elements.forEach( (item) => {
             const date = new Date(item.DATE);
+            if(date.getMonth() == 2){
+                console.log(item);
+            }
             month_data[date.getFullYear()][date.getMonth()] += convert_currency(item.CURRENCY, item.VALUE);
             month_data[date.getFullYear()][date.getMonth()] = Math.round(month_data[date.getFullYear()][date.getMonth()] * 100) / 100;
         });
