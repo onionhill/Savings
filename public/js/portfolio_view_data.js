@@ -100,6 +100,8 @@ function initValues(){
 
 
         $('#current_value').html( format_number(total_value, false ) );
+        $('#goal_value').html( format_number(total_value - 250000, false) );
+
         let changes = total_value - yesterdays_item.results.total;
 
         $('#today_change').html( format_number(changes) );
