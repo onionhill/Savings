@@ -71,7 +71,7 @@ const ticket_data = {
         'url': 'https://www.nordnet.no/market/etfs/17277718-jp-morgan-equity-premium',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
-    'JEPI':{
+    'SDIV':{
         'url': 'https://www.nordnet.no/market/etfs/16116734-global-x-super-dividend',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },

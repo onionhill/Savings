@@ -169,13 +169,24 @@ function get_etf_promise(ticket){
         return Promise.resolve(ticket);
     }
 
-    return get_stock_price_api(ticket).then( (value) => {
+    let etf_promise;
+    if(etf.METHOD === 'scrapper'){
+        etf_promise = get_stock_price_url(ticket);
+    }else{
+        etf_promise = get_stock_price_api(ticket);
+    }
+
+
+    return etf_promise.then( (value) => {
         etf.stock_price = value;
         get_value_asset(etf, ticket);
         return ticket
     }).catch( (err) => {
         console.log('error in get etf promise', err);
     });
+
+
+    
 }
 
 
