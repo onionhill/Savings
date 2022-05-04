@@ -75,6 +75,22 @@ const ticket_data = {
         'url': 'https://www.nordnet.no/market/etfs/16116734-global-x-super-dividend',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
+    'MO':{
+        'url': 'https://www.nordnet.no/market/stocks/16122125-altria-group',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
+    'SCCO':{
+        'url': 'https://www.nordnet.no/market/stocks/16122875-southern-copper-corporation',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
+    'IEP':{
+        'url': 'https://www.nordnet.no/market/stocks/16118835-icahn-enterprises-lp',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
+    'QYLD':{
+        'url': 'https://www.nordnet.no/market/etfs/16978678-global-x-nasdaq-100',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
     'OD-ODUSD':{
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F00000XXR8',
         'selector': '$(".line.text").first()',

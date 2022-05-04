@@ -32,7 +32,7 @@ const backup_stock_price = {
 
 const get_stock_price_api = (ticket) => {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticket}&apikey=I1G8TIKPFJ9UHGV0`;
-
+    console.log('this stock is runnin api', ticket);
     //This should only be in USD
     return axios.get(url,{
         json: true,

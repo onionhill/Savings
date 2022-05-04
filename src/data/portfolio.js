@@ -232,6 +232,48 @@ const portfolio = {
                     },
                 ],
                 'METHOD': 'scrapper'
+            },
+            'MO': {
+                'PROVIDER':'nordnet',
+                'NAME': 'AGNC Investment Corp',
+                'ORDERS':[
+                    {
+                        'PRICE':56.61,
+                        'CURRENCY': 'USD',
+                        'UNITS': 5,
+                        'DATE':'2022-04-31',
+                        'BUY': true
+                    },
+                ],
+                'METHOD': 'scrapper'
+            },
+            'IEP': {
+                'PROVIDER':'nordnet',
+                'NAME': 'Icahn Enterprises',
+                'ORDERS':[
+                    {
+                        'PRICE':53.86,
+                        'CURRENCY': 'USD',
+                        'UNITS': 6,
+                        'DATE':'2022-04-31',
+                        'BUY': true
+                    },
+                ],
+                'METHOD': 'scrapper'
+            },
+            'SCCO': {
+                'PROVIDER':'nordnet',
+                'NAME': 'Southern Copper Corporation',
+                'ORDERS':[
+                    {
+                        'PRICE':62.26,
+                        'CURRENCY': 'USD',
+                        'UNITS': 6,
+                        'DATE':'2022-04-31',
+                        'BUY': true
+                    },
+                ],
+                'METHOD': 'scrapper'
             }
 
         },
@@ -245,6 +287,20 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 21,
                         'DATE':'2022-04-13',
+                        'BUY': true
+                    }
+                ],
+                'METHOD': 'scrapper'
+            },
+            'QYLD':{
+                'PROVIDER': 'nordnet',
+                'NAME': 'Global X NASDAQ-100 Covered Call ETF',
+                'ORDERS':[
+                    {
+                        'PRICE': 19.49,
+                        'CURRENCY': 'USD',
+                        'UNITS': 30,
+                        'DATE':'2022-04-31',
                         'BUY': true
                     }
                 ],
@@ -307,69 +363,8 @@ const portfolio = {
                     }
                 ],
             },
-            'OD-ODUSD':{
-                'PROVIDER': 'SpareBank1',
-                'NAME': 'ODIN USA D',
-                'ORDERS':[
-                    {
-                        'PRICE': 237.77,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 37.64,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 237.39,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 2.10,
-                        'DATE':'2022-02-23',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 237.89,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 2.10,
-                        'DATE':'2022-04-25',
-                        'BUY': true
-                    }
-                ],
-            }
         },
         'crypto':{
-            'ADA':{
-                'PROVIDER': 'firi',
-                'NAME': 'Cardano',
-                'ORDERS':[
-                    {
-                        'PRICE': 11.59,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 12.56,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 9.14,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 5.44,
-                        'DATE':'2022-02-19',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 7.61,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 6.54,
-                        'DATE':'2022-03-21',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 8.41,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 5.92,
-                        'DATE':'2022-04-21',
-                        'BUY': true
-                    }
-                ]
-            },
             'BTC':{
                 'PROVIDER': 'firi',
                 'NAME': 'Bitcoin',
@@ -454,81 +449,6 @@ const portfolio = {
                         'PRICE': 27415,
                         'CURRENCY': 'NOK',
                         'UNITS': 0.0145,
-                        'DATE':'2022-04-21',
-                        'BUY': true
-                    }
-                ]
-            },
-            'LTC':{
-                'PROVIDER': 'firi',
-                'NAME': 'Litecoin',
-                'ORDERS':[
-                    {
-                        'PRICE': 1141,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 0.14,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 1060,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 0.046,
-                        'DATE':'2022-02-19',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 991,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 0.050,
-                        'DATE':'2022-03-21',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 1,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 0.023,
-                        'DATE':'2022-03-21',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 982,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 0.506,
-                        'DATE':'2022-04-21',
-                        'BUY': true
-                    }
-                ]
-            },
-            'XRP':{
-                'PROVIDER': 'firi',
-                'NAME': 'XRP',
-                'ORDERS':[
-                    {
-                        'PRICE': 7.28,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 22.23,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 7.20,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 6.916,
-                        'DATE':'2022-02-19',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 7.16,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 6.955,
-                        'DATE':'2022-03-21',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 6.59,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 7.55,
                         'DATE':'2022-04-21',
                         'BUY': true
                     }
@@ -635,19 +555,6 @@ const portfolio = {
                     }
                 ]
             },
-            'ELON':{
-                'PROVIDER': 'Crypto.com',
-                'NAME': 'Dogelon Mars',
-                'ORDERS':[
-                    {
-                        'PRICE': 0.000001573,
-                        'CURRENCY': 'USD',
-                        'UNITS': 10000000,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    }
-                ]
-            },
             'AXS':{
                 'PROVIDER': 'binance',
                 'NAME': 'Axie Infinity',
@@ -671,19 +578,6 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 0.630,
                         'DATE':'2022-04-28',
-                        'BUY': true
-                    }
-                ]
-            },
-            'DOT':{
-                'PROVIDER': 'Firi',
-                'NAME': 'Polkadot',
-                'ORDERS':[
-                    {
-                        'PRICE': 169,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 0.292,
-                        'DATE':'2022-04-21',
                         'BUY': true
                     }
                 ]
