@@ -349,35 +349,6 @@ const portfolio = {
                 'METHOD': 'scrapper'
             }
         },
-        'fonds':{
-            'OD-AKSJD':{
-                'PROVIDER': 'SpareBank1',
-                'NAME': 'ODIN Aksje D',
-                'ORDERS':[
-                    {
-                        'PRICE': 110.43,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 94.81,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 103.05,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 4.85,
-                        'DATE':'2022-02-23',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 103.64,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 4.82,
-                        'DATE':'2022-04-25',
-                        'BUY': true
-                    }
-                ],
-            },
-        },
         'crypto':{
             'BTC':{
                 'PROVIDER': 'firi',
