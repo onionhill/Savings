@@ -83,6 +83,10 @@ const ticket_data = {
         'url': 'https://www.nordnet.no/market/stocks/16122875-southern-copper-corporation',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
+    'KAHOT':{
+        'url': 'https://www.nordnet.no/market/stocks/16874165-kahoot-asa',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
     'IEP':{
         'url': 'https://www.nordnet.no/market/stocks/16118835-icahn-enterprises-lp',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'

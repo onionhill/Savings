@@ -274,6 +274,20 @@ const portfolio = {
                     },
                 ],
                 'METHOD': 'scrapper'
+            },
+            'KAHOT': {
+                'PROVIDER':'nordnet',
+                'NAME': 'Kahoot',
+                'ORDERS':[
+                    {
+                        'PRICE':23.04,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 27,
+                        'DATE':'2022-05-06',
+                        'BUY': true
+                    },
+                ],
+                'METHOD': 'scrapper'
             }
 
         },
@@ -513,6 +527,13 @@ const portfolio = {
                         'UNITS': 1.01,
                         'DATE':'2022-04-20',
                         'BUY': true
+                    }, 
+                    {
+                        'PRICE': 0.82,
+                        'CURRENCY': 'USD',
+                        'UNITS': 73.68,
+                        'DATE':'2022-05-05',
+                        'BUY': true
                     }
                 ]
             },
@@ -526,11 +547,19 @@ const portfolio = {
                         'UNITS': 156,
                         'DATE':'2022-01-01',
                         'BUY': true
-                    },{
+                    },
+                    {
                         'PRICE': 0.001,
                         'CURRENCY': 'USD',
                         'UNITS': 5.69,
                         'DATE':'2022-04-28',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 0.3144,
+                        'CURRENCY': 'USD',
+                        'UNITS': 150,
+                        'DATE':'2022-05-05',
                         'BUY': true
                     }
                 ]

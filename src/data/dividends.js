@@ -84,6 +84,9 @@ const dividens = {
     ],
     'RYLD': [    
         { 'DATE': '2022-04-27', 'VALUE': 38.77, 'CURRENCY': 'NOK' }
+    ],
+    'DNB': [    
+        { 'DATE': '2022-05-05', 'VALUE': 672.75, 'CURRENCY': 'NOK' }
     ]
 }
 
