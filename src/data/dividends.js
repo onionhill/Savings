@@ -19,6 +19,7 @@ const dividens = {
         { 'DATE': '2021-07-28', 'VALUE': 21.86, 'CURRENCY': 'NOK' },
         { 'DATE': '2021-11-12', 'VALUE': 69.82, 'CURRENCY': 'NOK' },
         { 'DATE': '2022-02-23', 'VALUE': 83.56, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-05-11', 'VALUE': 105.39, 'CURRENCY': 'NOK' },
     ],
     'MOWI':[
         { 'DATE': '2021-03-08', 'VALUE': 2.88, 'CURRENCY': 'NOK' },

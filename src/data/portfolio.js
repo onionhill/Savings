@@ -505,6 +505,27 @@ const portfolio = {
                         'UNITS': 73.68,
                         'DATE':'2022-05-05',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 0.58,
+                        'CURRENCY': 'USD',
+                        'UNITS': 138.95,
+                        'DATE':'2022-05-10',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 0.48,
+                        'CURRENCY': 'USD',
+                        'UNITS': 124.40,
+                        'DATE':'2022-05-11',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 0.41,
+                        'CURRENCY': 'USD',
+                        'UNITS': 185.60,
+                        'DATE':'2022-05-11',
+                        'BUY': true
                     }
                 ]
             },
@@ -531,6 +552,13 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 150,
                         'DATE':'2022-05-05',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 0.199,
+                        'CURRENCY': 'USD',
+                        'UNITS': 500,
+                        'DATE':'2022-05-11',
                         'BUY': true
                     }
                 ]
