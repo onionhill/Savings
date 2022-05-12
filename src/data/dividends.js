@@ -88,6 +88,9 @@ const dividens = {
     ],
     'DNB': [    
         { 'DATE': '2022-05-05', 'VALUE': 672.75, 'CURRENCY': 'NOK' }
+    ],
+    'JEPI': [    
+        { 'DATE': '2022-05-06', 'VALUE': 60.81, 'CURRENCY': 'NOK' }
     ]
 }
 
