@@ -202,6 +202,13 @@ const portfolio = {
                         'DATE':'2022-04-28',
                         'BUY': true
                     },
+                    {
+                        'PRICE':1.64,
+                        'CURRENCY': 'USD',
+                        'UNITS': 16,
+                        'DATE':'2022-05-13',
+                        'BUY': true
+                    },
                 ],
                 'METHOD': 'scrapper'
             },
@@ -315,6 +322,13 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 30,
                         'DATE':'2022-04-31',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 17.85,
+                        'CURRENCY': 'USD',
+                        'UNITS': 29,
+                        'DATE':'2022-05-12',
                         'BUY': true
                     }
                 ],
@@ -526,7 +540,7 @@ const portfolio = {
                         'UNITS': 185.60,
                         'DATE':'2022-05-11',
                         'BUY': true
-                    }
+                    },
                 ]
             },
             'CRO':{
@@ -558,6 +572,13 @@ const portfolio = {
                         'PRICE': 0.199,
                         'CURRENCY': 'USD',
                         'UNITS': 500,
+                        'DATE':'2022-05-11',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 0.1978,
+                        'CURRENCY': 'USD',
+                        'UNITS': 250,
                         'DATE':'2022-05-11',
                         'BUY': true
                     }
