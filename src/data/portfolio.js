@@ -541,6 +541,15 @@ const portfolio = {
                         'DATE':'2022-05-11',
                         'BUY': true
                     },
+                    {
+                        'PRICE': 0.001,
+                        'CURRENCY': 'USD',
+                        'UNITS': 107.57,
+                        'DATE':'2022-05-14',
+                        'BUY': true
+                    },
+
+                    
                 ]
             },
             'CRO':{

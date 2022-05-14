@@ -72,7 +72,8 @@ const dividens = {
         { 'DATE': '2022-03-28', 'VALUE': 1, 'CURRENCY': 'USD' }
     ],
     'SDIV': [ 
-        { 'DATE': '2022-04-06', 'VALUE': 0.31, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-04-06', 'VALUE': 0.31, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-05-14', 'VALUE': 16.69, 'CURRENCY': 'NOK' }
     ],
     'SPHD': [ 
         { 'DATE': '2022-04-19', 'VALUE': 0.11, 'CURRENCY': 'USD' }
@@ -92,7 +93,7 @@ const dividens = {
     'JEPI': [    
         { 'DATE': '2022-05-06', 'VALUE': 60.81, 'CURRENCY': 'NOK' }
     ],
-    'JEPI': [    
+    'SCHB': [    
         { 'DATE': '2022-05-13', 'VALUE': 60, 'CURRENCY': 'NOK' }
     ]
 }
