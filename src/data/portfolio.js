@@ -293,6 +293,13 @@ const portfolio = {
                         'DATE':'2022-05-06',
                         'BUY': true
                     },
+                    {
+                        'PRICE':24.35,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 42,
+                        'DATE':'2022-05-16',
+                        'BUY': true
+                    },
                 ],
                 'METHOD': 'scrapper'
             }
