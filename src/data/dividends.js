@@ -95,6 +95,9 @@ const dividens = {
     ],
     'SCHB': [    
         { 'DATE': '2022-05-13', 'VALUE': 60, 'CURRENCY': 'NOK' }
+    ],
+    'KIT': [    
+        { 'DATE': '2022-05-18', 'VALUE': 75, 'CURRENCY': 'NOK' }
     ]
 }
 
