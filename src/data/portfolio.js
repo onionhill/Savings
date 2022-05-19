@@ -47,6 +47,13 @@ const portfolio = {
                         'UNITS': 33,
                         'DATE': '2022-03-28',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 125.15,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 30,
+                        'DATE': '2022-05-19',
+                        'BUY': true
                     }
                 ],
                 'METHOD': 'scrapper'
@@ -113,6 +120,13 @@ const portfolio = {
                         'UNITS': 2,
                         'DATE':'2022-04-13',
                         'BUY': true
+                    },
+                    {
+                        'PRICE': 234.9,
+                        'CURRENCY': 'NOK',
+                        'UNITS': 20,
+                        'DATE':'2022-05-19',
+                        'BUY': true
                     }
                 ],
                 'METHOD': 'scrapper'
@@ -154,42 +168,6 @@ const portfolio = {
                 ],
                 'METHOD': 'scrapper'
 
-            },
-            'KIT':{
-                'PROVIDER':'nordnet',
-                'NAME': 'Kitron',
-                'ORDERS':[
-                    {
-                        'PRICE': 19.25,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 150,
-                        'DATE':'2022-01-01',
-                        'BUY': true
-                    },
-                    {
-                        'PRICE': 20.06,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 150,
-                        'DATE':'2022-03-25',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'scrapper'
-
-            },
-            'SCHB': {
-                'PROVIDER':'nordnet',
-                'NAME': 'Schibsted',
-                'ORDERS':[
-                    {
-                        'PRICE':191.80,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 30,
-                        'DATE':'2022-03-28',
-                        'BUY': true
-                    },
-                ],
-                'METHOD': 'scrapper'
             },
             'IVR': {
                 'PROVIDER':'nordnet',

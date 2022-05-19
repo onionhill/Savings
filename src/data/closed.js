@@ -172,8 +172,8 @@ const closed_posisions = {
         'DATE': '2022-04-26'
     },
     'Landkreditt Utbytte A':{
-        'PROVIDER': 'fond',
-        'TYPE': 'Landkreditt Utbytte A',
+        'TYPE': 'fond',
+        'NAME': 'Landkreditt Utbytte A',
         'RESULT': -24,
         'BUY': 2061,
         'SELL': 2037,
@@ -181,8 +181,8 @@ const closed_posisions = {
         'DATE': '2022-04-26'
     },
     'Nordnet Indeksfond Global ESG':{
-        'PROVIDER': 'fond',
-        'TYPE': 'Landkreditt Utbytte A',
+        'TYPE': 'fond',
+        'NAME': 'Landkreditt Utbytte A',
         'RESULT': -59,
         'BUY': 2321,
         'SELL': 2262,
@@ -190,15 +190,34 @@ const closed_posisions = {
         'DATE': '2022-04-26'
     },
     'Nordnet Indeks Emerging Market ESG':{
-        'PROVIDER': 'fond',
-        'TYPE': 'Landkreditt Utbytte A',
+        'TYPE': 'fond',
+        'NAME': 'Landkreditt Utbytte A',
         'RESULT': -227,
         'BUY': 2233,
         'SELL': 2006,
         'CURRENCY': 'NOK',
         'DATE': '2022-04-26'
+    },
+    'Kitron':{
+        'TYPE': 'fond',
+        'NAME': 'Landkreditt Utbytte A',
+        'RESULT': -456,
+        'BUY': 5896,
+        'SELL': 5440,
+        'CURRENCY': 'NOK',
+        'DATE': '2022-05-19'
+    },
+    'Schibsted':{
+        'TYPE': 'Stock',
+        'NAME': 'Landkreditt Utbytte A',
+        'RESULT': -756,
+        'BUY': 5739,
+        'SELL': 4983,
+        'CURRENCY': 'NOK',
+        'DATE': '2022-05-19'
     }
 }
+
 
 
 module.exports = closed_posisions;
