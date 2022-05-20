@@ -198,21 +198,30 @@ const closed_posisions = {
         'CURRENCY': 'NOK',
         'DATE': '2022-04-26'
     },
-    'Kitron':{
+    'KIT':{
         'TYPE': 'fond',
-        'NAME': 'Landkreditt Utbytte A',
+        'NAME': 'Kitron',
         'RESULT': -456,
         'BUY': 5896,
         'SELL': 5440,
         'CURRENCY': 'NOK',
         'DATE': '2022-05-19'
     },
-    'Schibsted':{
+    'SCHB':{
         'TYPE': 'Stock',
-        'NAME': 'Landkreditt Utbytte A',
+        'NAME': 'Schibsted',
         'RESULT': -756,
         'BUY': 5739,
         'SELL': 4983,
+        'CURRENCY': 'NOK',
+        'DATE': '2022-05-19'
+    },
+    'KAHOT':{
+        'TYPE': 'Stock',
+        'NAME': 'Kahot',
+        'RESULT': -46,
+        'BUY': 1702,
+        'SELL': 1656,
         'CURRENCY': 'NOK',
         'DATE': '2022-05-19'
     }

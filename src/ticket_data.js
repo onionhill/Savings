@@ -103,6 +103,10 @@ const ticket_data = {
         'url': 'https://www.morningstar.no/no/funds/snapshot/snapshot.aspx?id=F0000170KP',
         'selector': '$(".line.text").first()',
     },
+    'O':{
+        'url': 'https://www.nordnet.no/market/stocks/16122508-realty-income',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    },
 }
 
 module.exports = ticket_data;

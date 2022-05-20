@@ -201,6 +201,13 @@ const portfolio = {
                         'DATE':'2022-04-28',
                         'BUY': true
                     },
+                    {
+                        'PRICE':7.65,
+                        'CURRENCY': 'USD',
+                        'UNITS': 7,
+                        'DATE':'2022-05-21',
+                        'BUY': true
+                    },
                 ],
                 'METHOD': 'scrapper'
             },
@@ -260,24 +267,17 @@ const portfolio = {
                 ],
                 'METHOD': 'scrapper'
             },
-            'KAHOT': {
-                'PROVIDER':'nordnet',
-                'NAME': 'Kahoot',
+            'O': {
+                'PROVIDER':'Nordnet',
+                'NAME': 'Realty Income Corp.',
                 'ORDERS':[
                     {
-                        'PRICE':23.04,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 27,
-                        'DATE':'2022-05-06',
+                        'PRICE':67,
+                        'CURRENCY': 'USD',
+                        'UNITS': 10,
+                        'DATE':'2022-05-20',
                         'BUY': true
-                    },
-                    {
-                        'PRICE':24.35,
-                        'CURRENCY': 'NOK',
-                        'UNITS': 42,
-                        'DATE':'2022-05-16',
-                        'BUY': true
-                    },
+                    }
                 ],
                 'METHOD': 'scrapper'
             }
