@@ -31,6 +31,7 @@ const dividens = {
     'YAR':[
         { 'DATE': '2021-05-19', 'VALUE': 160, 'CURRENCY': 'NOK' },
         { 'DATE': '2021-09-15', 'VALUE': 160, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-05-21', 'VALUE': 240, 'CURRENCY': 'NOK' },
     ],
     'NONG': [
         { 'DATE': '2021-04-14', 'VALUE': 12.7, 'CURRENCY': 'NOK' },
