@@ -8,6 +8,7 @@ const dividens = {
     'TEL':[
         { 'DATE': '2021-06-09', 'VALUE': 150, 'CURRENCY': 'NOK' },
         { 'DATE': '2021-10-20', 'VALUE': 204, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-05-24', 'VALUE': 665, 'CURRENCY': 'NOK' },
     ], 
     'MING': [
         { 'DATE': '2021-07-04', 'VALUE': 13, 'CURRENCY': 'NOK' },
