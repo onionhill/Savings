@@ -106,6 +106,10 @@ const ticket_data = {
     'O':{
         'url': 'https://www.nordnet.no/market/stocks/16122508-realty-income',
         'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
+    }, 
+    'NPK':{
+        'url': 'https://www.nordnet.no/market/stocks/16124909-verde-agritech',
+        'selector': '$("[class*=StatsBox__StyledPriceText]").first()'
     },
 }
 

@@ -287,6 +287,20 @@ const portfolio = {
                     }
                 ],
                 'METHOD': 'scrapper'
+            },
+            'NPK': {
+                'PROVIDER':'Nordnet',
+                'NAME': 'Verde Agritech Plc',
+                'ORDERS':[
+                    {
+                        'PRICE':13.67,
+                        'CURRENCY': 'CAD',
+                        'UNITS': 2,
+                        'DATE':'2022-05-27',
+                        'BUY': true
+                    }
+                ],
+                'METHOD': 'scrapper'
             }
 
         },
