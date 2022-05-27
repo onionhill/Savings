@@ -20,8 +20,11 @@ function initPortFolio(){
         dividends = portfolioData.dividends;
         history = portfolioData.history;
         closed_posisions = portfolioData.closed;
-        todays_item = history[get_todays_date()];
 
+        todays_item = history[get_todays_date()];
+        if(!todays_item){
+            todays_item = history[getLastItem() ];
+        }
 
         if(typeof create_dividends_overview === 'function'){
             create_dividends_overview();
@@ -37,14 +40,19 @@ function initPortFolio(){
             history = portfolioData.history;
             dividends = portfolioData.dividends;
             todays_item = history[get_todays_date()];
+
+            if(!todays_item){
+                todays_item = history[getLastItem() ];
+            }
+
+
             closed_posisions = portfolioData.closed;
 
-            let sum_sold = 0;
+         /*   let sum_sold = 0;
             Object.keys(closed_posisions).forEach((ticket) => {
                 sum_sold += convert_currency( closed_posisions[ticket].CURRENCY, closed_posisions[ticket].SELL );
-            });
+            });*/
 
-            console.log('test2', sum_sold);
 
             if(typeof create_dividends_overview === 'function'){
                 create_dividends_overview();
@@ -54,6 +62,11 @@ function initPortFolio(){
             }
         });
     }
+}
+
+function getLastItem(){
+    let dates = Object.keys( portfolioData.history).sort().reverse();
+    return dates[0];
 }
 
 function getDateElement(datestring){
