@@ -106,6 +106,7 @@ function initValues(){
     if(todays_item ){
         Object.keys(assets).forEach((type) => {
             Object.keys(assets[type] ).forEach((ticket) => {
+                console.log('ticket', ticket);
                 const asset = todays_item.assets[type][ticket];
                 total_value+= asset.current_value;
             });

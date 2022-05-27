@@ -24,7 +24,7 @@ app.get('/PortfolioData', function(request, response){
     } );
 });
 
-const port = process.evnv.PORT || 5300;
+const port = process.env.PORT || 5300;
 
 app.listen(port, () => {
     console.log('express is running on port 5300');

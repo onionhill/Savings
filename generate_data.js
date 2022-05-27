@@ -31,7 +31,7 @@ function init_portfolio(){
     }
     // If we dont have exchange rates we delay the portfolio code to make sure the promises are done
     var timeout_timer = 2000;
-    if( Object.keys(exchange_rates).length != 2){
+    if( Object.keys(exchange_rates).length != 3){
         Promise.all( get_exchange_rates() ).then( () => {
             console.log('done with exchange....', exchange_rates);
         } );
@@ -343,7 +343,7 @@ function get_todays_date(){
 
 function get_exchange_rates(){
     // Only need to get USD TO NOK and SEK TO NOK
-    var currencys_in_use = ['USD', 'SEK'];
+    var currencys_in_use = ['USD', 'SEK', 'CAD'];
     var exchange_rate_promises = [];
     currencys_in_use.forEach((from_currency) => {
 
