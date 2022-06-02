@@ -101,7 +101,10 @@ const dividens = {
     ],
     'KIT': [    
         { 'DATE': '2022-05-18', 'VALUE': 75, 'CURRENCY': 'NOK' }
-    ]
+    ],
+    'SCCO': [    
+        { 'DATE': '2022-06-01', 'VALUE': 70, 'CURRENCY': 'NOK' }
+    ],
 }
 
 module.exports = dividens;
