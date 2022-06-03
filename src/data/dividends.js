@@ -69,7 +69,8 @@ const dividens = {
         { 'DATE': '2022-03-22', 'VALUE': 1.39, 'CURRENCY': 'USD' },
         { 'DATE': '2022-03-29', 'VALUE': 2.46, 'CURRENCY': 'USD' },
         { 'DATE': '2022-04-19', 'VALUE': 1.42, 'CURRENCY': 'USD' },
-        { 'DATE': '2022-04-27', 'VALUE': 2.41, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-04-27', 'VALUE': 2.41, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-06-02', 'VALUE': 84.69, 'CURRENCY': 'NOK' }
     ],
     'SCHD': [ 
         { 'DATE': '2022-03-28', 'VALUE': 1, 'CURRENCY': 'USD' }
@@ -88,7 +89,8 @@ const dividens = {
         { 'DATE': '2022-04-27', 'VALUE': 5.52, 'CURRENCY': 'USD' }
     ],
     'RYLD': [    
-        { 'DATE': '2022-04-27', 'VALUE': 38.77, 'CURRENCY': 'NOK' }
+        { 'DATE': '2022-04-27', 'VALUE': 38.77, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-06-02', 'VALUE': 35.68, 'CURRENCY': 'NOK' }
     ],
     'DNB': [    
         { 'DATE': '2022-05-05', 'VALUE': 672.75, 'CURRENCY': 'NOK' }
