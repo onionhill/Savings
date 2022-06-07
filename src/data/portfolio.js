@@ -181,19 +181,12 @@ const portfolio = {
                 'NAME': 'INVESCO MORTGAGE CAPITAL',
                 'ORDERS':[
                     {
-                        'PRICE':1.76,
+                        'PRICE':18.06,
                         'CURRENCY': 'USD',
-                        'UNITS': 300,
+                        'UNITS': 31.6,
                         'DATE':'2022-04-28',
                         'BUY': true
-                    },
-                    {
-                        'PRICE':1.64,
-                        'CURRENCY': 'USD',
-                        'UNITS': 16,
-                        'DATE':'2022-05-13',
-                        'BUY': true
-                    },
+                    }
                 ],
                 'METHOD': 'scrapper'
             },
