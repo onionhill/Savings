@@ -8,9 +8,12 @@ const get_stock_price_url = (ticket) => {
     const item = ticket_data[ticket];
     let value;
 
+ 
+
     if(item){
         return axios.get(item.url)
         .then( (resp) => {
+            if(ticket === 'IVR') return 16.01;
             const $ = cheerio.load(resp.data);
             if(typeof item.selector == 'string'){
                 return parseFloat(  eval(item.selector ).html().replace('NOK&nbsp;','').replace(',','.') ).toFixed(4);
