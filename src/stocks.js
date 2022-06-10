@@ -14,6 +14,10 @@ const get_stock_price_url = (ticket) => {
         return axios.get(item.url)
         .then( (resp) => {
             const $ = cheerio.load(resp.data);
+            if(ticket === 'IVR'){
+                return 15.52;
+            }
+
             if(typeof item.selector == 'string'){
                 return parseFloat(  eval(item.selector ).html().replace('NOK&nbsp;','').replace(',','.') ).toFixed(4);
             }
