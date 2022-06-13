@@ -47,6 +47,7 @@ const dividens = {
         { 'DATE': '2022-01-11', 'VALUE': 1.01, 'CURRENCY': 'USD' },
         { 'DATE': '2022-02-09', 'VALUE': 1.01, 'CURRENCY': 'USD' },
         { 'DATE': '2022-03-09', 'VALUE': 1.01, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-06-12', 'VALUE': 23.41, 'CURRENCY': 'NOK' },
     ],
     'PSEC': [
         { 'DATE': '2022-01-20', 'VALUE': 1.18, 'CURRENCY': 'USD' },
