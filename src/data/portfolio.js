@@ -176,20 +176,7 @@ const portfolio = {
                 'METHOD': 'scrapper'
 
             },
-            'IVR': {
-                'PROVIDER':'nordnet',
-                'NAME': 'INVESCO MORTGAGE CAPITAL',
-                'ORDERS':[
-                    {
-                        'PRICE':18.06,
-                        'CURRENCY': 'USD',
-                        'UNITS': 31.6,
-                        'DATE':'2022-04-28',
-                        'BUY': true
-                    }
-                ],
-                'METHOD': 'scrapper'
-            },
+
             'PSEC': {
                 'PROVIDER':'nordnet',
                 'NAME': 'Prospect Capital Corporation',
@@ -328,6 +315,13 @@ const portfolio = {
                         'CURRENCY': 'USD',
                         'UNITS': 29,
                         'DATE':'2022-05-12',
+                        'BUY': true
+                    },
+                    {
+                        'PRICE': 17.35,
+                        'CURRENCY': 'USD',
+                        'UNITS': 21,
+                        'DATE':'2022-06-15',
                         'BUY': true
                     }
                 ],
