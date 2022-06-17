@@ -110,6 +110,9 @@ const dividens = {
     'SCCO': [    
         { 'DATE': '2022-06-01', 'VALUE': 70, 'CURRENCY': 'NOK' }
     ],
+    'O': [    
+        { 'DATE': '2022-06-17', 'VALUE': 21, 'CURRENCY': 'NOK' }
+    ],
 }
 
 module.exports = dividens;
