@@ -27,7 +27,7 @@ function initPortFolio(){
         }
 
         if(typeof create_dividends_overview === 'function'){
-            create_dividends_overview();
+            set_year(new Date().getFullYear() );
         }else{
             initValues();
 
@@ -55,7 +55,7 @@ function initPortFolio(){
 
 
             if(typeof create_dividends_overview === 'function'){
-                create_dividends_overview();
+                set_year(new Date().getFullYear() );
             }else{
                 initValues();
 

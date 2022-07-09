@@ -102,7 +102,8 @@ const dividens = {
     ],
     'JEPI': [    
         { 'DATE': '2022-05-06', 'VALUE': 60.81, 'CURRENCY': 'NOK' },
-        { 'DATE': '2022-06-06', 'VALUE': 66.56, 'CURRENCY': 'NOK' }
+        { 'DATE': '2022-06-06', 'VALUE': 66.56, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-07-07', 'VALUE': 85, 'CURRENCY': 'NOK' }
     ],
     'SCHB': [    
         { 'DATE': '2022-05-13', 'VALUE': 60, 'CURRENCY': 'NOK' }
