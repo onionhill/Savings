@@ -90,7 +90,8 @@ const dividens = {
         { 'DATE': '2022-04-14', 'VALUE': 0.20, 'CURRENCY': 'USD' }
     ],
     'IEP': [    
-        { 'DATE': '2022-04-27', 'VALUE': 5.52, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-04-27', 'VALUE': 5.52, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-07-12', 'VALUE': 77, 'CURRENCY': 'NOK' }
     ],
     'RYLD': [    
         { 'DATE': '2022-04-27', 'VALUE': 38.77, 'CURRENCY': 'NOK' },
