@@ -108,6 +108,7 @@
 
         const filter_divideds = sorted_elements_by_name.filter( (dividend) => {
             let date = new Date(dividend.DATE);
+            console.log(dividend);
             return date.getFullYear() === dividend_year;
         });
 

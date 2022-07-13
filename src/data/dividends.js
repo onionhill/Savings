@@ -118,6 +118,9 @@ const dividens = {
     'O': [    
         { 'DATE': '2022-06-17', 'VALUE': 21, 'CURRENCY': 'NOK' }
     ],
+    'MO': [    
+        { 'DATE': '2022-07-13', 'VALUE': 39, 'CURRENCY': 'NOK' }
+    ],
 }
 
 module.exports = dividens;
