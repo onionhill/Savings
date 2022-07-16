@@ -14,7 +14,7 @@ let flatten_assets = [];
 
 
 function initPortFolio(){
-    if(window.localStorage.getItem('portfolioData') !== null ){
+    if(window.localStorage.getItem('PortfolioData_old') !== null ){
         portfolioData = JSON.parse(window.localStorage.getItem('portfolioData'));
         assets = portfolioData.portfolio.assets;
         dividends = portfolioData.dividends;
@@ -34,7 +34,7 @@ function initPortFolio(){
         }
 
     }else{
-        $.get('/portfolioData').then( (res) => {
+        $.get('/PortfolioData_old').then( (res) => {
             portfolioData = res;
             assets = portfolioData.portfolio.assets;
             history = portfolioData.history;

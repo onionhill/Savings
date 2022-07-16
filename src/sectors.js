@@ -12,4 +12,4 @@ const sectors = {
     'Technology Sector': [],
 };
 
-module.exports = dividens;
+module.exports = sectors;

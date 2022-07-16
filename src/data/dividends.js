@@ -82,7 +82,8 @@ const dividens = {
     'SDIV': [ 
         { 'DATE': '2022-04-06', 'VALUE': 0.31, 'CURRENCY': 'USD' },
         { 'DATE': '2022-05-14', 'VALUE': 16.69, 'CURRENCY': 'NOK' },
-        { 'DATE': '2022-06-15', 'VALUE': 16.77, 'CURRENCY': 'NOK' }
+        { 'DATE': '2022-06-15', 'VALUE': 16.77, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-07-16', 'VALUE': 17, 'CURRENCY': 'NOK' }
     ],
     'SPHD': [ 
         { 'DATE': '2022-04-19', 'VALUE': 0.11, 'CURRENCY': 'USD' }
