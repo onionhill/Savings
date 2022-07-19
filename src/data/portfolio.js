@@ -214,7 +214,7 @@ const portfolio = {
             },
             'MO': {
                 'PROVIDER':'nordnet',
-                'NAME': 'AGNC Investment Corp',
+                'NAME': 'Altria Group Inc',
                 'ORDERS':[
                     {
                         'PRICE':56.61,

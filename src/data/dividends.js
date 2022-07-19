@@ -48,6 +48,7 @@ const dividens = {
         { 'DATE': '2022-02-09', 'VALUE': 1.01, 'CURRENCY': 'USD' },
         { 'DATE': '2022-03-09', 'VALUE': 1.01, 'CURRENCY': 'USD' },
         { 'DATE': '2022-06-12', 'VALUE': 23.41, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-07-14', 'VALUE': 25, 'CURRENCY': 'NOK' },
     ],
     'PSEC': [
         { 'DATE': '2022-01-20', 'VALUE': 1.18, 'CURRENCY': 'USD' },
@@ -81,7 +82,8 @@ const dividens = {
     'SDIV': [ 
         { 'DATE': '2022-04-06', 'VALUE': 0.31, 'CURRENCY': 'USD' },
         { 'DATE': '2022-05-14', 'VALUE': 16.69, 'CURRENCY': 'NOK' },
-        { 'DATE': '2022-06-15', 'VALUE': 16.77, 'CURRENCY': 'NOK' }
+        { 'DATE': '2022-06-15', 'VALUE': 16.77, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-07-16', 'VALUE': 17, 'CURRENCY': 'NOK' }
     ],
     'SPHD': [ 
         { 'DATE': '2022-04-19', 'VALUE': 0.11, 'CURRENCY': 'USD' }
@@ -90,7 +92,8 @@ const dividens = {
         { 'DATE': '2022-04-14', 'VALUE': 0.20, 'CURRENCY': 'USD' }
     ],
     'IEP': [    
-        { 'DATE': '2022-04-27', 'VALUE': 5.52, 'CURRENCY': 'USD' }
+        { 'DATE': '2022-04-27', 'VALUE': 5.52, 'CURRENCY': 'USD' },
+        { 'DATE': '2022-07-12', 'VALUE': 77, 'CURRENCY': 'NOK' }
     ],
     'RYLD': [    
         { 'DATE': '2022-04-27', 'VALUE': 38.77, 'CURRENCY': 'NOK' },
@@ -102,7 +105,8 @@ const dividens = {
     ],
     'JEPI': [    
         { 'DATE': '2022-05-06', 'VALUE': 60.81, 'CURRENCY': 'NOK' },
-        { 'DATE': '2022-06-06', 'VALUE': 66.56, 'CURRENCY': 'NOK' }
+        { 'DATE': '2022-06-06', 'VALUE': 66.56, 'CURRENCY': 'NOK' },
+        { 'DATE': '2022-07-07', 'VALUE': 85, 'CURRENCY': 'NOK' }
     ],
     'SCHB': [    
         { 'DATE': '2022-05-13', 'VALUE': 60, 'CURRENCY': 'NOK' }
@@ -115,6 +119,9 @@ const dividens = {
     ],
     'O': [    
         { 'DATE': '2022-06-17', 'VALUE': 21, 'CURRENCY': 'NOK' }
+    ],
+    'MO': [    
+        { 'DATE': '2022-07-13', 'VALUE': 39, 'CURRENCY': 'NOK' }
     ],
 }
 
