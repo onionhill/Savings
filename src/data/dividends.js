@@ -57,7 +57,7 @@ const dividens = {
         { 'DATE': '2022-06-23', 'VALUE': 24, 'CURRENCY': 'NOK' },
         { 'DATE': '2022-07-22', 'VALUE': 24, 'CURRENCY': 'NOK' },
     ],
-    ],
+    
     'VICI': [ 
         { 'DATE': '2022-04-07', 'VALUE': 1.35, 'CURRENCY': 'USD' }
     ],
